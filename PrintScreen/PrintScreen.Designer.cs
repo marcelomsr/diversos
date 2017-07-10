@@ -39,6 +39,7 @@
             this.btn_print_screen.TabIndex = 0;
             this.btn_print_screen.Text = "Tirar print screen";
             this.btn_print_screen.UseVisualStyleBackColor = true;
+            this.btn_print_screen.Click += new System.EventHandler(this.btn_print_screen_Click);
             // 
             // PrintScreen
             // 

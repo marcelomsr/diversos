@@ -11,7 +11,10 @@ namespace Diversos
         public PrintScreen()
         {
             InitializeComponent();
+        }
 
+        private void btn_print_screen_Click(object sender, EventArgs e)
+        {
             SimpleFunctions.PrintScreen(Screen.AllScreens, @"C:\Users\marcelosr\Desktop\printscreen.png", ImageFormat.Png);
         }
     }

@@ -1,5 +1,5 @@
 ﻿using System;
-using IBM.Data.DB2;
+//using IBM.Data.DB2;
 using System.Data.Odbc;
 using System.Data;
 using System.Data.SqlClient;

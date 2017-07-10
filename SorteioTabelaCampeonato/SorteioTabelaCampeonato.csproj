@@ -61,7 +61,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MyLibrary">
-      <HintPath>..\MyLibrary\bin\x86\Debug\MyLibrary.dll</HintPath>
+      <HintPath>..\MyLibrary\obj\x86\Debug\MyLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
