@@ -119,7 +119,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\diversos\MyLibrary\MyLibrary\MyLibrary.csproj">
+    <ProjectReference Include="..\MyLibrary\MyLibrary.csproj">
       <Project>{c9af0e6c-2f1b-4a78-8224-bd8b16817c03}</Project>
       <Name>MyLibrary</Name>
     </ProjectReference>

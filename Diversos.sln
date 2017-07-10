@@ -31,7 +31,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReconhecimentoDeVozETTS", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecursosDaMaquina", "RecursosDaMaquina\RecursosDaMaquina.csproj", "{239C8556-B259-4A17-BED3-BFAC17299D88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary", "..\diversos\MyLibrary\MyLibrary\MyLibrary.csproj", "{C9AF0E6C-2F1B-4A78-8224-BD8B16817C03}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary", "MyLibrary\MyLibrary.csproj", "{C9AF0E6C-2F1B-4A78-8224-BD8B16817C03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
