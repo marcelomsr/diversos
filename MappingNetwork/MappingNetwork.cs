@@ -3,11 +3,33 @@ using IWshRuntimeLibrary;
 using System;
 using System.Reflection;
 using System.Windows.Forms;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.ComponentModel;
 
 namespace Network
 {
     public partial class MappingNetwork : Form
     {
+        #region Mover a tela pressionando o mouse
+
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        #endregion
+
+        private struct LDAPAutenticacaoConfig
+        {
+            public string dsc_ip_ldap;
+            public string dsc_arvore_ldap;
+            public int nmr_porta_ldap;
+        };
+
         private bool _mapeou = true;
 
         public MappingNetwork()
@@ -30,72 +52,113 @@ namespace Network
 
         private void btn_mapear_Click(object sender, System.EventArgs e)
         {
+            if (txtPassword.Text.Trim() == "" || txtUsername.Text.Trim() == "")
+            {
+                MessageBox.Show("Usuário e senha necessários.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!usuario_valido(txtUsername.Text.Trim(), txtPassword.Text.Trim()))
+            {
+                MessageBox.Show("Usuário ou senha inválidos.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            
             if (chk_R.Checked)
             {
-                desmapear_unidade_rede("R:");
                 mapear_unidade_rede("R:", @"\\dados.lbv.org.br\data1$");
                 CreateShortcut("R");
             }
 
             if (chk_S.Checked)
             {
-                desmapear_unidade_rede("S:");
                 mapear_unidade_rede("S:", @"\\manisa.lbvdc.lbv.org.br\data1$");
                 CreateShortcut("S");
             }
 
             if (chk_T.Checked)
             {
-                desmapear_unidade_rede("T:");
                 mapear_unidade_rede("T:", @"\\samsun.lbvdc.lbv.org.br\transfer$");
                 CreateShortcut("T");
             }
 
             if (_mapeou)
+            {
+                txtPassword.Text = "";
                 this.WindowState = FormWindowState.Minimized;
+            }
+
+            // Define true novamente, para que seja possível tentar mapear novamente.
+            _mapeou = true;
         }
 
-        private void zUpdateStatus(string psStatus)
+        private void btn_desconectar_Click(object sender, EventArgs e)
         {
-            //update the status bar and refresh
-            this.conStatusBar.Panels[0].Text = psStatus;
-            this.Refresh();
+            if (chk_R.Checked)
+            {
+                desmapear_unidade_rede("R:");
+                DeleteShortcut("R");
+            }
+
+            if (chk_S.Checked)
+            {
+                desmapear_unidade_rede("S:");
+                DeleteShortcut("S");
+            }
+
+            if (chk_T.Checked)
+            {
+                desmapear_unidade_rede("T:");
+                DeleteShortcut("T");
+            }
+
+            this.WindowState = FormWindowState.Minimized;
         }
 
         private void mapear_unidade_rede(string letter_drive, string txtAddress)
         {
+            // Se na primeira tentativa não mapeou, não tenta de novo para evitar o bloqueio do usuário.
+            if (_mapeou == false)
+                return;
+
             NetworkDrive oNetDrive = new NetworkDrive();
-            zUpdateStatus(string.Format("Mapeando {0} com letra {1}", txtAddress, letter_drive));
 
             try
             {
                 oNetDrive.LocalDrive = letter_drive;
                 oNetDrive.Force = true;
                 oNetDrive.ShareName = txtAddress;
-                //match call to options provided
-                if (txtPassword.Text == "" && txtUsername.Text == "")
-                {
-                    oNetDrive.MapDrive();
-                }
-                else if (txtUsername.Text == "")
-                {
-                    oNetDrive.MapDrive(txtPassword.Text);
-                }
-                else
-                {
-                    oNetDrive.MapDrive(txtUsername.Text, txtPassword.Text);
-                }
-                //update status
-                zUpdateStatus("Drive mapeado com successo");
+                oNetDrive.MapDrive(txtUsername.Text, txtPassword.Text);
             }
-            catch (Exception err)
+            catch (Win32Exception err)
             {
                 _mapeou = false;
 
-                string message = string.Format("Não foi possível mapear o {0}! - {1}", letter_drive, err.Message);
-
-                //report error
-                zUpdateStatus(message);
+                if (err.NativeErrorCode == 1202 /*"O nome de dispositivo local tem uma conexão lembrada com outro recurso de rede"*/)
+                {
+                    MessageBox.Show(String.Format("Não foi possível fazer mapear {0}, pois já existe um mapeamento para essa unidade", letter_drive), "Atenção",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else if (err.NativeErrorCode == 1909 /*"A conta referenciada está bloqueada no momento e pode não ser possível fazer logon"*/)
+                {
+                    MessageBox.Show(String.Format("Não foi possível fazer mapear {0}, pois o usuário está bloqueado, procure o administrador da rede.", letter_drive), "Atenção",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else if (err.NativeErrorCode == 86 /*"A senha de rede especificada não está correta"*/)
+                {
+                    MessageBox.Show(String.Format("Não foi possível fazer mapear {0}, usuário ou senha inválidos.", letter_drive), "Atenção",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else if (err.NativeErrorCode == 1326 /*"Nome de usuário ou senha incorretos"*/)
+                {
+                    MessageBox.Show(String.Format("Não foi possível fazer mapear {0}, usuário ou senha inválidos.", letter_drive), "Atenção",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(String.Format("Não foi possível fazer mapear {0}.", letter_drive), "Atenção",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
 
             oNetDrive = null;
@@ -104,15 +167,13 @@ namespace Network
         private void desmapear_unidade_rede(string letter_drive)
         {
             NetworkDrive oNetDrive = new NetworkDrive();
-            zUpdateStatus("Unmapping drive...");
+
             try
             {
-                //unmap the drive
+                // Unmap the drive
                 oNetDrive.LocalDrive = letter_drive;
                 oNetDrive.Force = true;
                 oNetDrive.UnMapDrive();
-                //update status
-                zUpdateStatus("Drive removido com successo.");
             }
             catch (Exception) { }
 
@@ -139,12 +200,76 @@ namespace Network
 
         private void CreateShortcut(string letter_drive)
         {
+            if (!_mapeou)
+                return;
+
             object shDesktop = (object)"Desktop";
             WshShell shell = new WshShell();
             string shortcutAddress = (string)shell.SpecialFolders.Item(ref shDesktop) + string.Format(@"\{0}.lnk", letter_drive);
             IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutAddress);
             shortcut.TargetPath = letter_drive + ":";
             shortcut.Save();
+        }
+
+        private void DeleteShortcut(string letter_drive)
+        {
+            object shDesktop = (object)"Desktop";
+            WshShell shell = new WshShell();
+            string shortcutAddress = (string)shell.SpecialFolders.Item(ref shDesktop) + string.Format(@"\{0}.lnk", letter_drive);
+            System.IO.File.Delete(shortcutAddress);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private bool usuario_valido(string nme_login, string dsc_senha)
+        {
+            LDAPAutenticacaoConfig ldap_autenticacao_config;
+            ldap_autenticacao_config.dsc_ip_ldap = "lbvdc.lbv.org.br";
+            ldap_autenticacao_config.dsc_arvore_ldap = "DC=lbvdc,DC=lbv,DC=org,DC=br";
+            ldap_autenticacao_config.nmr_porta_ldap = 636;
+
+            LdapAuthentication ldap = new LdapAuthentication(
+                String.Format("{0}:{1}", ldap_autenticacao_config.dsc_ip_ldap, ldap_autenticacao_config.nmr_porta_ldap),
+                ldap_autenticacao_config.dsc_arvore_ldap, "sAMAccountName={0}");
+
+            return ldap.Authenticate(nme_login, dsc_senha);
+        }
+
+        private void General_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            General_MouseDown(sender, e);
+        }
+
+        private void label2_MouseDown(object sender, MouseEventArgs e)
+        {
+            General_MouseDown(sender, e);
+        }
+
+        private void label3_MouseDown(object sender, MouseEventArgs e)
+        {
+            General_MouseDown(sender, e);
+        }
+
+        private void label4_MouseDown(object sender, MouseEventArgs e)
+        {
+            General_MouseDown(sender, e);
+        }
+
+        private void label1_MouseDown(object sender, MouseEventArgs e)
+        {
+            General_MouseDown(sender, e);
         }
     }
 }

@@ -114,6 +114,7 @@
     <Reference Include="System.Data">
       <Name>System.Data</Name>
     </Reference>
+    <Reference Include="System.DirectoryServices.Protocols" />
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
     </Reference>
@@ -131,6 +132,7 @@
     <Compile Include="cNetworkDrives0015.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Ldap.cs" />
     <Compile Include="MappingNetwork.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +147,7 @@
     </Compile>
     <Content Include="App.ico" />
     <Content Include="favicon.ico" />
+    <None Include="Resources\fechar_16x16.gif" />
     <EmbeddedResource Include="lib\Interop.IWshRuntimeLibrary.dll" />
     <EmbeddedResource Include="MappingNetwork.resx">
       <DependentUpon>MappingNetwork.cs</DependentUpon>
