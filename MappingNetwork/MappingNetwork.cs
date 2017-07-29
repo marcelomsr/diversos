@@ -226,6 +226,8 @@ namespace Network
 
         private bool usuario_valido(string nme_login, string dsc_senha)
         {
+            try
+            { 
             LDAPAutenticacaoConfig ldap_autenticacao_config;
             ldap_autenticacao_config.dsc_ip_ldap = "lbvdc.lbv.org.br";
             ldap_autenticacao_config.dsc_arvore_ldap = "DC=lbvdc,DC=lbv,DC=org,DC=br";
@@ -236,6 +238,11 @@ namespace Network
                 ldap_autenticacao_config.dsc_arvore_ldap, "sAMAccountName={0}");
 
             return ldap.Authenticate(nme_login, dsc_senha);
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
         }
 
         private void General_MouseDown(object sender, MouseEventArgs e)
@@ -270,6 +277,16 @@ namespace Network
         private void label1_MouseDown(object sender, MouseEventArgs e)
         {
             General_MouseDown(sender, e);
+        }
+
+        private void lbl_fechar_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void lbl_fechar_MouseHover(object sender, EventArgs e)
+        {
+            lbl_fechar.Cursor = Cursors.Hand;
         }
     }
 }
