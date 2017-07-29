@@ -149,7 +149,6 @@
     <Content Include="favicon.ico" />
     <None Include="Resources\usuario_login_16x16.png" />
     <None Include="Resources\senha_login_16x16.png" />
-    <None Include="Resources\user.png" />
     <None Include="Resources\fechar_16x16.gif" />
     <EmbeddedResource Include="lib\Interop.IWshRuntimeLibrary.dll" />
     <EmbeddedResource Include="MappingNetwork.resx">
