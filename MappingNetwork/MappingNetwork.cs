@@ -52,6 +52,12 @@ namespace Network
 
         private void btn_mapear_Click(object sender, System.EventArgs e)
         {
+            if (!chk_R.Checked && !chk_S.Checked && !chk_T.Checked)
+            {
+                MessageBox.Show("Selecione as unidades que deseja mapear.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             if (txtPassword.Text.Trim() == "" || txtUsername.Text.Trim() == "")
             {
                 MessageBox.Show("Usuário e senha necessários.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -63,7 +69,7 @@ namespace Network
                 MessageBox.Show("Usuário ou senha inválidos.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            
+
             if (chk_R.Checked)
             {
                 mapear_unidade_rede("R:", @"\\dados.lbv.org.br\data1$");
@@ -83,10 +89,7 @@ namespace Network
             }
 
             if (_mapeou)
-            {
-                txtPassword.Text = "";
-                this.WindowState = FormWindowState.Minimized;
-            }
+                this.Close();
 
             // Define true novamente, para que seja possível tentar mapear novamente.
             _mapeou = true;
@@ -112,7 +115,7 @@ namespace Network
                 DeleteShortcut("T");
             }
 
-            this.WindowState = FormWindowState.Minimized;
+            this.Close();
         }
 
         private void mapear_unidade_rede(string letter_drive, string txtAddress)

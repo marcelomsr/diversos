@@ -93,9 +93,9 @@ namespace Network.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap user {
+        internal static System.Drawing.Bitmap usuario_login_16x16 {
             get {
-                object obj = ResourceManager.GetObject("user", resourceCulture);
+                object obj = ResourceManager.GetObject("usuario_login_16x16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace Network.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap usuario_login_16x16 {
+        internal static System.Drawing.Bitmap usuario_login_16x161 {
             get {
-                object obj = ResourceManager.GetObject("usuario_login_16x16", resourceCulture);
+                object obj = ResourceManager.GetObject("usuario_login_16x161", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

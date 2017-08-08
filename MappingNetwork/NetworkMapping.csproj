@@ -147,6 +147,7 @@
     </Compile>
     <Content Include="App.ico" />
     <Content Include="favicon.ico" />
+    <None Include="Resources\usuario_login_16x161.png" />
     <None Include="Resources\usuario_login_16x16.png" />
     <None Include="Resources\senha_login_16x16.png" />
     <None Include="Resources\fechar_16x16.gif" />
@@ -174,6 +175,7 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent />
