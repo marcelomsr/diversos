@@ -48,6 +48,37 @@ namespace Network
             };
 
             InitializeComponent();
+
+            tratar_drives();
+        }
+
+        private void tratar_drives()
+        {
+            DriveInfo[] allDrives = DriveInfo.GetDrives();
+
+            foreach (DriveInfo d in allDrives)
+            {
+                if (d.Name == @"R:\")
+                    chk_R.Checked = true;
+                else if (d.Name == @"S:\")
+                    chk_S.Checked = true;
+                else if (d.Name == @"T:\")
+                    chk_T.Checked = true;
+            }
+
+            if(chk_R.Checked || chk_S.Checked || chk_T.Checked)
+                alterar_componentes_conexao(false);
+            else
+                alterar_componentes_conexao(true);
+        }
+
+        private void alterar_componentes_conexao(bool habilita)
+        {
+            txtUsername.Enabled = habilita;
+            txtPassword.Enabled = habilita;
+            btn_map_drive.Enabled = habilita;
+
+            btn_desconectar.Enabled = !habilita;
         }
 
         private void btn_mapear_Click(object sender, System.EventArgs e)

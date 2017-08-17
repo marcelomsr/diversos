@@ -27,7 +27,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MappingNetwork));
             this.label1 = new System.Windows.Forms.Label();
             this.btn_desconectar = new System.Windows.Forms.Button();
@@ -38,7 +37,6 @@
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.btn_map_drive = new System.Windows.Forms.Button();
-            this.conMenu = new System.Windows.Forms.MainMenu(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbl_fechar = new System.Windows.Forms.Label();
@@ -216,7 +214,6 @@
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Menu = this.conMenu;
             this.Name = "MappingNetwork";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mapear unidade de rede 2.0";
@@ -232,7 +229,6 @@
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Button btn_map_drive;
-        private System.Windows.Forms.MainMenu conMenu;
         private System.Windows.Forms.CheckBox chk_R;
         private System.Windows.Forms.CheckBox chk_S;
         private System.Windows.Forms.CheckBox chk_T;
