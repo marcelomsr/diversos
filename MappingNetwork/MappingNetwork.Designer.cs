@@ -47,7 +47,7 @@
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.Location = new System.Drawing.Point(59, 127);
+            this.label1.Location = new System.Drawing.Point(104, 125);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(116, 21);
             this.label1.TabIndex = 26;
@@ -58,13 +58,13 @@
             // btn_desconectar
             // 
             this.btn_desconectar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_desconectar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(71)))), ((int)(((byte)(138)))));
+            this.btn_desconectar.BackColor = System.Drawing.Color.DarkRed;
             this.btn_desconectar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_desconectar.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_desconectar.ForeColor = System.Drawing.Color.White;
-            this.btn_desconectar.Location = new System.Drawing.Point(174, 165);
+            this.btn_desconectar.Location = new System.Drawing.Point(85, 183);
             this.btn_desconectar.Name = "btn_desconectar";
-            this.btn_desconectar.Size = new System.Drawing.Size(110, 24);
+            this.btn_desconectar.Size = new System.Drawing.Size(159, 24);
             this.btn_desconectar.TabIndex = 7;
             this.btn_desconectar.Text = "Desconectar";
             this.btn_desconectar.UseVisualStyleBackColor = false;
@@ -74,7 +74,7 @@
             // 
             this.chk_S.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chk_S.AutoSize = true;
-            this.chk_S.Location = new System.Drawing.Point(217, 130);
+            this.chk_S.Location = new System.Drawing.Point(147, 149);
             this.chk_S.Name = "chk_S";
             this.chk_S.Size = new System.Drawing.Size(36, 17);
             this.chk_S.TabIndex = 4;
@@ -85,7 +85,7 @@
             // 
             this.chk_T.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chk_T.AutoSize = true;
-            this.chk_T.Location = new System.Drawing.Point(256, 130);
+            this.chk_T.Location = new System.Drawing.Point(186, 149);
             this.chk_T.Name = "chk_T";
             this.chk_T.Size = new System.Drawing.Size(36, 17);
             this.chk_T.TabIndex = 5;
@@ -96,7 +96,7 @@
             // 
             this.chk_R.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chk_R.AutoSize = true;
-            this.chk_R.Location = new System.Drawing.Point(177, 130);
+            this.chk_R.Location = new System.Drawing.Point(107, 149);
             this.chk_R.Name = "chk_R";
             this.chk_R.Size = new System.Drawing.Size(37, 17);
             this.chk_R.TabIndex = 3;
@@ -107,7 +107,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.Image = ((System.Drawing.Image)(resources.GetObject("label4.Image")));
-            this.label4.Location = new System.Drawing.Point(51, 98);
+            this.label4.Location = new System.Drawing.Point(54, 96);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(30, 21);
             this.label4.TabIndex = 21;
@@ -117,19 +117,19 @@
             // txtPassword
             // 
             this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPassword.Location = new System.Drawing.Point(82, 96);
+            this.txtPassword.Location = new System.Drawing.Point(85, 94);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(202, 21);
+            this.txtPassword.Size = new System.Drawing.Size(159, 21);
             this.txtPassword.TabIndex = 2;
             this.txtPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPassword_KeyPress);
             // 
             // txtUsername
             // 
             this.txtUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtUsername.Location = new System.Drawing.Point(82, 65);
+            this.txtUsername.Location = new System.Drawing.Point(85, 63);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(202, 21);
+            this.txtUsername.Size = new System.Drawing.Size(159, 21);
             this.txtUsername.TabIndex = 1;
             this.txtUsername.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUsername_KeyPress);
             // 
@@ -140,9 +140,9 @@
             this.btn_map_drive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_map_drive.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_map_drive.ForeColor = System.Drawing.Color.White;
-            this.btn_map_drive.Location = new System.Drawing.Point(55, 165);
+            this.btn_map_drive.Location = new System.Drawing.Point(85, 183);
             this.btn_map_drive.Name = "btn_map_drive";
-            this.btn_map_drive.Size = new System.Drawing.Size(110, 24);
+            this.btn_map_drive.Size = new System.Drawing.Size(159, 24);
             this.btn_map_drive.TabIndex = 6;
             this.btn_map_drive.Text = "Mapear";
             this.btn_map_drive.UseVisualStyleBackColor = false;
@@ -151,8 +151,8 @@
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(11, 7);
+            this.label2.Font = new System.Drawing.Font("Tahoma", 12.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(19, 8);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(259, 35);
             this.label2.TabIndex = 28;
@@ -179,7 +179,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(343, 211);
+            this.panel1.Size = new System.Drawing.Size(319, 232);
             this.panel1.TabIndex = 29;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             // 
@@ -187,7 +187,7 @@
             // 
             this.lbl_fechar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_fechar.Image = ((System.Drawing.Image)(resources.GetObject("lbl_fechar.Image")));
-            this.lbl_fechar.Location = new System.Drawing.Point(304, 5);
+            this.lbl_fechar.Location = new System.Drawing.Point(280, 6);
             this.lbl_fechar.Name = "lbl_fechar";
             this.lbl_fechar.Size = new System.Drawing.Size(33, 23);
             this.lbl_fechar.TabIndex = 29;
@@ -199,7 +199,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.Image = ((System.Drawing.Image)(resources.GetObject("label3.Image")));
-            this.label3.Location = new System.Drawing.Point(52, 65);
+            this.label3.Location = new System.Drawing.Point(55, 63);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(30, 21);
             this.label3.TabIndex = 20;
@@ -209,7 +209,7 @@
             // MappingNetwork
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 14);
-            this.ClientSize = new System.Drawing.Size(343, 211);
+            this.ClientSize = new System.Drawing.Size(319, 232);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

@@ -76,9 +76,10 @@ namespace Network
         {
             txtUsername.Enabled = habilita;
             txtPassword.Enabled = habilita;
-            btn_map_drive.Enabled = habilita;
+            btn_map_drive.Enabled = btn_map_drive.Visible = habilita;
 
-            btn_desconectar.Enabled = !habilita;
+            btn_desconectar.Enabled = btn_desconectar.Visible = !habilita;
+            
         }
 
         private void btn_mapear_Click(object sender, System.EventArgs e)
