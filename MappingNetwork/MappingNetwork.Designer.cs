@@ -38,10 +38,11 @@
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.btn_map_drive = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnl_mapping_network = new System.Windows.Forms.Panel();
             this.lbl_fechar = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
+            this.chk_L = new System.Windows.Forms.CheckBox();
+            this.pnl_mapping_network.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -74,7 +75,7 @@
             // 
             this.chk_S.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chk_S.AutoSize = true;
-            this.chk_S.Location = new System.Drawing.Point(147, 149);
+            this.chk_S.Location = new System.Drawing.Point(126, 149);
             this.chk_S.Name = "chk_S";
             this.chk_S.Size = new System.Drawing.Size(36, 17);
             this.chk_S.TabIndex = 4;
@@ -85,7 +86,7 @@
             // 
             this.chk_T.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chk_T.AutoSize = true;
-            this.chk_T.Location = new System.Drawing.Point(186, 149);
+            this.chk_T.Location = new System.Drawing.Point(165, 149);
             this.chk_T.Name = "chk_T";
             this.chk_T.Size = new System.Drawing.Size(36, 17);
             this.chk_T.TabIndex = 5;
@@ -96,7 +97,7 @@
             // 
             this.chk_R.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chk_R.AutoSize = true;
-            this.chk_R.Location = new System.Drawing.Point(107, 149);
+            this.chk_R.Location = new System.Drawing.Point(86, 149);
             this.chk_R.Name = "chk_R";
             this.chk_R.Size = new System.Drawing.Size(37, 17);
             this.chk_R.TabIndex = 3;
@@ -160,28 +161,29 @@
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.label2_MouseDown);
             // 
-            // panel1
+            // pnl_mapping_network
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.lbl_fechar);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.txtPassword);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.chk_R);
-            this.panel1.Controls.Add(this.btn_desconectar);
-            this.panel1.Controls.Add(this.txtUsername);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.chk_T);
-            this.panel1.Controls.Add(this.chk_S);
-            this.panel1.Controls.Add(this.btn_map_drive);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(319, 232);
-            this.panel1.TabIndex = 29;
-            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.pnl_mapping_network.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.pnl_mapping_network.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_mapping_network.Controls.Add(this.chk_L);
+            this.pnl_mapping_network.Controls.Add(this.lbl_fechar);
+            this.pnl_mapping_network.Controls.Add(this.label2);
+            this.pnl_mapping_network.Controls.Add(this.label4);
+            this.pnl_mapping_network.Controls.Add(this.txtPassword);
+            this.pnl_mapping_network.Controls.Add(this.label1);
+            this.pnl_mapping_network.Controls.Add(this.chk_R);
+            this.pnl_mapping_network.Controls.Add(this.btn_desconectar);
+            this.pnl_mapping_network.Controls.Add(this.txtUsername);
+            this.pnl_mapping_network.Controls.Add(this.label3);
+            this.pnl_mapping_network.Controls.Add(this.chk_T);
+            this.pnl_mapping_network.Controls.Add(this.chk_S);
+            this.pnl_mapping_network.Controls.Add(this.btn_map_drive);
+            this.pnl_mapping_network.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnl_mapping_network.Location = new System.Drawing.Point(0, 0);
+            this.pnl_mapping_network.Name = "pnl_mapping_network";
+            this.pnl_mapping_network.Size = new System.Drawing.Size(319, 232);
+            this.pnl_mapping_network.TabIndex = 29;
+            this.pnl_mapping_network.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             // 
             // lbl_fechar
             // 
@@ -206,19 +208,30 @@
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.label3_MouseDown);
             // 
+            // chk_L
+            // 
+            this.chk_L.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chk_L.AutoSize = true;
+            this.chk_L.Location = new System.Drawing.Point(208, 149);
+            this.chk_L.Name = "chk_L";
+            this.chk_L.Size = new System.Drawing.Size(35, 17);
+            this.chk_L.TabIndex = 30;
+            this.chk_L.Text = "L:";
+            this.chk_L.UseVisualStyleBackColor = true;
+            // 
             // MappingNetwork
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 14);
             this.ClientSize = new System.Drawing.Size(319, 232);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnl_mapping_network);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MappingNetwork";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mapear unidade de rede 2.0";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnl_mapping_network.ResumeLayout(false);
+            this.pnl_mapping_network.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -235,7 +248,8 @@
         private System.Windows.Forms.Button btn_desconectar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnl_mapping_network;
         private System.Windows.Forms.Label lbl_fechar;
+        private System.Windows.Forms.CheckBox chk_L;
     }
 }

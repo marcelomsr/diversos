@@ -27,20 +27,10 @@ namespace Network
                 ldap.SessionOptions.ProtocolVersion = 3;
                 ldap.SessionOptions.VerifyServerCertificate = new VerifyServerCertificateCallback((con, cer) => true);
 
-                ldap.AuthType = AuthType.Basic;
-                ldap.Credential = new NetworkCredential("lbvdc\\sysauth", "frusPa&7Wr");
-                ldap.Bind();
-
-                var dn = GetDn(ldap, userName);
-
-                if (dn == null)
-                    // Usuário inexistente.
-                    return false;
-
                 try
                 {
                     ldap.AuthType = AuthType.Basic;
-                    ldap.Bind(new NetworkCredential(dn, password));
+                    ldap.Bind(new NetworkCredential("lbvdc\\" + userName, password));
 
                     return true;
                 }
@@ -56,16 +46,16 @@ namespace Network
                 }
             }
         }
-
+        
         private String GetDn(LdapConnection ldap, String userName)
-        {
+        {            
             var request = new SearchRequest(this.BaseDn, string.Format(CultureInfo.InvariantCulture, this.Filter, userName), SearchScope.Subtree);
             var response = (SearchResponse)ldap.SendRequest(request);
 
             if (response.Entries.Count == 1)
                 return response.Entries[0].DistinguishedName;
 
-            return null;
+            return null;            
         }
     }
 }

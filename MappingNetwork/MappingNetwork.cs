@@ -1,11 +1,13 @@
 using aejw.Network;
 using IWshRuntimeLibrary;
 using System;
-using System.Reflection;
-using System.Windows.Forms;
-using System.IO;
-using System.Runtime.InteropServices;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.DirectoryServices;
+using System.IO;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace Network
 {
@@ -30,10 +32,19 @@ namespace Network
             public int nmr_porta_ldap;
         };
 
+        private enum SiglaLocal
+        {
+            PAE, // Porto Alegre
+            SPO  // São Paulo
+        }
+
         private bool _mapeou = true;
+        private SiglaLocal local;
 
         public MappingNetwork()
         {
+            descobrir_local_maquina();
+
             AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
             {
                 string resourceName = new AssemblyName(args.Name).Name + ".dll";
@@ -52,6 +63,19 @@ namespace Network
             tratar_drives();
         }
 
+        private void descobrir_local_maquina()
+        {
+            if(Environment.MachineName.Contains("PAE"))
+                local = SiglaLocal.PAE;
+            else if (Environment.MachineName.Contains("SPO"))
+                local = SiglaLocal.SPO;
+            else
+            {
+                MessageBox.Show("Este computador não está autorizado a utilizar esta ferramenta.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Environment.Exit(1);
+            }
+        }
+
         private void tratar_drives()
         {
             DriveInfo[] allDrives = DriveInfo.GetDrives();
@@ -64,12 +88,17 @@ namespace Network
                     chk_S.Checked = true;
                 else if (d.Name == @"T:\")
                     chk_T.Checked = true;
+                else if (d.Name == @"L:\")
+                    chk_L.Checked = true;
             }
 
-            if(chk_R.Checked || chk_S.Checked || chk_T.Checked)
+            if (chk_R.Checked || chk_S.Checked || chk_T.Checked || chk_L.Checked)
                 alterar_componentes_conexao(false);
             else
                 alterar_componentes_conexao(true);
+
+            if (Environment.MachineName.Contains("SPO"))
+                chk_L.Enabled = false;
         }
 
         private void alterar_componentes_conexao(bool habilita)
@@ -79,39 +108,38 @@ namespace Network
             btn_map_drive.Enabled = btn_map_drive.Visible = habilita;
 
             btn_desconectar.Enabled = btn_desconectar.Visible = !habilita;
-            
+
         }
 
         private void btn_mapear_Click(object sender, System.EventArgs e)
         {
-            if (!chk_R.Checked && !chk_S.Checked && !chk_T.Checked)
+            this.Cursor = Cursors.WaitCursor;
+
+            if (!chk_R.Checked && !chk_S.Checked && !chk_T.Checked && !chk_L.Checked)
             {
                 MessageBox.Show("Selecione as unidades que deseja mapear.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Cursor = Cursors.Default;
                 return;
             }
 
             if (txtPassword.Text.Trim() == "" || txtUsername.Text.Trim() == "")
             {
                 MessageBox.Show("Usuário e senha necessários.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Cursor = Cursors.Default;
                 return;
             }
 
             if (!usuario_valido(txtUsername.Text.Trim(), txtPassword.Text.Trim()))
             {
                 MessageBox.Show("Usuário ou senha inválidos.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Cursor = Cursors.Default;
                 return;
             }
-
+            
             if (chk_R.Checked)
             {
                 mapear_unidade_rede("R:", @"\\dados.lbv.org.br\data1$");
                 CreateShortcut("R");
-            }
-
-            if (chk_S.Checked)
-            {
-                mapear_unidade_rede("S:", @"\\manisa.lbvdc.lbv.org.br\data1$");
-                CreateShortcut("S");
             }
 
             if (chk_T.Checked)
@@ -120,11 +148,36 @@ namespace Network
                 CreateShortcut("T");
             }
 
+            if (local == SiglaLocal.SPO)
+            {
+                if (chk_S.Checked)
+                {
+                    mapear_unidade_rede("S:", @"\\manisa.lbvdc.lbv.org.br\data1$");
+                    CreateShortcut("S");
+                }
+            }
+            else if (local == SiglaLocal.PAE)
+            {
+                if (chk_S.Checked)
+                {
+                    mapear_unidade_rede("S:", @"\\haslev.lbvdc.lbv.org.br\srbvpae$");
+                    CreateShortcut("S");
+                }
+
+                if (chk_L.Checked)
+                {
+                    mapear_unidade_rede("L:", @"\\haslev.lbvdc.lbv.org.br\pae$");
+                    CreateShortcut("L");
+                }
+            }
+
             if (_mapeou)
                 this.Close();
 
             // Define true novamente, para que seja possível tentar mapear novamente.
             _mapeou = true;
+
+            this.Cursor = Cursors.Default;
         }
 
         private void btn_desconectar_Click(object sender, EventArgs e)
@@ -145,6 +198,12 @@ namespace Network
             {
                 desmapear_unidade_rede("T:");
                 DeleteShortcut("T");
+            }
+            
+            if (chk_L.Checked && local == SiglaLocal.PAE)
+            {
+                desmapear_unidade_rede("L:");
+                DeleteShortcut("L");
             }
 
             this.Close();
@@ -201,18 +260,12 @@ namespace Network
 
         private void desmapear_unidade_rede(string letter_drive)
         {
-            NetworkDrive oNetDrive = new NetworkDrive();
-
-            try
-            {
-                // Unmap the drive
-                oNetDrive.LocalDrive = letter_drive;
-                oNetDrive.Force = true;
-                oNetDrive.UnMapDrive();
-            }
-            catch (Exception) { }
-
-            oNetDrive = null;
+            Process p = new Process();
+            p.StartInfo.FileName = "net";
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.Arguments = String.Format("use {0} /delete /y", letter_drive);
+            p.StartInfo.RedirectStandardOutput = true;
+            p.Start();
         }
 
         private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
@@ -262,19 +315,19 @@ namespace Network
         private bool usuario_valido(string nme_login, string dsc_senha)
         {
             try
-            { 
-            LDAPAutenticacaoConfig ldap_autenticacao_config;
-            ldap_autenticacao_config.dsc_ip_ldap = "lbvdc.lbv.org.br";
-            ldap_autenticacao_config.dsc_arvore_ldap = "DC=lbvdc,DC=lbv,DC=org,DC=br";
-            ldap_autenticacao_config.nmr_porta_ldap = 636;
+            {
+                LDAPAutenticacaoConfig ldap_autenticacao_config;
+                ldap_autenticacao_config.dsc_ip_ldap = "lbvdc.lbv.org.br";
+                ldap_autenticacao_config.dsc_arvore_ldap = "DC=lbvdc,DC=lbv,DC=org,DC=br";
+                ldap_autenticacao_config.nmr_porta_ldap = 636;
 
-            LdapAuthentication ldap = new LdapAuthentication(
-                String.Format("{0}:{1}", ldap_autenticacao_config.dsc_ip_ldap, ldap_autenticacao_config.nmr_porta_ldap),
-                ldap_autenticacao_config.dsc_arvore_ldap, "sAMAccountName={0}");
+                LdapAuthentication ldap = new LdapAuthentication(
+                    String.Format("{0}:{1}", ldap_autenticacao_config.dsc_ip_ldap, ldap_autenticacao_config.nmr_porta_ldap),
+                    ldap_autenticacao_config.dsc_arvore_ldap, "sAMAccountName={0}");
 
-            return ldap.Authenticate(nme_login, dsc_senha);
+                return ldap.Authenticate(nme_login, dsc_senha);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
