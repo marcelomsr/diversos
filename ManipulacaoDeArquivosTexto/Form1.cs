@@ -78,7 +78,7 @@ namespace ManipulacaoDeArquivosTexto
 
                             Valores[0] = lido.Substring(1, 6);
                             Valores[1] = data;
-                            Valores[2] = valItem.ToString("0.00");
+                            Valores[2] = valItem.ToString("0,00");
 
                             dsTXT.Tables["Table1"].Rows.Add(Valores);
                         }

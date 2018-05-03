@@ -1,0 +1,45 @@
+﻿// Floor( 0.5 * Power * Atk / Def* STAB * Effective ) + 1
+// Attack = ( BaseAttack + AttackIV ) * CpM
+// Defense = (BaseDefense + DefenseIV) * CpM
+Power = Power move, ex: solar beam 180
+Stab 1.2
+Effectiveness: 1.4
+Doubly weak 1.96
+
+                    immune      ineffective neutral Effective
+                    x0.51       x0.714      x1.0    x1.4
+immune      x0.51   x0.51²      x0.36414    x0.51   x0.714
+ineffective x0.714  x0.36414    x0.714²     x0.714  x1.0
+Neutral     x1.0    x0.51       x0.714      x1.0    x1.4
+Effective   x1.4    x0.714      x1.0        x1.4    x1.4²
+
+Attack = ( 263 + 15 ) = 278 * 0,7317 = 203,4126
+Attack = ( 263 + 14 ) = 277 * 0,7317 = 202,6809
+Attack = ( 263 + 13 ) = 276 * 0,7317 = 201,9492
+
+Attack = ( 263 + 15 ) = 278 * 0,79030001 = 219,70340278
+Attack = ( 263 + 14 ) = 277 * 0,79030001 = 218,91310277
+Attack = ( 263 + 13 ) = 276 * 0,79030001 = 218,12280276
+
+Defense = ( 201 + 15 ) = 216 * 0,7317 = 158,0472
+Defense = ( 201 + 14 ) = 215 * 0,7317 = 157,3155
+Defense = ( 201 + 13 ) = 214 * 0,7317 = 156,5838
+
+Defense = ( 201 + 15 ) = 216 * 0,79030001 = 
+Defense = ( 201 + 14 ) = 215 * 0,79030001 = 
+Defense = ( 201 + 13 ) = 214 * 0,79030001 = 
+
+
+Floor( 0.5 * 15 * 203,4126 / 158,0472 * 1.2 * 1.4 ) + 1 = 17/163
+Floor( 0.5 * 15 * 202,6809 / 158,0472 * 1.2 * 1.4 ) + 1 = 17/162
+Floor( 0.5 * 15 * 201,9492 / 158,0472 * 1.2 * 1.4 ) + 1 = 17/162
+
+Level 30
+15 - 17/163
+14 - 17/162
+13 - 17/162
+
+Level 40
+15 - 18/176
+14 - 18/175
+13 - 18/174
