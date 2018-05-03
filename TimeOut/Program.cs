@@ -1,24 +1,19 @@
-﻿using System;
+﻿using MyLibrary;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace TimeOut
 {
     static class Program
-    {
+    {        
         static void Main()
         {
-            var tokenSource = new CancellationTokenSource();
-            CancellationToken token = tokenSource.Token;
-            int timeOut = 1000; // 1000 ms
-
-            var task = Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(970); // Costuma estourar.
-                //Thread.Sleep(950); // Costuma dar tempo.
-            }, token);
-
-            if (!task.Wait(timeOut, token))
+            if ( SimpleFunctions.TimeOut(() =>
+                    {
+                        Thread.Sleep(980); // Costuma estourar.
+                        //Thread.Sleep(950); // Costuma dar tempo.
+                    }, 1000) )
                 Console.WriteLine(String.Format("Estourou o timeout"));
             else
                 Console.WriteLine(String.Format("Deu tempo!"));

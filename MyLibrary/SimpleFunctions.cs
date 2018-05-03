@@ -8,6 +8,8 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MyLibrary
@@ -187,6 +189,20 @@ namespace MyLibrary
             var field = type.GetField(name);
             var customAttribute = field.GetCustomAttributes(typeof(DescriptionAttribute), false);
             return customAttribute.Length > 0 ? ((DescriptionAttribute)customAttribute[0]).Description : name;
+        }
+
+        public static bool TimeOut(Action action, int millisecondsTimeOut)
+        {
+            var tokenSource = new CancellationTokenSource();
+            CancellationToken token = tokenSource.Token;
+
+            var task = Task.Factory.StartNew(action, token);
+
+            // Estourou o tempo
+            if (!task.Wait(millisecondsTimeOut, token))
+                return true;
+
+            return false;
         }
     }
 }
