@@ -23,14 +23,37 @@ namespace ConsoleRecorder
         {
             InitializeComponent();
 
-            _conexao_gravador.conectar();
+            _conexao_gravador.AoComandoEnviado += ao_receber_comando_enviado;
+
+            popular_lista_gravadores();
             popular_combo_comandos();
             cbo_comandos.SelectedIndex = 0;
         }
 
+        private void popular_lista_gravadores()
+        {
+            lst_gravadores.Items.Add(new Gravador("localhost:8888", "localhost", 8888));
+            lst_gravadores.Items.Add(new Gravador("(DUNKIRK) (Inativo)", "10.0.35.194", 8881));
+            lst_gravadores.Items.Add(new Gravador("HA", "10.0.35.194", 8882));
+            lst_gravadores.Items.Add(new Gravador("Agente Virtual (ANTIBES)", "10.0.35.194", 8883));
+            lst_gravadores.Items.Add(new Gravador("LGW-SIP (NANCY)", "10.0.35.194", 8886));
+            lst_gravadores.Items.Add(new Gravador("Paraguai (BEDER)", "10.0.35.194", 8888));
+
+            lst_gravadores.Items.Add(new Gravador("Centronorte", "10.0.35.195", 8880));
+            lst_gravadores.Items.Add(new Gravador("Argentina", "10.0.35.195", 8882));
+            lst_gravadores.Items.Add(new Gravador("Nordeste", "10.0.35.195", 8883));
+            lst_gravadores.Items.Add(new Gravador("São Paulo Interior", "10.0.35.195", 8884));
+            lst_gravadores.Items.Add(new Gravador("Rio de Janeiro", "10.0.35.195", 8885));
+            lst_gravadores.Items.Add(new Gravador("Sul", "10.0.35.195", 8886));
+            lst_gravadores.Items.Add(new Gravador("São Paulo II", "10.0.35.195", 8887));
+            lst_gravadores.Items.Add(new Gravador("Minas", "10.0.35.195", 8888));
+
+            lst_gravadores.DisplayMember = "_nome";
+        }
+
         private void popular_combo_comandos()
         {
-            foreach (KeyValuePair<int, string> item in _conexao_gravador.obter_comandos())
+            foreach (InteracaoGravador.Comando item in Enum.GetValues(typeof(InteracaoGravador.Comando)))
                 cbo_comandos.Items.Add(item);
         }
 
@@ -73,27 +96,25 @@ namespace ConsoleRecorder
 
         private void cbo_comandos_SelectedValueChanged(object sender, EventArgs e)
         {
-            var selectedItem = (KeyValuePair<int, string>)cbo_comandos.SelectedItem;
-
             panel.Controls.Clear();
 
-            switch (selectedItem.Key)
+            switch (cbo_comandos.SelectedItem)
             {
-                case COMANDO_INICIAR_GRAVACAO_CHAMADA:
+                case InteracaoGravador.Comando.COMANDO_INICIAR_GRAVACAO_CHAMADA:
                     {
                         UserControlGravar user_control = new UserControlGravar();
                         panel.Controls.Add(user_control);
                     }
                     break;
 
-                case COMANDO_PARAR_GRAVACAO_CHAMADA:
+                case InteracaoGravador.Comando.COMANDO_PARAR_GRAVACAO_CHAMADA:
                     {
                         UserControlPararGravar user_control = new UserControlPararGravar();
                         panel.Controls.Add(user_control);
                     }
                     break;
 
-                case COMANDO_OBTER_GRAVACAO:
+                case InteracaoGravador.Comando.COMANDO_OBTER_GRAVACAO:
                     {
                         UserControlObterGravacao user_control = new UserControlObterGravacao();
                         panel.Controls.Add(user_control);
@@ -104,14 +125,20 @@ namespace ConsoleRecorder
                     break;
             }
         }
-        
+
+        private void lst_gravadores_SelectedValueChanged(object sender, EventArgs e)
+        {
+            var selectedItem = (Gravador)lst_gravadores.SelectedItem;
+
+            _conexao_gravador.definir_endereco_gravador(selectedItem._ip, selectedItem._porta);
+            _conexao_gravador.conectar();
+        }
+
         private void btn_enviar_comando_Click(object sender, EventArgs e)
         {
-            var selectedItem = (KeyValuePair<int, string>)cbo_comandos.SelectedItem;
-
-            switch (selectedItem.Key)
+            switch (cbo_comandos.SelectedItem)
             {
-                case COMANDO_INICIAR_GRAVACAO_CHAMADA:
+                case InteracaoGravador.Comando.COMANDO_INICIAR_GRAVACAO_CHAMADA:
                     {
                         TextBox txt_chamada_id = (TextBox)panel.Controls[0].Controls.Find("txt_chamada_id", false)[0];
                         int chamada_id = Convert.ToInt32(txt_chamada_id.Text);
@@ -125,7 +152,7 @@ namespace ConsoleRecorder
 
                     break;
 
-                case COMANDO_PARAR_GRAVACAO_CHAMADA:
+                case InteracaoGravador.Comando.COMANDO_PARAR_GRAVACAO_CHAMADA:
                     {
                         TextBox txt_chamada_id = (TextBox)panel.Controls[0].Controls.Find("txt_gravacao_id", false)[0];
                         int gravacao_id = Convert.ToInt32(txt_chamada_id.Text);
@@ -136,7 +163,7 @@ namespace ConsoleRecorder
 
                     break;
 
-                case COMANDO_OBTER_GRAVACAO:
+                case InteracaoGravador.Comando.COMANDO_OBTER_GRAVACAO:
                     {
                         TextBox txt_sqc_gravacao = (TextBox)panel.Controls[0].Controls.Find("txt_sqc_gravacao", false)[0];
                         string gravacao = _conexao_gravador.obter_gravacao(Convert.ToInt32(txt_sqc_gravacao.Text));
@@ -147,7 +174,7 @@ namespace ConsoleRecorder
 
                     break;
 
-                case COMANDO_OBTER_VERSAO:
+                case InteracaoGravador.Comando.COMANDO_OBTER_VERSAO:
                     {
                         string versao = _conexao_gravador.obter_versao();
 
@@ -164,7 +191,7 @@ namespace ConsoleRecorder
         private void alimentar_texto_console(string txtConsole, bool pula_duas_linhas = false)
         {
             rct_retorno.AppendText("[" + DateTime.Now.ToString() + "]");
-            rct_retorno.AppendText(" ");            
+            rct_retorno.AppendText(" ");
             rct_retorno.AppendText(txtConsole);
             rct_retorno.AppendText("\n");
 
@@ -173,8 +200,12 @@ namespace ConsoleRecorder
 
             rct_retorno.ScrollToCaret();
         }
-    }
 
+        private void ao_receber_comando_enviado(string comando)
+        {
+            alimentar_texto_console(comando);
+        }
+    }
 
     public class CompressUtil
     {
