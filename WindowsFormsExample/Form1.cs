@@ -15,13 +15,22 @@ namespace WindowsFormsExample
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            while (true)
+            Manager_Scroll();
+        }
+
+        private void Manager_Scroll()
+        {
+            do
             {
-                SendKeys.Send("%{SCROLLLOCK}");
-                Thread.Sleep(1000);
-                SendKeys.Send("%{SCROLLLOCK}");
-                Thread.Sleep(_QTD_MINUTOS * 1000 * 60);
-            }
+                try
+                {
+                    SendKeys.Send("%{SCROLLLOCK}");
+                    Thread.Sleep(1000);
+                    SendKeys.Send("%{SCROLLLOCK}");
+                    Thread.Sleep(_QTD_MINUTOS * 1000 * 60);
+                }
+                catch (Exception) { }
+            } while (true);
         }
     }
 }

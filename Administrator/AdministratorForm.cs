@@ -27,11 +27,17 @@ namespace Administrator
         {
             Dictionary<string, Database> items = new Dictionary<string, Database>();
 
+            Database apn_prd_grv = new Database();
+            apn_prd_grv.name_connection = "APNPRD - GRV";
+            apn_prd_grv.dsn = "APNPRD";
+            apn_prd_grv.user = "SRVALTSRV";
+            apn_prd_grv.password = "o@nL@M58mtfBZx";
+
             Database apn_vld_zehahahaha = new Database();
             apn_vld_zehahahaha.name_connection = "APNVLD - Zehahahaha";
             apn_vld_zehahahaha.dsn = "APNVLD";
-            apn_vld_zehahahaha.user = "ADMUSR";
-            apn_vld_zehahahaha.password = "admlight";
+            apn_vld_zehahahaha.user = "SRVWCFALTRIUM";
+            apn_vld_zehahahaha.password = "K!@qtr3fQ4CMxE";
             
             Database apn_vld_marcelo = new Database();
             apn_vld_marcelo.name_connection = "APNVLD - marcelo_";
@@ -44,7 +50,8 @@ namespace Administrator
             apn_des_desenv.dsn = "APNDES";
             apn_des_desenv.user = "desenv";
             apn_des_desenv.password = "envdes";
-                        
+
+            items.Add(apn_prd_grv.name_connection, apn_vld_zehahahaha);
             items.Add(apn_vld_zehahahaha.name_connection, apn_vld_zehahahaha);
             items.Add(apn_vld_marcelo.name_connection, apn_vld_marcelo);
             items.Add(apn_des_desenv.name_connection, apn_des_desenv);
