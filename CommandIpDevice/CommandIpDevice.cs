@@ -1,6 +1,6 @@
-﻿using Asterisk.NET.Manager;
-using Asterisk.NET.Manager.Action;
-using Asterisk.NET.Manager.Response;
+﻿//using Asterisk.NET.Manager;
+//using Asterisk.NET.Manager.Action;
+//using Asterisk.NET.Manager.Response;
 using System;
 using System.IO;
 using System.Net;
@@ -11,7 +11,7 @@ namespace CommandIpDevice
 {
     public partial class CommandIpDevice : Form
     {
-        private ManagerConnection _manager;
+        //private ManagerConnection _manager;
 
         private const string _PATH_REQUEST = "/cgi-bin/ConfigManApp.com?key=";
         private string _user_device = "admin";
@@ -29,7 +29,7 @@ namespace CommandIpDevice
         }
 
         private void ConectarServerAsterisk()
-        {
+        {/*
             if (_manager != null && _manager.IsConnected())
             {
                 try
@@ -62,16 +62,17 @@ namespace CommandIpDevice
                 _manager.Logoff();
 
                 btnListDevices.Enabled = false;
-            }
+            }*/
         }
-
+        
         private void btnListDevices_Click(object sender, EventArgs e)
-        {
+        {/*
             var action = new CommandAction();
             action.Command = "SIP SHOW PEERS";
 
             ManagerResponse mr = _manager.SendAction(action);
             string resposta = mr.Response;
+            */
         }
 
         private void btn_send_command_Click(object sender, EventArgs e)
