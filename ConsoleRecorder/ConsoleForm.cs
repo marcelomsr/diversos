@@ -64,10 +64,10 @@ namespace ConsoleRecorder
             byte[] bytes_arquivo = File.ReadAllBytes(diretorio_arquivo);
             //string gravacao = Convert.ToBase64String(bytes_arquivo);
 
-            using (MemoryMappedFile mmf = MemoryMappedFile.CreateNew("testmap", bytes_arquivo.Length))
+            using (MemoryMappedFile mmf = MemoryMappedFile.CreateNew("audiomap", bytes_arquivo.Length))
             {
                 bool mutexCreated;
-                Mutex mutex = new Mutex(true, "testmapmutex", out mutexCreated);
+                Mutex mutex = new Mutex(true, "audiomapmutex", out mutexCreated);
 
                 using (MemoryMappedViewStream stream = mmf.CreateViewStream())
                 {
