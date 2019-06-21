@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Update="ConsoleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ConsoleForm.Designer.cs">
+      <DependentUpon>ConsoleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="UserControlGravar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControlGravar.Designer.cs">
+      <DependentUpon>UserControlGravar.cs</DependentUpon>
+    </Compile>
+    <Compile Update="UserControlObterGravacao .cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControlObterGravacao .Designer.cs">
+      <DependentUpon>UserControlObterGravacao .cs</DependentUpon>
+    </Compile>
+    <Compile Update="UserControlPararGravar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControlPararGravar.Designer.cs">
+      <DependentUpon>UserControlPararGravar.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="ConsoleForm.resx">
+      <DependentUpon>ConsoleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserControlGravar.resx">
+      <DependentUpon>UserControlGravar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserControlObterGravacao .resx">
+      <DependentUpon>UserControlObterGravacao .cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserControlPararGravar.resx">
+      <DependentUpon>UserControlPararGravar.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
