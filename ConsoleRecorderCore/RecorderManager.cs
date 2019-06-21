@@ -127,7 +127,7 @@ namespace ConsoleRecorderCore
             int comandoID = 0;
             string[] parametros = new string[] { };
 
-            Protocol.decodificar(mensagem, ref comandoID, ref parametros);
+            decodificar(mensagem, ref comandoID, ref parametros);
 
             switch (comandoID)
             {
@@ -337,6 +337,44 @@ namespace ConsoleRecorderCore
             }
 
             return retorno_servidor;
+        }
+
+        public bool decodificar(string mensagem, ref int comando, ref string[] parametros)
+        {
+            //
+            int posicao_comando = mensagem.IndexOf("@", 0);
+
+            // FIXME: Verificação temporária para evitar decodificar a mensagem 
+            // de um gravador PCS.
+            if (posicao_comando == -1)
+            {
+                return false;
+            }
+
+            comando = Convert.ToInt32(mensagem.Substring(0, posicao_comando));
+
+            return decodificar(comando, mensagem, ref parametros);
+        }
+
+        public bool decodificar(int comando_experado, string mensagem, ref string[] parametros)
+        {
+            int posicao_comando = mensagem.IndexOf("@", 0);
+
+            // FIXME: Verificação temporária para evitar decodificar a mensagem 
+            // de um gravador PCS.
+            if (posicao_comando == -1)
+            {
+                return false;
+            }
+
+            int posicao_final_comando = mensagem.IndexOf("$", 0);
+
+            if (Convert.ToInt32(mensagem.Substring(0, posicao_comando)) == comando_experado)
+            {
+                parametros = mensagem.Substring(posicao_comando + 1, posicao_final_comando - posicao_comando - 1).Split('&');
+            }
+
+            return true;
         }
     }
 }
