@@ -1,4 +1,4 @@
-﻿namespace ConsoleRecorder
+﻿namespace ConsoleRecorderCore
 {
     partial class UserControlGravar
     {

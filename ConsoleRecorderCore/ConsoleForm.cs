@@ -17,7 +17,7 @@ namespace ConsoleRecorderCore
         private const int COMANDO_OBTER_GRAVACAO = 10;
         private const int COMANDO_OBTER_VERSAO = 11;
 
-        ConexaoGravador _conexao_gravador = new ConexaoGravador();
+        RecorderManager _conexao_gravador = new RecorderManager();
 
         public ConsoleForm()
         {
@@ -32,28 +32,28 @@ namespace ConsoleRecorderCore
 
         private void popular_lista_gravadores()
         {
-            lst_gravadores.Items.Add(new Gravador("localhost:8888", "localhost", 8888));
-            lst_gravadores.Items.Add(new Gravador("(DUNKIRK) (Inativo)", "10.0.35.194", 8881));
-            lst_gravadores.Items.Add(new Gravador("HA", "10.0.35.194", 8882));
-            lst_gravadores.Items.Add(new Gravador("Agente Virtual (ANTIBES)", "10.0.35.194", 8883));
-            lst_gravadores.Items.Add(new Gravador("LGW-SIP (NANCY)", "10.0.35.194", 8886));
-            lst_gravadores.Items.Add(new Gravador("Paraguai (BEDER)", "10.0.35.194", 8888));
+            lst_gravadores.Items.Add(new Recorder("localhost:8888", "localhost", 8888));
+            lst_gravadores.Items.Add(new Recorder("(DUNKIRK) (Inativo)", "10.0.35.194", 8881));
+            lst_gravadores.Items.Add(new Recorder("HA", "10.0.35.194", 8882));
+            lst_gravadores.Items.Add(new Recorder("Agente Virtual (ANTIBES)", "10.0.35.194", 8883));
+            lst_gravadores.Items.Add(new Recorder("LGW-SIP (NANCY)", "10.0.35.194", 8886));
+            lst_gravadores.Items.Add(new Recorder("Paraguai (BEDER)", "10.0.35.194", 8888));
 
-            lst_gravadores.Items.Add(new Gravador("Centronorte", "10.0.35.195", 8880));
-            lst_gravadores.Items.Add(new Gravador("Argentina", "10.0.35.195", 8882));
-            lst_gravadores.Items.Add(new Gravador("Nordeste", "10.0.35.195", 8883));
-            lst_gravadores.Items.Add(new Gravador("São Paulo Interior", "10.0.35.195", 8884));
-            lst_gravadores.Items.Add(new Gravador("Rio de Janeiro", "10.0.35.195", 8885));
-            lst_gravadores.Items.Add(new Gravador("Sul", "10.0.35.195", 8886));
-            lst_gravadores.Items.Add(new Gravador("São Paulo II", "10.0.35.195", 8887));
-            lst_gravadores.Items.Add(new Gravador("Minas", "10.0.35.195", 8888));
+            lst_gravadores.Items.Add(new Recorder("Centronorte", "10.0.35.195", 8880));
+            lst_gravadores.Items.Add(new Recorder("Argentina", "10.0.35.195", 8882));
+            lst_gravadores.Items.Add(new Recorder("Nordeste", "10.0.35.195", 8883));
+            lst_gravadores.Items.Add(new Recorder("São Paulo Interior", "10.0.35.195", 8884));
+            lst_gravadores.Items.Add(new Recorder("Rio de Janeiro", "10.0.35.195", 8885));
+            lst_gravadores.Items.Add(new Recorder("Sul", "10.0.35.195", 8886));
+            lst_gravadores.Items.Add(new Recorder("São Paulo II", "10.0.35.195", 8887));
+            lst_gravadores.Items.Add(new Recorder("Minas", "10.0.35.195", 8888));
 
-            lst_gravadores.DisplayMember = "_nome";
+            lst_gravadores.DisplayMember = "Name";
         }
 
         private void popular_combo_comandos()
         {
-            foreach (InteracaoGravador.Comando item in Enum.GetValues(typeof(InteracaoGravador.Comando)))
+            foreach (RecorderInteraction.Command item in Enum.GetValues(typeof(RecorderInteraction.Command)))
                 cbo_comandos.Items.Add(item);
         }
 
@@ -100,21 +100,21 @@ namespace ConsoleRecorderCore
 
             switch (cbo_comandos.SelectedItem)
             {
-                case InteracaoGravador.Comando.COMANDO_INICIAR_GRAVACAO_CHAMADA:
+                case RecorderInteraction.Command.COMANDO_INICIAR_GRAVACAO_CHAMADA:
                     {
                         UserControlGravar user_control = new UserControlGravar();
                         panel.Controls.Add(user_control);
                     }
                     break;
 
-                case InteracaoGravador.Comando.COMANDO_PARAR_GRAVACAO_CHAMADA:
+                case RecorderInteraction.Command.COMANDO_PARAR_GRAVACAO_CHAMADA:
                     {
                         UserControlPararGravar user_control = new UserControlPararGravar();
                         panel.Controls.Add(user_control);
                     }
                     break;
 
-                case InteracaoGravador.Comando.COMANDO_OBTER_GRAVACAO:
+                case RecorderInteraction.Command.COMANDO_OBTER_GRAVACAO:
                     {
                         UserControlObterGravacao user_control = new UserControlObterGravacao();
                         panel.Controls.Add(user_control);
@@ -128,9 +128,9 @@ namespace ConsoleRecorderCore
 
         private void lst_gravadores_SelectedValueChanged(object sender, EventArgs e)
         {
-            var selectedItem = (Gravador)lst_gravadores.SelectedItem;
+            var selectedItem = (Recorder)lst_gravadores.SelectedItem;
 
-            _conexao_gravador.definir_endereco_gravador(selectedItem._ip, selectedItem._porta);
+            _conexao_gravador.definir_endereco_gravador(selectedItem.Ip, selectedItem.Port);
             _conexao_gravador.conectar();
         }
 
@@ -138,7 +138,7 @@ namespace ConsoleRecorderCore
         {
             switch (cbo_comandos.SelectedItem)
             {
-                case InteracaoGravador.Comando.COMANDO_INICIAR_GRAVACAO_CHAMADA:
+                case RecorderInteraction.Command.COMANDO_INICIAR_GRAVACAO_CHAMADA:
                     {
                         TextBox txt_chamada_id = (TextBox)panel.Controls[0].Controls.Find("txt_chamada_id", false)[0];
                         int chamada_id = Convert.ToInt32(txt_chamada_id.Text);
@@ -152,7 +152,7 @@ namespace ConsoleRecorderCore
 
                     break;
 
-                case InteracaoGravador.Comando.COMANDO_PARAR_GRAVACAO_CHAMADA:
+                case RecorderInteraction.Command.COMANDO_PARAR_GRAVACAO_CHAMADA:
                     {
                         TextBox txt_chamada_id = (TextBox)panel.Controls[0].Controls.Find("txt_gravacao_id", false)[0];
                         int gravacao_id = Convert.ToInt32(txt_chamada_id.Text);
@@ -163,7 +163,7 @@ namespace ConsoleRecorderCore
 
                     break;
 
-                case InteracaoGravador.Comando.COMANDO_OBTER_GRAVACAO:
+                case RecorderInteraction.Command.COMANDO_OBTER_GRAVACAO:
                     {
                         TextBox txt_sqc_gravacao = (TextBox)panel.Controls[0].Controls.Find("txt_sqc_gravacao", false)[0];
                         string gravacao = _conexao_gravador.obter_gravacao(Convert.ToInt32(txt_sqc_gravacao.Text));
@@ -174,7 +174,7 @@ namespace ConsoleRecorderCore
 
                     break;
 
-                case InteracaoGravador.Comando.COMANDO_OBTER_VERSAO:
+                case RecorderInteraction.Command.COMANDO_OBTER_VERSAO:
                     {
                         string versao = _conexao_gravador.obter_versao();
 
