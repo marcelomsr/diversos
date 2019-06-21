@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Windows.Forms;
 using System.IO.Compression;
-using System.Runtime.InteropServices;
 using System.IO.MemoryMappedFiles;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace ConsoleRecorderCore
 {
