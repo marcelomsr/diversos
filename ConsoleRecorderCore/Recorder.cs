@@ -3,13 +3,13 @@
     public class Recorder
     {
         public string Name { protected set; get; }
-        public string Ip { protected set; get; }
+        public string Host { protected set; get; }
         public int Port { protected set; get; }
 
-        public Recorder(string name, string ip, int port)
+        public Recorder(string name, string host, int port)
         {
             Name = name;
-            Ip = ip;
+            Host = host;
             Port = port;
         }
     }

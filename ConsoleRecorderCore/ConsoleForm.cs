@@ -130,7 +130,7 @@ namespace ConsoleRecorderCore
         {
             var selectedItem = (Recorder)lst_gravadores.SelectedItem;
 
-            _conexao_gravador.definir_endereco_gravador(selectedItem.Ip, selectedItem.Port);
+            _conexao_gravador.definir_endereco_gravador(selectedItem.Host, selectedItem.Port);
             _conexao_gravador.conectar();
         }
 
