@@ -88,39 +88,55 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InteracaoGravador.cs" />
-    <Compile Include="ConexaoGravador.cs" />
-    <Compile Include="ConsoleForm.cs">
+    <Compile Include="..\ConsoleRecorderCore\ConsoleForm.cs">
+      <Link>ConsoleForm.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConsoleForm.Designer.cs">
-      <DependentUpon>ConsoleForm.cs</DependentUpon>
+    <Compile Include="..\ConsoleRecorderCore\UserControlGravar.cs">
+      <Link>UserControlGravar.cs</Link>
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="..\ConsoleRecorderCore\UserControlObterGravacao .cs">
+      <Link>UserControlObterGravacao .cs</Link>
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="..\ConsoleRecorderCore\UserControlPararGravar.cs">
+      <Link>UserControlPararGravar.cs</Link>
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InteracaoGravador.cs" />
+    <Compile Include="ConexaoGravador.cs" />
+    <Compile Include="_ConsoleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_ConsoleForm.Designer.cs">
+      <DependentUpon>_ConsoleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Gravador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocolo.cs" />
     <Compile Include="StateObject.cs" />
-    <Compile Include="UserControlGravar.cs">
+    <Compile Include="_UserControlGravar.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControlGravar.Designer.cs">
-      <DependentUpon>UserControlGravar.cs</DependentUpon>
+    <Compile Include="_UserControlGravar.Designer.cs">
+      <DependentUpon>_UserControlGravar.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControlObterGravacao .cs">
+    <Compile Include="_UserControlObterGravacao .cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControlObterGravacao .Designer.cs">
-      <DependentUpon>UserControlObterGravacao .cs</DependentUpon>
+    <Compile Include="_UserControlObterGravacao .Designer.cs">
+      <DependentUpon>_UserControlObterGravacao .cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControlPararGravar.cs">
+    <Compile Include="_UserControlPararGravar.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControlPararGravar.Designer.cs">
-      <DependentUpon>UserControlPararGravar.cs</DependentUpon>
+    <Compile Include="_UserControlPararGravar.Designer.cs">
+      <DependentUpon>_UserControlPararGravar.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ConsoleForm.resx">
-      <DependentUpon>ConsoleForm.cs</DependentUpon>
+    <EmbeddedResource Include="_ConsoleForm.resx">
+      <DependentUpon>_ConsoleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -132,14 +148,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="UserControlGravar.resx">
-      <DependentUpon>UserControlGravar.cs</DependentUpon>
+    <EmbeddedResource Include="_UserControlGravar.resx">
+      <DependentUpon>_UserControlGravar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControlObterGravacao .resx">
-      <DependentUpon>UserControlObterGravacao .cs</DependentUpon>
+    <EmbeddedResource Include="_UserControlObterGravacao .resx">
+      <DependentUpon>_UserControlObterGravacao .cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControlPararGravar.resx">
-      <DependentUpon>UserControlPararGravar.cs</DependentUpon>
+    <EmbeddedResource Include="_UserControlPararGravar.resx">
+      <DependentUpon>_UserControlPararGravar.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

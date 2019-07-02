@@ -13,7 +13,7 @@ namespace ConsoleRecorder
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ConsoleForm());
+            Application.Run(new _ConsoleForm());
         }
     }
 }

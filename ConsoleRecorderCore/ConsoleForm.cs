@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.IO.Compression;
 using System.IO.MemoryMappedFiles;
 using System.Threading;
 using System.Windows.Forms;
@@ -10,18 +9,11 @@ namespace ConsoleRecorderCore
 {
     public partial class ConsoleForm : Form
     {
-        private const int COMANDO_INICIAR_GRAVACAO_CHAMADA = 1;
-        private const int COMANDO_PARAR_GRAVACAO_CHAMADA = 2;
-        private const int COMANDO_OBTER_GRAVACAO = 10;
-        private const int COMANDO_OBTER_VERSAO = 11;
-
-        RecorderManager _conexao_gravador = new RecorderManager();
+        RecorderInteraction _recorderInteraction;
 
         public ConsoleForm()
         {
-            InitializeComponent();
-
-            _conexao_gravador.AoComandoEnviado += ao_receber_comando_enviado;
+            InitializeComponent();            
 
             popular_lista_gravadores();
             popular_combo_comandos();
@@ -31,20 +23,19 @@ namespace ConsoleRecorderCore
         private void popular_lista_gravadores()
         {
             lst_gravadores.Items.Add(new Recorder("localhost:8888", "localhost", 8888));
-            lst_gravadores.Items.Add(new Recorder("(DUNKIRK) (Inativo)", "10.0.35.194", 8881));
-            lst_gravadores.Items.Add(new Recorder("HA", "10.0.35.194", 8882));
-            lst_gravadores.Items.Add(new Recorder("Agente Virtual (ANTIBES)", "10.0.35.194", 8883));
-            lst_gravadores.Items.Add(new Recorder("LGW-SIP (NANCY)", "10.0.35.194", 8886));
-            lst_gravadores.Items.Add(new Recorder("Paraguai (BEDER)", "10.0.35.194", 8888));
+            lst_gravadores.Items.Add(new Recorder("Campinas", "10.0.72.194", 8884));
+            lst_gravadores.Items.Add(new Recorder("HA", "10.0.72.194", 8882));
+            lst_gravadores.Items.Add(new Recorder("Agente Virtual (ANTIBES)", "10.0.72.194", 8883));
+            lst_gravadores.Items.Add(new Recorder("Paraguai (BEDER)", "10.0.72.194", 8888));
 
-            lst_gravadores.Items.Add(new Recorder("Centronorte", "10.0.35.195", 8880));
-            lst_gravadores.Items.Add(new Recorder("Argentina", "10.0.35.195", 8882));
-            lst_gravadores.Items.Add(new Recorder("Nordeste", "10.0.35.195", 8883));
-            lst_gravadores.Items.Add(new Recorder("São Paulo Interior", "10.0.35.195", 8884));
-            lst_gravadores.Items.Add(new Recorder("Rio de Janeiro", "10.0.35.195", 8885));
-            lst_gravadores.Items.Add(new Recorder("Sul", "10.0.35.195", 8886));
-            lst_gravadores.Items.Add(new Recorder("São Paulo II", "10.0.35.195", 8887));
-            lst_gravadores.Items.Add(new Recorder("Minas", "10.0.35.195", 8888));
+            lst_gravadores.Items.Add(new Recorder("Centronorte", "10.0.72.195", 8880));
+            lst_gravadores.Items.Add(new Recorder("Argentina", "10.0.72.195", 8882));
+            lst_gravadores.Items.Add(new Recorder("Nordeste", "10.0.72.195", 8883));
+            lst_gravadores.Items.Add(new Recorder("São Paulo Interior", "10.0.72.195", 8884));
+            lst_gravadores.Items.Add(new Recorder("Rio de Janeiro", "10.0.72.195", 8885));
+            lst_gravadores.Items.Add(new Recorder("Sul", "10.0.72.195", 8886));
+            lst_gravadores.Items.Add(new Recorder("São Paulo II", "10.0.72.195", 8887));
+            lst_gravadores.Items.Add(new Recorder("Minas", "10.0.72.195", 8888));
 
             lst_gravadores.DisplayMember = "Name";
         }
@@ -86,9 +77,9 @@ namespace ConsoleRecorderCore
         private void btn_gravar_arquivo_Click(object sender, EventArgs e)
         {
             TextBox txt_sqc_gravacao = (TextBox)panel.Controls[0].Controls.Find("txt_sqc_gravacao", false)[0];
-            string gravacao = _conexao_gravador.obter_gravacao(Convert.ToInt32(txt_sqc_gravacao.Text));
+            string recording = _recorderInteraction.GetRecording(Convert.ToInt32(txt_sqc_gravacao.Text));
 
-            byte[] data = Convert.FromBase64String(gravacao);
+            byte[] data = Convert.FromBase64String(recording);
             File.WriteAllBytes(String.Format(@"C:\Users\marcelosr\Desktop\{0}.wav", txt_sqc_gravacao.Text), data);
         }
 
@@ -126,10 +117,10 @@ namespace ConsoleRecorderCore
 
         private void lst_gravadores_SelectedValueChanged(object sender, EventArgs e)
         {
-            var selectedItem = (Recorder)lst_gravadores.SelectedItem;
+            var recorder = (Recorder)lst_gravadores.SelectedItem;
 
-            _conexao_gravador.definir_endereco_gravador(selectedItem.Host, selectedItem.Port);
-            _conexao_gravador.conectar();
+            _recorderInteraction = new RecorderInteraction(recorder);
+            _recorderInteraction.CommandSended += ao_receber_comando_enviado;
         }
 
         private void btn_enviar_comando_Click(object sender, EventArgs e)
@@ -142,10 +133,14 @@ namespace ConsoleRecorderCore
                         int chamada_id = Convert.ToInt32(txt_chamada_id.Text);
 
                         TextBox txt_nmr_dispositivo = (TextBox)panel.Controls[0].Controls.Find("txt_nmr_dispositivo", false)[0];
-                        int nmr_ramal = Convert.ToInt32(txt_nmr_dispositivo.Text);
+                        string device = txt_nmr_dispositivo.Text;
 
-                        alimentar_texto_console(_conexao_gravador.gravar(chamada_id, nmr_ramal));
-                        alimentar_texto_console(_conexao_gravador.obter_retorno(), true);
+                        // FIXME: Colocar a quota como parâmetro, quota é o cdg_identificacao da tabela cct.cct_grv_gravador_quota.
+                        // Que é o mesmo de cdg_interface_cti, ou seja, é a identificação de qual interface cti possui a cota.
+                        int quota = 54;
+
+                        AppendTextConsole(_recorderInteraction.Record(chamada_id, device, quota), true);
+                        AppendTextConsole(_recorderInteraction.GetResponse());
                     }
 
                     break;
@@ -153,10 +148,9 @@ namespace ConsoleRecorderCore
                 case RecorderInteraction.Command.COMANDO_PARAR_GRAVACAO_CHAMADA:
                     {
                         TextBox txt_chamada_id = (TextBox)panel.Controls[0].Controls.Find("txt_gravacao_id", false)[0];
-                        int gravacao_id = Convert.ToInt32(txt_chamada_id.Text);
-
-                        alimentar_texto_console(_conexao_gravador.parar_gravar(gravacao_id));
-                        alimentar_texto_console(_conexao_gravador.obter_retorno(), true);
+                        int gravacao_id = Convert.ToInt32(txt_chamada_id.Text);                        
+                        AppendTextConsole(_recorderInteraction.StopRecording(gravacao_id), true);
+                        AppendTextConsole(_recorderInteraction.GetResponse());
                     }
 
                     break;
@@ -164,108 +158,45 @@ namespace ConsoleRecorderCore
                 case RecorderInteraction.Command.COMANDO_OBTER_GRAVACAO:
                     {
                         TextBox txt_sqc_gravacao = (TextBox)panel.Controls[0].Controls.Find("txt_sqc_gravacao", false)[0];
-                        string gravacao = _conexao_gravador.obter_gravacao(Convert.ToInt32(txt_sqc_gravacao.Text));
+                        string gravacao = _recorderInteraction.GetRecording(Convert.ToInt32(txt_sqc_gravacao.Text));
 
-                        alimentar_texto_console(gravacao);
-                        alimentar_texto_console(_conexao_gravador.obter_retorno(), true);
+                        AppendTextConsole(_recorderInteraction.GetResponse());
+                        AppendTextConsole(gravacao, true);                        
                     }
 
                     break;
 
                 case RecorderInteraction.Command.COMANDO_OBTER_VERSAO:
-                    {
-                        string versao = _conexao_gravador.obter_versao();
-
-                        alimentar_texto_console(versao);
+                    {                        
+                        string versao = _recorderInteraction.GetVersion();
+                        AppendTextConsole(_recorderInteraction.GetResponse());
+                        AppendTextConsole(versao, true);
                     }
 
                     break;
 
                 default:
+                    AppendTextConsole("Comando não suportado.");
                     break;
             }
         }
 
-        private void alimentar_texto_console(string txtConsole, bool pula_duas_linhas = false)
+        private void AppendTextConsole(string logMessage, bool skipTwoLines = false)
         {
             rct_retorno.AppendText("[" + DateTime.Now.ToString() + "]");
             rct_retorno.AppendText(" ");
-            rct_retorno.AppendText(txtConsole);
+            rct_retorno.AppendText(logMessage);
             rct_retorno.AppendText("\n");
 
-            if (pula_duas_linhas)
+            if (skipTwoLines)
                 rct_retorno.AppendText("\n");
 
             rct_retorno.ScrollToCaret();
         }
 
-        private void ao_receber_comando_enviado(string comando)
+        private void ao_receber_comando_enviado(string commnad)
         {
-            alimentar_texto_console(comando);
-        }
-    }
-
-    public class CompressUtil
-    {
-        /// <summary> Compacta uma string </summary>
-        /// <param name=”inputText”> Texto de entrada </param>
-        /// <returns> Texto compactado Base64 encoded </returns>
-        public static string Compress(string inputText)
-        {
-            return Compress(System.Text.Encoding.UTF8.GetBytes(inputText));
-        }
-
-        /// <summary> Compacta uma string </summary>
-        /// <param name=”inputBytes”> Texto de entrada </param>
-        /// <returns> Texto compactado Base64 encoded </returns>
-        public static string Compress(byte[] inputBytes)
-        {
-            byte[] compressed;
-
-            using (MemoryStream ms = new MemoryStream())
-            {
-                using (GZipStream zip = new GZipStream(ms, CompressionMode.Compress))
-                {
-                    zip.Write(inputBytes, 0, inputBytes.Length);
-                    zip.Close();
-
-                    compressed = ms.ToArray();
-                }
-            }
-
-            return Convert.ToBase64String(compressed);
-        }
-
-        /// <summary> Descompacta uma string. </summary>
-        /// <param name=”compressedText”> Texto compactado Base64 encoded </param>
-        /// <returns> descompacta um texto </returns>
-        public static string DecompressText(string compressedText)
-        {
-            return System.Text.Encoding.UTF8.GetString(DecompressBytes(compressedText));
-        }
-
-        /// <summary> Descompacta uma string </summary>
-        /// <param name=”compressedText”> Texto compactado Base64 encoded </param>
-        /// <returns> descompacta byte array </returns>
-        public static byte[] DecompressBytes(string compressedText)
-        {
-            byte[] bytes = Convert.FromBase64String(compressedText);
-            byte[] outputBytes;
-
-            using (MemoryStream inputStream = new MemoryStream(bytes))
-            {
-                using (GZipStream zip = new GZipStream(inputStream, CompressionMode.Decompress))
-                {
-                    using (MemoryStream outputStream = new MemoryStream())
-                    {
-                        zip.CopyTo(outputStream);
-
-                        outputBytes = outputStream.ToArray();
-                    }
-                }
-            }
-
-            return outputBytes;
+            AppendTextConsole(commnad);
         }
     }
 }
