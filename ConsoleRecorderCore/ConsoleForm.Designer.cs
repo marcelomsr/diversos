@@ -36,6 +36,7 @@
             this.rct_retorno = new System.Windows.Forms.RichTextBox();
             this.panel = new System.Windows.Forms.Panel();
             this.lst_gravadores = new System.Windows.Forms.ListBox();
+            this.btn_stress = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_tocar_audio
@@ -118,11 +119,23 @@
             this.lst_gravadores.TabIndex = 13;
             this.lst_gravadores.SelectedValueChanged += new System.EventHandler(this.lst_gravadores_SelectedValueChanged);
             // 
+            // btn_stress
+            // 
+            this.btn_stress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_stress.Location = new System.Drawing.Point(254, 422);
+            this.btn_stress.Name = "btn_stress";
+            this.btn_stress.Size = new System.Drawing.Size(94, 23);
+            this.btn_stress.TabIndex = 14;
+            this.btn_stress.Text = "Stressar";
+            this.btn_stress.UseVisualStyleBackColor = true;
+            this.btn_stress.Click += new System.EventHandler(this.btn_stress_Click);
+            // 
             // ConsoleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(957, 457);
+            this.Controls.Add(this.btn_stress);
             this.Controls.Add(this.lst_gravadores);
             this.Controls.Add(this.panel);
             this.Controls.Add(this.rct_retorno);
@@ -148,6 +161,7 @@
         private System.Windows.Forms.RichTextBox rct_retorno;
         private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.ListBox lst_gravadores;
+        private System.Windows.Forms.Button btn_stress;
     }
 }
 
