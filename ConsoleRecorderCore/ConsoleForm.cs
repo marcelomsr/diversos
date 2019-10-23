@@ -83,10 +83,11 @@ namespace ConsoleRecorderCore
         private void btn_gravar_arquivo_Click(object sender, EventArgs e)
         {
             TextBox txt_sqc_gravacao = (TextBox)panel.Controls[0].Controls.Find("txt_sqc_gravacao", false)[0];
-            string recording = _recorderInteraction.GetRecording(Convert.ToInt32(txt_sqc_gravacao.Text));
+            // FIXME
+            //string recording = _recorderInteraction.GetRecording(Convert.ToInt32(txt_sqc_gravacao.Text));
 
-            byte[] data = Convert.FromBase64String(recording);
-            File.WriteAllBytes(String.Format(@"C:\Users\marcelosr\Desktop\{0}.wav", txt_sqc_gravacao.Text), data);
+            //byte[] data = Convert.FromBase64String(recording);
+            //File.WriteAllBytes(String.Format(@"C:\Users\marcelosr\Desktop\{0}.wav", txt_sqc_gravacao.Text), data);
         }
 
         private void cbo_comandos_SelectedValueChanged(object sender, EventArgs e)
@@ -125,8 +126,9 @@ namespace ConsoleRecorderCore
         {
             var recorder = (Recorder)lst_gravadores.SelectedItem;
 
-            _recorderInteraction = new RecorderInteraction(recorder);
-            _recorderInteraction.CommandSended += ao_receber_comando_enviado;
+            // FIXME
+            //_recorderInteraction = new RecorderInteraction(recorder);
+            //_recorderInteraction.CommandSended += ao_receber_comando_enviado;
 
             ValidateInteractions();
         }
@@ -147,8 +149,9 @@ namespace ConsoleRecorderCore
                         // Que é o mesmo de cdg_interface_cti, ou seja, é a identificação de qual interface cti possui a cota.
                         int quota = -1;
 
-                        AppendTextConsole(_recorderInteraction.Record(chamada_id, device, quota), true);
-                        AppendTextConsole(_recorderInteraction.GetResponse());
+                        // FIXME
+                        //AppendTextConsole(_recorderInteraction.Record(chamada_id, device, quota), true);
+                        //AppendTextConsole(_recorderInteraction.GetResponse());
                     }
 
                     break;
@@ -157,8 +160,10 @@ namespace ConsoleRecorderCore
                     {
                         TextBox txt_chamada_id = (TextBox)panel.Controls[0].Controls.Find("txt_gravacao_id", false)[0];
                         int gravacao_id = Convert.ToInt32(txt_chamada_id.Text);
-                        AppendTextConsole(_recorderInteraction.StopRecording(gravacao_id), true);
-                        AppendTextConsole(_recorderInteraction.GetResponse());
+                        
+                        // FIXME
+                        //AppendTextConsole(_recorderInteraction.StopRecording(gravacao_id), true);
+                        //AppendTextConsole(_recorderInteraction.GetResponse());
                     }
 
                     break;
@@ -166,19 +171,22 @@ namespace ConsoleRecorderCore
                 case RecorderInteraction.Command.COMANDO_OBTER_GRAVACAO:
                     {
                         TextBox txt_sqc_gravacao = (TextBox)panel.Controls[0].Controls.Find("txt_sqc_gravacao", false)[0];
-                        string gravacao = _recorderInteraction.GetRecording(Convert.ToInt32(txt_sqc_gravacao.Text));
+                        
+                        // FIXME
+                        //string gravacao = _recorderInteraction.GetRecording(Convert.ToInt32(txt_sqc_gravacao.Text));
 
-                        AppendTextConsole(_recorderInteraction.GetResponse());
-                        AppendTextConsole(gravacao, true);
+                        //AppendTextConsole(_recorderInteraction.GetResponse());
+                        //AppendTextConsole(gravacao, true);
                     }
 
                     break;
 
                 case RecorderInteraction.Command.COMANDO_OBTER_VERSAO:
                     {
-                        string versao = _recorderInteraction.GetVersion();
-                        AppendTextConsole(_recorderInteraction.GetResponse());
-                        AppendTextConsole(versao, true);
+                        // FIXME
+                        //string versao = _recorderInteraction.GetVersion();
+                        //AppendTextConsole(_recorderInteraction.GetResponse());
+                        //AppendTextConsole(versao, true);
                     }
 
                     break;
@@ -239,8 +247,9 @@ namespace ConsoleRecorderCore
 
         private void Stress()
         {
-            AppendTextConsole(_recorderInteraction.Record("1", "SIP/190001", -1));
-            AppendTextConsole(_recorderInteraction.GetResponse());
+            // FIXME
+            //AppendTextConsole(_recorderInteraction.Record("1", "SIP/190001", -1));
+            //AppendTextConsole(_recorderInteraction.GetResponse());
 
             Thread.Sleep(500);
 
