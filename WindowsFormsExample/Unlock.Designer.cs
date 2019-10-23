@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsExample
 {
-    partial class Form1
+    partial class Unlock
     {
         /// <summary>
         /// Required designer variable.

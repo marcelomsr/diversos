@@ -4,11 +4,11 @@ using System.Windows.Forms;
 
 namespace WindowsFormsExample
 {
-    public partial class Form1 : Form
+    public partial class Unlock : System.Windows.Forms.Form
     {
         private const int _QTD_MINUTOS = 3;
 
-        public Form1()
+        public Unlock()
         {
             InitializeComponent();
         }
