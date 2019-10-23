@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>ConsoleRecorder</RootNamespace>
     <AssemblyName>ConsoleRecorder</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -99,9 +99,7 @@
     </Compile>
     <Compile Include="InteracaoGravador.cs" />
     <Compile Include="ConexaoGravador.cs" />
-    <Compile Include="_ConsoleForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="_ConsoleForm.cs" />
     <Compile Include="_ConsoleForm.Designer.cs">
       <DependentUpon>_ConsoleForm.cs</DependentUpon>
     </Compile>
@@ -110,21 +108,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocolo.cs" />
     <Compile Include="StateObject.cs" />
-    <Compile Include="_UserControlGravar.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="_UserControlGravar.cs" />
     <Compile Include="_UserControlGravar.Designer.cs">
       <DependentUpon>_UserControlGravar.cs</DependentUpon>
     </Compile>
-    <Compile Include="_UserControlObterGravacao .cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="_UserControlObterGravacao .cs" />
     <Compile Include="_UserControlObterGravacao .Designer.cs">
       <DependentUpon>_UserControlObterGravacao .cs</DependentUpon>
     </Compile>
-    <Compile Include="_UserControlPararGravar.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="_UserControlPararGravar.cs" />
     <Compile Include="_UserControlPararGravar.Designer.cs">
       <DependentUpon>_UserControlPararGravar.cs</DependentUpon>
     </Compile>
