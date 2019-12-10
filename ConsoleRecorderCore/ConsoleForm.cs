@@ -28,7 +28,7 @@ namespace ConsoleRecorderCore
 
         private void LoadListRecorders()
         {
-            lst_gravadores.Items.Add(new Recorder("localhost:8888", "localhost", 8888));
+            lst_gravadores.Items.Add(new Recorder("localhost:8889", "localhost", 8889));
             lst_gravadores.Items.Add(new Recorder("Campinas", "10.0.72.194", 8884));
             lst_gravadores.Items.Add(new Recorder("HA", "10.0.72.194", 8882));
             lst_gravadores.Items.Add(new Recorder("Agente Virtual (ANTIBES)", "10.0.72.194", 8883));
@@ -80,16 +80,6 @@ namespace ConsoleRecorderCore
             }
         }
 
-        private void btn_gravar_arquivo_Click(object sender, EventArgs e)
-        {
-            TextBox txt_sqc_gravacao = (TextBox)panel.Controls[0].Controls.Find("txt_sqc_gravacao", false)[0];
-            // FIXME
-            //string recording = _recorderInteraction.GetRecording(Convert.ToInt32(txt_sqc_gravacao.Text));
-
-            //byte[] data = Convert.FromBase64String(recording);
-            //File.WriteAllBytes(String.Format(@"C:\Users\marcelosr\Desktop\{0}.wav", txt_sqc_gravacao.Text), data);
-        }
-
         private void cbo_comandos_SelectedValueChanged(object sender, EventArgs e)
         {
             panel.Controls.Clear();
@@ -126,9 +116,9 @@ namespace ConsoleRecorderCore
         {
             var recorder = (Recorder)lst_gravadores.SelectedItem;
 
-            // FIXME
-            //_recorderInteraction = new RecorderInteraction(recorder);
-            //_recorderInteraction.CommandSended += ao_receber_comando_enviado;
+            _recorderInteraction = new RecorderInteraction(recorder);
+            _recorderInteraction.AoComandoEnviado += ao_receber_comando_enviado;
+            //.CommandSended
 
             ValidateInteractions();
         }
@@ -140,7 +130,7 @@ namespace ConsoleRecorderCore
                 case RecorderInteraction.Command.COMANDO_INICIAR_GRAVACAO_CHAMADA:
                     {
                         TextBox txt_chamada_id = (TextBox)panel.Controls[0].Controls.Find("txt_chamada_id", false)[0];
-                        string chamada_id = txt_chamada_id.Text;
+                        int chamada_id = Convert.ToInt32(txt_chamada_id.Text);
 
                         TextBox txt_nmr_dispositivo = (TextBox)panel.Controls[0].Controls.Find("txt_nmr_dispositivo", false)[0];
                         string device = txt_nmr_dispositivo.Text;
@@ -150,8 +140,8 @@ namespace ConsoleRecorderCore
                         int quota = -1;
 
                         // FIXME
-                        //AppendTextConsole(_recorderInteraction.Record(chamada_id, device, quota), true);
-                        //AppendTextConsole(_recorderInteraction.GetResponse());
+                        AppendTextConsole(_recorderInteraction.gravar(chamada_id, device, quota), true);
+                        AppendTextConsole(_recorderInteraction.obter_retorno());
                     }
 
                     break;
@@ -173,10 +163,10 @@ namespace ConsoleRecorderCore
                         TextBox txt_sqc_gravacao = (TextBox)panel.Controls[0].Controls.Find("txt_sqc_gravacao", false)[0];
                         
                         // FIXME
-                        //string gravacao = _recorderInteraction.GetRecording(Convert.ToInt32(txt_sqc_gravacao.Text));
+                        string gravacao = _recorderInteraction.obter_gravacao(Convert.ToInt32(txt_sqc_gravacao.Text));
 
-                        //AppendTextConsole(_recorderInteraction.GetResponse());
-                        //AppendTextConsole(gravacao, true);
+                        AppendTextConsole(_recorderInteraction.obter_retorno());
+                        AppendTextConsole(gravacao, true);
                     }
 
                     break;
@@ -262,7 +252,6 @@ namespace ConsoleRecorderCore
             btn_stress.Enabled = _recorderInteraction != null;
             btn_enviar_comando.Enabled = _recorderInteraction != null;
             btn_tocar_audio.Enabled = _recorderInteraction != null;
-            btn_gravar_arquivo.Enabled = _recorderInteraction != null;
         }
     }
 }
