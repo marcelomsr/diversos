@@ -17,22 +17,22 @@
     <Compile Update="ConsoleForm.Designer.cs">
       <DependentUpon>ConsoleForm.cs</DependentUpon>
     </Compile>
-    <Compile Update="UserControlGravar.cs">
+    <Compile Update="Telas\UserControlGravar.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserControlGravar.Designer.cs">
+    <Compile Update="Telas\UserControlGravar.Designer.cs">
       <DependentUpon>UserControlGravar.cs</DependentUpon>
     </Compile>
-    <Compile Update="UserControlObterGravacao .cs">
+    <Compile Update="Telas\UserControlObterGravacao.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserControlObterGravacao .Designer.cs">
-      <DependentUpon>UserControlObterGravacao .cs</DependentUpon>
+    <Compile Update="Telas\UserControlObterGravacao.Designer.cs">
+      <DependentUpon>UserControlObterGravacao.cs</DependentUpon>
     </Compile>
-    <Compile Update="UserControlPararGravar.cs">
+    <Compile Update="Telas\UserControlPararGravar.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserControlPararGravar.Designer.cs">
+    <Compile Update="Telas\UserControlPararGravar.Designer.cs">
       <DependentUpon>UserControlPararGravar.cs</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -41,13 +41,13 @@
     <EmbeddedResource Update="ConsoleForm.resx">
       <DependentUpon>ConsoleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Update="UserControlGravar.resx">
+    <EmbeddedResource Update="Telas\UserControlGravar.resx">
       <DependentUpon>UserControlGravar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Update="UserControlObterGravacao .resx">
-      <DependentUpon>UserControlObterGravacao .cs</DependentUpon>
+    <EmbeddedResource Update="Telas\UserControlObterGravacao.resx">
+      <DependentUpon>UserControlObterGravacao.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Update="UserControlPararGravar.resx">
+    <EmbeddedResource Update="Telas\UserControlPararGravar.resx">
       <DependentUpon>UserControlPararGravar.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

@@ -36,6 +36,7 @@
             this.panel = new System.Windows.Forms.Panel();
             this.lst_gravadores = new System.Windows.Forms.ListBox();
             this.btn_stress = new System.Windows.Forms.Button();
+            this.btn_analisar_gravacoes = new System.Windows.Forms.Button();
             // 
             // btn_tocar_audio
             // 
@@ -126,11 +127,22 @@
             this.btn_stress.UseVisualStyleBackColor = true;
             this.btn_stress.Click += new System.EventHandler(this.btn_stress_Click);
             // 
+            // btn_analisar_gravacoes
+            // 
+            this.btn_analisar_gravacoes.Location = new System.Drawing.Point(427, 491);
+            this.btn_analisar_gravacoes.Name = "btn_analisar_gravacoes";
+            this.btn_analisar_gravacoes.Size = new System.Drawing.Size(75, 23);
+            this.btn_analisar_gravacoes.TabIndex = 15;
+            this.btn_analisar_gravacoes.Text = "Analisar gravações";
+            this.btn_analisar_gravacoes.UseVisualStyleBackColor = true;
+            this.btn_analisar_gravacoes.Click += new System.EventHandler(this.btn_analisar_gravacoes_Click);
+            // 
             // ConsoleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1116, 527);
+            this.Controls.Add(this.btn_analisar_gravacoes);
             this.Controls.Add(this.btn_stress);
             this.Controls.Add(this.lst_gravadores);
             this.Controls.Add(this.panel);
@@ -155,6 +167,7 @@
         private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.ListBox lst_gravadores;
         private System.Windows.Forms.Button btn_stress;
+        private System.Windows.Forms.Button btn_analisar_gravacoes;
     }
 }
 

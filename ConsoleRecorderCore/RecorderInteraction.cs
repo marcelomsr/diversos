@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace ConsoleRecorderCore
 {
@@ -13,16 +10,16 @@ namespace ConsoleRecorderCore
     {
         public enum Command
         {
-            COMANDO_INICIAR_GRAVACAO_CHAMADA = 1,
-            COMANDO_PARAR_GRAVACAO_CHAMADA = 2,
-            COMANDO_OBTER_CAMINHO_GRAVACAO_LIGACAO = 3,
-            COMANDO_OBTER_INFORMACOES_GRAVADOR = 4,
-            COMANDO_OBTER_INFORMACOES_CANAL_GRAVACAO = 5,
-            COMANDO_OBTER_CAMINHO_GRAVACAO = 6,
-            COMANDO_INFORMAR_DADOS_GRAVACAO_COMPLETA = 7,
-            COMANDO_OBTER_INFORMACOES_QUOTA = 9,
-            COMANDO_OBTER_GRAVACAO = 10,
-            COMANDO_OBTER_VERSAO = 11
+            INICIAR_GRAVACAO_CHAMADA = 1,
+            PARAR_GRAVACAO_CHAMADA = 2,
+            OBTER_CAMINHO_GRAVACAO_LIGACAO = 3,
+            OBTER_INFORMACOES_GRAVADOR = 4,
+            OBTER_INFORMACOES_CANAL_GRAVACAO = 5,
+            OBTER_CAMINHO_GRAVACAO = 6,
+            INFORMAR_DADOS_GRAVACAO_COMPLETA = 7,
+            OBTER_INFORMACOES_QUOTA = 9,
+            OBTER_GRAVACAO = 10,
+            OBTER_VERSAO = 11
         }
 
         private const int RETORNO_COMANDO_TIMEOUT = 20000000; // milissegundos
@@ -41,24 +38,15 @@ namespace ConsoleRecorderCore
         protected bool _conectado;
 
         public delegate void AoComandoEnviadoHandler(string comando);
-        public event AoComandoEnviadoHandler AoComandoEnviado;
-
-        private bool _gravador_definido = false;
+        public event AoComandoEnviadoHandler CommandSended;
 
         public RecorderInteraction(Recorder recorder)
         {
-            definir_endereco_gravador(recorder.Host, recorder.Port);
+            _dsc_endereco_ip = recorder.Host;
+            _nmr_porta = recorder.Port;
         }
 
-        public void definir_endereco_gravador(string dsc_endereco_ip, int nmr_porta)
-        {
-            _dsc_endereco_ip = dsc_endereco_ip;
-            _nmr_porta = nmr_porta;
-
-            _gravador_definido = true;
-        }
-
-        public void conectar()
+        public void Connect()
         {
             try
             {
@@ -113,9 +101,9 @@ namespace ConsoleRecorderCore
 
                 int qtd_bytes_lidos = _socket.EndReceive(result);
 
-                so.mensagem.Append(Encoding.Default.GetString(so.buffer, 0, qtd_bytes_lidos));
+                so.message.Append(Encoding.Default.GetString(so.buffer, 0, qtd_bytes_lidos));
 
-                if (so.mensagem[so.mensagem.Length - 1] != '$')
+                if (so.message[so.message.Length - 1] != '$')
                 {
                     _socket.BeginReceive(so.buffer, 0, StateObject.BUFFER_SIZE, SocketFlags.None,
                         new AsyncCallback(tratar_iniciar_escuta), so);
@@ -125,7 +113,7 @@ namespace ConsoleRecorderCore
 
                 iniciar_escuta();
 
-                string mensagem_nao_tratada = so.mensagem.ToString();
+                string mensagem_nao_tratada = so.message.ToString();
 
                 string[] mensagens = mensagem_nao_tratada.Split('$');
 
@@ -149,7 +137,7 @@ namespace ConsoleRecorderCore
             int comandoID = 0;
             string[] parametros = new string[] { };
 
-            Protocolo.decodificar(mensagem, ref comandoID, ref parametros);
+            Protocol.decodificar(mensagem, ref comandoID, ref parametros);
 
             switch (comandoID)
             {
@@ -173,13 +161,13 @@ namespace ConsoleRecorderCore
             }
         }
 
-        private string[] enviar_comando(string comando)
+        private string[] SendCommand(string comando)
         {
             try
             {
                 if (!_conectado)
                 {
-                    conectar();
+                    Connect();
                 }
 
                 byte[] mensagem_envio = Encoding.Default.GetBytes(comando);
@@ -192,7 +180,8 @@ namespace ConsoleRecorderCore
 
                 copiar_parametros_retorno(ref retorno);
 
-                AoComandoEnviado(comando);
+                if(CommandSended != null)
+                    CommandSended(comando);
 
                 return retorno;
             }
@@ -202,21 +191,21 @@ namespace ConsoleRecorderCore
                 {
                     _conectado = false;
 
-                    return enviar_comando(comando);
+                    return SendCommand(comando);
                 }
 
                 throw;
             }
         }
 
-        public string obter_retorno()
+        public string GetResponse()
         {
             return String.Join("&", _parametros_retorno);
         }
 
-        public string obter_gravacao(int sqc_gravacao)
+        public string GetPathRecording(int sqc_gravacao)
         {
-            string[] parametros_retorno = enviar_comando($"{(int)Command.COMANDO_OBTER_GRAVACAO}@{sqc_gravacao}$");
+            string[] parametros_retorno = SendCommand($"{(int)Command.OBTER_CAMINHO_GRAVACAO}@{sqc_gravacao}$");
 
             int retorno = Convert.ToInt32(parametros_retorno[parametros_retorno.Length - 1]);
 
@@ -236,7 +225,29 @@ namespace ConsoleRecorderCore
             return gravacao;
         }
 
-        public string gravar(int chamadaID, string dispositivo, int quota = 1)
+        public string GetRecording(int sqc_gravacao)
+        {
+            string[] parametros_retorno = SendCommand($"{(int)Command.OBTER_GRAVACAO}@{sqc_gravacao}$");
+
+            int retorno = Convert.ToInt32(parametros_retorno[parametros_retorno.Length - 1]);
+
+            string gravacao = "";
+
+            switch (retorno)
+            {
+                case 0:
+                    gravacao = parametros_retorno[0];
+                    break;
+
+                case 1:
+                    gravacao = "Não foi possível obter a gravação.";
+                    break;
+            }
+
+            return gravacao;
+        }
+
+        public string Record(int chamadaID, string dispositivo, int quota = 1)
         {
             long cdg_agente = 1;
             long sqc_ligacao_atendida = 2;
@@ -244,9 +255,9 @@ namespace ConsoleRecorderCore
 
             _requisicao_ID++;
 
-            string command = $"{(int)Command.COMANDO_INICIAR_GRAVACAO_CHAMADA}@{_requisicao_ID}&{chamadaID}&{dispositivo}&{cdg_agente}&{sqc_ligacao_atendida}&{dados_extra}&{quota}$";
+            string command = $"{(int)Command.INICIAR_GRAVACAO_CHAMADA}@{_requisicao_ID}&{chamadaID}&{dispositivo}&{cdg_agente}&{sqc_ligacao_atendida}&{dados_extra}&{quota}$";
             
-            string[] parametros_retorno = enviar_comando(command);
+            string[] parametros_retorno = SendCommand(command);
 
             int retorno = Convert.ToInt32(parametros_retorno[parametros_retorno.Length - 1]);
 
@@ -305,15 +316,14 @@ namespace ConsoleRecorderCore
             return retorno_servidor;
         }
 
-        public string parar_gravar(int gravacaoID)
+        public string StopRecord(int gravacaoID)
         {
             string motivo = "";
             string dta_permanencia = "";
 
             _requisicao_ID++;
 
-            string[] parametros_retorno = enviar_comando(String.Format("{0:000}@{1}&{2}&{3}&{4}$",
-                Command.COMANDO_PARAR_GRAVACAO_CHAMADA, _requisicao_ID, gravacaoID, motivo, dta_permanencia));
+            string[] parametros_retorno = SendCommand($"{(int)Command.PARAR_GRAVACAO_CHAMADA}@{_requisicao_ID}&{gravacaoID}&{motivo}&{dta_permanencia}$");
 
             int retorno = Convert.ToInt32(parametros_retorno[parametros_retorno.Length - 1]);
 
@@ -344,9 +354,9 @@ namespace ConsoleRecorderCore
             return retorno_servidor;
         }
 
-        public string obter_versao()
+        public string GetVersion()
         {
-            string[] parametros_retorno = enviar_comando($"{(int)Command.COMANDO_OBTER_VERSAO}@$");
+            string[] parametros_retorno = SendCommand($"{(int)Command.OBTER_VERSAO}@$");
 
             int retorno = Convert.ToInt32(parametros_retorno[parametros_retorno.Length - 1]);
 
