@@ -11,6 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="NAudio">
+      <HintPath>..\Lib\NAudio.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="ConsoleForm.cs">
       <SubType>Form</SubType>
     </Compile>

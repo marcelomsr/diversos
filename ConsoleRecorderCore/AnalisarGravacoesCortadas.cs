@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 
@@ -7,16 +8,23 @@ namespace ConsoleRecorderCore
 {
     public class AnalisarGravacoesCortadas
     {
-        //ffmpeg -ss 50 -t 120 -i audio_origem.wav audio-cortado.wav
         private RecorderInteraction _recorderInteraction;
+        SimplePlayback _player;
 
         private int _QTD_SEGUNDOS_MAX_GRAVACAO = 120;
         private List<GravacaoComDefeito> _gravacoes;
+
+        private string _desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+        //{0} endereço do exe ffmpeg, {1} início do corte, {2} duração do audio, {3} audio original, {4} recorte
+        private string _base_script = "{0} -ss {1} -t {2} -i {3} {4}";
 
         public AnalisarGravacoesCortadas()
         {
             Recorder recorder = new Recorder("HA", "10.0.72.194", 8882);
             _recorderInteraction = new RecorderInteraction(recorder);
+
+            _player = new SimplePlayback();
 
             obter_gravacoes_com_defeito();
         }
@@ -24,28 +32,66 @@ namespace ConsoleRecorderCore
         private void obter_gravacoes_com_defeito()
         {
             _gravacoes = new List<GravacaoComDefeito>();
-
-            string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string filePath = Path.Combine(desktop, "gravacoes.txt");
-
-            string[] gravacoes = File.ReadAllLines(filePath);
+            
+            string[] gravacoes = File.ReadAllLines(Path.Combine(_desktop, "gravacoes.txt"));
 
             foreach (string gravacao in gravacoes)
             {
                 var split = gravacao.Split(',');
 
-                int gravacao_aceite = Convert.ToInt32(split[1]);
-                int gravacao_full = Convert.ToInt32(split[2]);
-                int inicio_gravacao_aceite = Convert.ToInt32(split[0]);
+                string data_gravacao = split[0];
+                int gravacao_aceite = Convert.ToInt32(split[2]);
+                int gravacao_full = Convert.ToInt32(split[3]);
+                int inicio_gravacao_aceite = Convert.ToInt32(split[1]);
                 string caminho_gravacao_aceite = @"S:\" + _recorderInteraction.GetPathRecording(gravacao_aceite);
                 string caminho_gravacao_full = @"S:\" + _recorderInteraction.GetPathRecording(gravacao_full);
 
-                _gravacoes.Add(new GravacaoComDefeito(gravacao_aceite, gravacao_full, inicio_gravacao_aceite, caminho_gravacao_aceite, caminho_gravacao_full));
+                try
+                {
+                    _player.BeginPlayback(new MemoryStream(File.ReadAllBytes(caminho_gravacao_aceite)));
+                }/*
+                catch(FileNotFoundException fnfe)
+                {
+
+                }
+                catch(FormatException fe)
+                {
+
+                }*/
+                catch(Exception e)
+                {
+                    string diretorio_final = _desktop + @"\gravacoes\" + data_gravacao + "\\";
+                    
+                    if (!Directory.Exists(diretorio_final))
+                        Directory.CreateDirectory(diretorio_final);
+
+                    executar_script(
+                        string.Format(_base_script,
+                        _desktop + @"\ffmpeg.exe",
+                        inicio_gravacao_aceite,
+                        _QTD_SEGUNDOS_MAX_GRAVACAO,
+                        caminho_gravacao_full,
+                        _desktop + @"\gravacoes\" + data_gravacao + "\\" + Path.GetFileName(caminho_gravacao_aceite)));
+                    
+                    _gravacoes.Add(new GravacaoComDefeito(gravacao_aceite, gravacao_full, inicio_gravacao_aceite, caminho_gravacao_aceite, caminho_gravacao_full));
+                }                
             }
         }
 
-        private void verificar_gravacao()
+        private void executar_script(string argumentos)
         {
+            //Define uma instância da classe ProcessStartInfo
+            ProcessStartInfo pro = new ProcessStartInfo();
+            //Define a propriedade FileName a ser iniciada
+            pro.FileName = "cmd.exe";
+            pro.Arguments = "/c " + argumentos;
+            pro.CreateNoWindow = true;
+            //inicia o processo
+            Process proStart = new Process();
+            // Define o nome do processo
+            proStart.StartInfo = pro;
+            // chama o método Start para começar
+            proStart.Start();
         }
     }
 
