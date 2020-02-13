@@ -3,6 +3,7 @@ import 'package:accountsvault/models/account.dart';
 import 'package:accountsvault/screens/account/formulario.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 const _titleAppBar = 'Accounts';
 const _textNoNameAccounts = 'Ah';
@@ -73,6 +74,8 @@ class ListAccountsState extends State<ListAccounts> {
   }
 }
 
+enum WhyFarther { harder, smarter, selfStarter, tradingCharter }
+
 class AccountItem extends StatelessWidget {
   final Account _account;
 
@@ -80,38 +83,73 @@ class AccountItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        //leading: Icon(Icons.monetization_on),
-        title: Text(_account.name.toString()),
-        subtitle: Text(_account.user.toString()),
-        leading: CircleAvatar(
-          backgroundColor: Colors.green.shade900,
-          child: Text(_account.name.length >= 2
-              ? _account.name.toString().substring(0, 2)
-              : _textNoNameAccounts),
-        ),
-        onLongPress: () {
-          Clipboard.setData(new ClipboardData(text: _account.password));
-        },
-        onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) {
-              return AccountForm(_account);
-            }),
-          );
-        },
-        trailing: new Column(
-          children: <Widget>[
-            new Container(
-              child: new IconButton(
-                icon: new Icon(Icons.menu),
-                onPressed: () {/* Your code */},
-              ),
-            )
-          ],
+    return Slidable(
+      delegate: SlidableDrawerDelegate(),
+      actionExtentRatio: 0.25,
+      child: Container(
+        //color: Colors.white,
+        child: ListTile(
+          //leading: Icon(Icons.monetization_on),
+          title: Text(_account.name.toString()),
+          subtitle: Text(_account.user.toString()),
+          leading: CircleAvatar(
+            backgroundColor: Colors.green.shade900,
+            child: Text(_account.name.length >= 2
+                ? _account.name.toString().substring(0, 2)
+                : _textNoNameAccounts),
+          ),
+          onLongPress: () {
+            Clipboard.setData(new ClipboardData(text: _account.password));
+          },
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) {
+                return AccountForm(_account);
+              }),
+            );
+          },
+          trailing: new Column(
+            children: <Widget>[
+              new Container(
+                child: new IconButton(
+                  icon: new Icon(Icons.menu),
+                  onPressed: () {
+                    print('object');
+                  },
+                ),
+              )
+            ],
+          ),
         ),
       ),
+      actions: <Widget>[
+        new IconSlideAction(
+          caption: 'Archive',
+          color: Colors.blue,
+          icon: Icons.archive,
+          //onTap: () => _showSnackBar('Archive'),
+        ),
+        new IconSlideAction(
+          caption: 'Share',
+          color: Colors.indigo,
+          icon: Icons.share,
+          //onTap: () => _showSnackBar('Share'),
+        ),
+      ],
+      secondaryActions: <Widget>[
+        new IconSlideAction(
+          caption: 'More',
+          color: Colors.black45,
+          icon: Icons.more_horiz,
+          //onTap: () => _showSnackBar('More'),
+        ),
+        new IconSlideAction(
+          caption: 'Delete',
+          color: Colors.red,
+          icon: Icons.delete,
+          //onTap: () => _showSnackBar('Delete'),
+        ),
+      ],
     );
   }
 }
