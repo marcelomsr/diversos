@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
 
 namespace ConsoleRecorderCore
 {
@@ -11,7 +10,7 @@ namespace ConsoleRecorderCore
         private RecorderInteraction _recorderInteraction;
         SimplePlayback _player;
 
-        private int _QTD_SEGUNDOS_MAX_GRAVACAO = 120;
+        private int _QTD_SEGUNDOS_MAX_GRAVACAO = 150;
         private List<GravacaoComDefeito> _gravacoes;
 
         private string _desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -21,6 +20,25 @@ namespace ConsoleRecorderCore
 
         public AnalisarGravacoesCortadas()
         {
+            /*
+            DirectoryInfo directory_analize = new DirectoryInfo(@"R:\STI\Pública\");
+            int count = 0;
+            foreach (FileInfo file in directory_analize.GetFiles("*.wav"))
+            {
+                _player = new SimplePlayback();
+                _player.BeginPlayback(new MemoryStream(File.ReadAllBytes(file.FullName)));
+                TimeSpan testeds = _player.getTotalTime();
+
+
+                count++;
+            }
+
+            int teste = count;
+            */
+
+
+
+
             Recorder recorder = new Recorder("HA", "10.0.72.194", 8882);
             _recorderInteraction = new RecorderInteraction(recorder);
 
@@ -32,7 +50,7 @@ namespace ConsoleRecorderCore
         private void obter_gravacoes_com_defeito()
         {
             _gravacoes = new List<GravacaoComDefeito>();
-            
+
             string[] gravacoes = File.ReadAllLines(Path.Combine(_desktop, "gravacoes.txt"));
 
             foreach (string gravacao in gravacoes)
@@ -58,10 +76,10 @@ namespace ConsoleRecorderCore
                 {
 
                 }*/
-                catch(Exception e)
+                catch (Exception e)
                 {
                     string diretorio_final = _desktop + @"\gravacoes\" + data_gravacao + "\\";
-                    
+
                     if (!Directory.Exists(diretorio_final))
                         Directory.CreateDirectory(diretorio_final);
 
@@ -72,9 +90,9 @@ namespace ConsoleRecorderCore
                         _QTD_SEGUNDOS_MAX_GRAVACAO,
                         caminho_gravacao_full,
                         _desktop + @"\gravacoes\" + data_gravacao + "\\" + Path.GetFileName(caminho_gravacao_aceite)));
-                    
+
                     _gravacoes.Add(new GravacaoComDefeito(gravacao_aceite, gravacao_full, inicio_gravacao_aceite, caminho_gravacao_aceite, caminho_gravacao_full));
-                }                
+                }
             }
         }
 
