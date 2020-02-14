@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
 class Editor extends StatelessWidget {
-  final String text;
   final TextEditingController controller;
   final String label;
   final String tip;
   final IconData icon;
+  final bool password;
+  final int maxLines;
 
   Editor({
-    this.text,
     this.controller,
     this.label,
     this.tip,
     this.icon,
+    this.password = false,
+    this.maxLines = 1,
   });
 
   @override
@@ -20,6 +22,8 @@ class Editor extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
+        maxLines: maxLines,
+        obscureText: password,
         controller: controller,
         style: TextStyle(
           fontSize: 16.0,

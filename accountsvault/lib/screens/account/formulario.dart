@@ -32,13 +32,11 @@ class AccountForm extends StatefulWidget {
 }
 
 class AccountFormState extends State<AccountForm> {
-  final TextEditingController _controllerFieldName = TextEditingController();
-  final TextEditingController _controllerFieldSite = TextEditingController();
-  final TextEditingController _controllerFieldUser = TextEditingController();
-  final TextEditingController _controllerFieldPassword =
-      TextEditingController();
-  final TextEditingController _controllerFieldDescription =
-      TextEditingController();
+  TextEditingController _controllerFieldName;
+  TextEditingController _controllerFieldSite;
+  TextEditingController _controllerFieldUser;
+  TextEditingController _controllerFieldPassword;
+  TextEditingController _controllerFieldDescription;
 
   final AccountDao _dao = AccountDao();
 
@@ -50,34 +48,47 @@ class AccountFormState extends State<AccountForm> {
         child: Column(
           children: <Widget>[
             Editor(
-              text: widget.account.name,
-              controller: _controllerFieldName,
+              controller: _controllerFieldName = TextEditingController(
+                text: widget.account != null ? widget.account.name : '',
+              ),
               label: _labelFieldName,
               tip: _tipFieldName,
             ),
             Editor(
-              controller: _controllerFieldSite,
+              controller: _controllerFieldSite = TextEditingController(
+                text: widget.account != null ? widget.account.site : '',
+              ),
               label: _labelFieldSite,
               tip: _tipFieldSite,
             ),
             Editor(
-              controller: _controllerFieldUser,
+              controller: _controllerFieldUser = TextEditingController(
+                text: widget.account != null ? widget.account.user : '',
+              ),
               label: _labelFieldUser,
               tip: _tipFieldUser,
             ),
             Editor(
-              controller: _controllerFieldPassword,
+              controller: _controllerFieldPassword = TextEditingController(
+                text: widget.account != null ? widget.account.password : '',
+              ),
               label: _labelFieldPassword,
               tip: _tipFieldPassword,
+              //password: true,
             ),
             Editor(
-              controller: _controllerFieldDescription,
+              controller: _controllerFieldDescription = TextEditingController(
+                text: widget.account != null ? widget.account.description : '',
+              ),
               label: _labelFieldDescription,
               tip: _tipFieldDescription,
+              maxLines: 5,
             ),
             RaisedButton(
               child: Text(_textoBotaoConfirmar),
-              onPressed: () => _createAccount(context),
+              onPressed: () {
+                _saveAccount(context, widget.account);
+              },
             ),
           ],
         ),
@@ -85,7 +96,7 @@ class AccountFormState extends State<AccountForm> {
     );
   }
 
-  void _createAccount(BuildContext context) {
+  void _saveAccount(BuildContext context, Account account) {
     final String name = _controllerFieldName.text;
     final String site = _controllerFieldSite.text;
     final String user = _controllerFieldUser.text;
@@ -93,11 +104,17 @@ class AccountFormState extends State<AccountForm> {
     final String description = _controllerFieldDescription.text;
 
     if (name != null && user != null && password != null) {
-      final accountCreated =
-          Account(0, name, site, user, password, description);
-      _dao
-          .save(accountCreated)
-          .then((id) => Navigator.pop(context, accountCreated));
+      final int id = (account != null ? account.id : 0);
+      final accountSaved = Account(id, name, site, user, password, description);
+
+      Future<int> future;
+
+      if (accountSaved.id != 0)
+        future = _dao.update(accountSaved);
+      else
+        future = _dao.save(accountSaved);
+
+      future.then((id) => Navigator.pop(context, accountSaved));
     }
   }
 }

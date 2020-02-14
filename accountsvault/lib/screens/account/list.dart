@@ -3,7 +3,7 @@ import 'package:accountsvault/models/account.dart';
 import 'package:accountsvault/screens/account/formulario.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
+//import 'package:flutter_slidable/flutter_slidable.dart';
 
 const _titleAppBar = 'Accounts';
 const _textNoNameAccounts = 'Ah';
@@ -50,7 +50,33 @@ class ListAccountsState extends State<ListAccounts> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final Account account = accounts[index];
-                  return AccountItem(account);
+                  return Dismissible(
+                    key: Key(account.id.toString()),
+                    onDismissed: (direction) {
+                      setState(() {
+                        _dao.delete(account.id);
+                      });
+                      var accountNameDeleted = account.name;
+                      Scaffold.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            '$accountNameDeleted deleted',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          backgroundColor: Colors.grey.shade900,
+                          action: SnackBarAction(
+                            label: 'Undo',
+                            textColor: Colors.blue.shade900,
+                            onPressed: () {
+                              _dao.save(account);
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                    background: Container(color: Colors.grey.shade800),
+                    child: AccountItem(account),
+                  );
                 },
                 itemCount: accounts.length,
               );
@@ -81,71 +107,69 @@ class AccountItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Slidable(
-      delegate: SlidableDrawerDelegate(),
-      actionExtentRatio: 0.25,
-      child: Container(
-        //color: Colors.white,
-        child: ListTile(
-          title: Text(_account.name.toString()),
-          subtitle: Text(_account.user.toString()),
-          leading: CircleAvatar(
-            backgroundColor: Colors.green.shade900,
-            child: Text(_account.name.length >= 2
-                ? _account.name.toString().substring(0, 2)
-                : _textNoNameAccounts),
-          ),
-          onLongPress: () {
-            Clipboard.setData(new ClipboardData(text: _account.password));
-          },
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) {
-                return AccountForm(_account);
-              }),
-            );
-          },
-          trailing: new Column(
-            children: <Widget>[
-              new Container(
-                child: new IconButton(
-                  icon: new Icon(Icons.menu),
-                  onPressed: () {
-                    print('Icon button tapped');
-                  },
-                ),
-              )
-            ],
-          ),
+    return Container(
+      //child: Container(
+      //color: Colors.white,
+      child: ListTile(
+        title: Text(_account.name.toString()),
+        subtitle: Text(_account.user.toString()),
+        leading: CircleAvatar(
+          backgroundColor: Colors.green.shade900,
+          child: Text(_account.name.length >= 2
+              ? _account.name.toString().substring(0, 2)
+              : _textNoNameAccounts),
+        ),
+        onLongPress: () {
+          Clipboard.setData(new ClipboardData(text: _account.password));
+        },
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) {
+              return AccountForm(_account);
+            }),
+          );
+        },
+        trailing: new Column(
+          children: <Widget>[
+            new Container(
+              child: new IconButton(
+                icon: new Icon(Icons.menu),
+                onPressed: () {
+                  print('Icon button tapped');
+                },
+              ),
+            )
+          ],
         ),
       ),
-      // actions: <Widget>[
-      //     caption: 'Archive',
-      //     color: Colors.blue,
-      //     icon: Icons.archive,
-      //     //onTap: () => _showSnackBar('Archive'),
-      //   ),
-      // new IconSlideAction(
-      //   caption: 'Share',
-      //   color: Colors.indigo,
-      //   icon: Icons.share,
-      //   //onTap: () => _showSnackBar('Share'),
-      // ),
-      // ],
-      secondaryActions: <Widget>[
-        //   new IconSlideAction(
-        //     caption: 'More',
-        //     color: Colors.black45,
-        //     icon: Icons.more_horiz,
-        //     //onTap: () => _showSnackBar('More'),
-        //   ),
-        new IconSlideAction(
-          caption: 'Delete',
-          color: Colors.red,
-          icon: Icons.delete,
-          onTap: () {},
-        ),
-      ],
     );
+    // actions: <Widget>[
+    //     caption: 'Archive',
+    //     color: Colors.blue,
+    //     icon: Icons.archive,
+    //     //onTap: () => _showSnackBar('Archive'),
+    //   ),
+    // new IconSlideAction(
+    //   caption: 'Share',
+    //   color: Colors.indigo,
+    //   icon: Icons.share,
+    //   //onTap: () => _showSnackBar('Share'),
+    // ),
+    // ],
+    //secondaryActions: <Widget>[
+    //   new IconSlideAction(
+    //     caption: 'More',
+    //     color: Colors.black45,
+    //     icon: Icons.more_horiz,
+    //     //onTap: () => _showSnackBar('More'),
+    //   ),
+    //   new IconSlideAction(
+    //     caption: 'Delete',
+    //     color: Colors.red,
+    //     icon: Icons.delete,
+    //     onTap: () {},
+    //   ),
+    // ],
+    //);
   }
 }
