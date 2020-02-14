@@ -120,7 +120,9 @@ class AccountItem extends StatelessWidget {
               : _textNoNameAccounts),
         ),
         onLongPress: () {
-          Clipboard.setData(new ClipboardData(text: _account.password));
+          Clipboard.setData(
+            new ClipboardData(text: _account.password),
+          );
         },
         onTap: () {
           Navigator.of(context).push(
