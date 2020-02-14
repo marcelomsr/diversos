@@ -3,6 +3,7 @@ import 'package:accountsvault/models/account.dart';
 import 'package:accountsvault/screens/account/formulario.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:path/path.dart';
 //import 'package:flutter_slidable/flutter_slidable.dart';
 
 const _titleAppBar = 'Accounts';
@@ -47,6 +48,9 @@ class ListAccountsState extends State<ListAccounts> {
               break;
             case ConnectionState.done:
               final List<Account> accounts = snapshot.data;
+              accounts.sort((a, b) {
+                return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+              });
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final Account account = accounts[index];
@@ -55,6 +59,7 @@ class ListAccountsState extends State<ListAccounts> {
                     onDismissed: (direction) {
                       setState(() {
                         _dao.delete(account.id);
+                        snapshot.data.remove(account);
                       });
                       var accountNameDeleted = account.name;
                       Scaffold.of(context).showSnackBar(
@@ -69,6 +74,9 @@ class ListAccountsState extends State<ListAccounts> {
                             textColor: Colors.blue.shade900,
                             onPressed: () {
                               _dao.save(account);
+                              setState(() {
+                                accounts.add(account);
+                              });
                             },
                           ),
                         ),
@@ -108,8 +116,6 @@ class AccountItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //child: Container(
-      //color: Colors.white,
       child: ListTile(
         title: Text(_account.name.toString()),
         subtitle: Text(_account.user.toString()),
