@@ -1,3 +1,4 @@
+import 'package:accountsvault/Constants.dart';
 import 'package:accountsvault/screens/account/list.dart';
 import 'package:flutter/material.dart';
 
@@ -11,10 +12,10 @@ class AccountsVaultApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         brightness: Brightness.dark,
-        primaryColor: Colors.green.shade900,
-        accentColor: Colors.green.shade900,
+        primaryColor: Constants.colorApp,
+        accentColor: Constants.colorApp,
         buttonTheme: ButtonThemeData(
-          buttonColor: Colors.green.shade900,
+          buttonColor: Constants.colorApp,
           textTheme: ButtonTextTheme.primary,
         ),
       ),

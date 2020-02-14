@@ -1,4 +1,4 @@
-import 'package:accountsvault/Strings.dart';
+import 'package:accountsvault/Constants.dart';
 import 'package:accountsvault/componentes/editor.dart';
 import 'package:accountsvault/database/dao/account.dart';
 import 'package:accountsvault/models/account.dart';
@@ -25,7 +25,7 @@ class AccountFormState extends State<AccountForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(Strings.titleAppBarCreateAccount)),
+      appBar: AppBar(title: Text(Constants.titleAppBarCreateAccount)),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -33,41 +33,41 @@ class AccountFormState extends State<AccountForm> {
               controller: _controllerFieldName = TextEditingController(
                 text: widget.account != null ? widget.account.name : '',
               ),
-              label: Strings.labelFieldNameCreateAccount,
-              tip: Strings.tipFieldNameCreateAccount,
+              label: Constants.labelFieldNameCreateAccount,
+              tip: Constants.tipFieldNameCreateAccount,
             ),
             Editor(
               controller: _controllerFieldSite = TextEditingController(
                 text: widget.account != null ? widget.account.site : '',
               ),
-              label: Strings.labelFieldSiteCreateAccount,
-              tip: Strings.tipFieldSiteCreateAccount,
+              label: Constants.labelFieldSiteCreateAccount,
+              tip: Constants.tipFieldSiteCreateAccount,
             ),
             Editor(
               controller: _controllerFieldUser = TextEditingController(
                 text: widget.account != null ? widget.account.user : '',
               ),
-              label: Strings.labelFieldUserCreateAccount,
-              tip: Strings.tipFieldUserCreateAccount,
+              label: Constants.labelFieldUserCreateAccount,
+              tip: Constants.tipFieldUserCreateAccount,
             ),
             Editor(
               controller: _controllerFieldPassword = TextEditingController(
                 text: widget.account != null ? widget.account.password : '',
               ),
-              label: Strings.labelFieldPasswordCreateAccount,
-              tip: Strings.tipFieldPasswordCreateAccount,
+              label: Constants.labelFieldPasswordCreateAccount,
+              tip: Constants.tipFieldPasswordCreateAccount,
               //password: true,
             ),
             Editor(
               controller: _controllerFieldDescription = TextEditingController(
                 text: widget.account != null ? widget.account.description : '',
               ),
-              label: Strings.labelFieldDescriptionCreateAccount,
-              tip: Strings.tipFieldDescriptionCreateAccount,
+              label: Constants.labelFieldDescriptionCreateAccount,
+              tip: Constants.tipFieldDescriptionCreateAccount,
               maxLines: 5,
             ),
             RaisedButton(
-              child: Text(Strings.textSaveButton),
+              child: Text(Constants.textSaveButton),
               onPressed: () {
                 _saveAccount(context, widget.account);
               },

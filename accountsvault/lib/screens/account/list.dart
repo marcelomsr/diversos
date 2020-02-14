@@ -3,7 +3,7 @@ import 'package:accountsvault/models/account.dart';
 import 'package:accountsvault/screens/account/formulario.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:accountsvault/Strings.dart';
+import 'package:accountsvault/Constants.dart';
 
 class ListAccounts extends StatefulWidget {
   @override
@@ -18,8 +18,40 @@ class ListAccountsState extends State<ListAccounts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: Text('Item 1'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Item 2'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
-        title: Text(Strings.titleAppBarAccounts),
+        title: Text(Constants.titleAppBarAccounts),
       ),
       body: FutureBuilder<List<Account>>(
         initialData: List(),
@@ -35,7 +67,7 @@ class ListAccountsState extends State<ListAccounts> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     CircularProgressIndicator(),
-                    Text(Strings.loading),
+                    Text(Constants.loading),
                   ],
                 ),
               );
@@ -66,8 +98,8 @@ class ListAccountsState extends State<ListAccounts> {
                           ),
                           backgroundColor: Colors.grey.shade900,
                           action: SnackBarAction(
-                            label: Strings.undo,
-                            textColor: Colors.blue.shade900,
+                            label: Constants.undo,
+                            textColor: Constants.colorApp,
                             onPressed: () {
                               _dao.save(account);
                               setState(() {
@@ -87,7 +119,7 @@ class ListAccountsState extends State<ListAccounts> {
               break;
           }
 
-          return Text(Strings.unknownError);
+          return Text(Constants.unknownError);
         },
       ),
       floatingActionButton: FloatingActionButton(
@@ -116,11 +148,12 @@ class AccountItem extends StatelessWidget {
         title: Text(_account.name.toString()),
         subtitle: Text(_account.user.toString()),
         leading: CircleAvatar(
-          backgroundColor: Colors.green.shade900,
+          backgroundColor: Colors.blue.shade500,
           child: Text(
             _account.name.length >= 2
                 ? _account.name.toString().substring(0, 2)
-                : Strings.textNoNameAccounts,
+                : Constants.textNoNameAccounts,
+            style: TextStyle(color: Colors.white),
           ),
         ),
         onLongPress: () {
@@ -132,7 +165,7 @@ class AccountItem extends StatelessWidget {
           Scaffold.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                Strings.passwordCopied,
+                Constants.passwordCopied,
                 style: TextStyle(color: Colors.white),
               ),
               backgroundColor: Colors.grey.shade900,
