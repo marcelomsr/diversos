@@ -17,6 +17,6 @@ class Account {
 
   @override
   String toString() {
-    return 'Account{name: $name, site: $site, user: $user, password: $password, description: $description}';
+    return 'Account { name: $name, site: $site, user: $user, password: $password, description: $description }';
   }
 }

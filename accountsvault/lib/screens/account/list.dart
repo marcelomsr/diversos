@@ -3,11 +3,7 @@ import 'package:accountsvault/models/account.dart';
 import 'package:accountsvault/screens/account/formulario.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-//import 'package:path/path.dart';
-//import 'package:flutter_slidable/flutter_slidable.dart';
-
-const _titleAppBar = 'Accounts';
-const _textNoNameAccounts = 'Ah';
+import 'package:accountsvault/Strings.dart';
 
 class ListAccounts extends StatefulWidget {
   @override
@@ -23,7 +19,7 @@ class ListAccountsState extends State<ListAccounts> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_titleAppBar),
+        title: Text(Strings.titleAppBarAccounts),
       ),
       body: FutureBuilder<List<Account>>(
         initialData: List(),
@@ -39,7 +35,7 @@ class ListAccountsState extends State<ListAccounts> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     CircularProgressIndicator(),
-                    Text('Loading..'),
+                    Text(Strings.loading),
                   ],
                 ),
               );
@@ -65,12 +61,12 @@ class ListAccountsState extends State<ListAccounts> {
                       Scaffold.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            '$accountNameDeleted deleted',
+                            '$accountNameDeleted deleted.',
                             style: TextStyle(color: Colors.white),
                           ),
                           backgroundColor: Colors.grey.shade900,
                           action: SnackBarAction(
-                            label: 'Undo',
+                            label: Strings.undo,
                             textColor: Colors.blue.shade900,
                             onPressed: () {
                               _dao.save(account);
@@ -91,7 +87,7 @@ class ListAccountsState extends State<ListAccounts> {
               break;
           }
 
-          return Text('unknown error.');
+          return Text(Strings.unknownError);
         },
       ),
       floatingActionButton: FloatingActionButton(
@@ -121,20 +117,35 @@ class AccountItem extends StatelessWidget {
         subtitle: Text(_account.user.toString()),
         leading: CircleAvatar(
           backgroundColor: Colors.green.shade900,
-          child: Text(_account.name.length >= 2
-              ? _account.name.toString().substring(0, 2)
-              : _textNoNameAccounts),
+          child: Text(
+            _account.name.length >= 2
+                ? _account.name.toString().substring(0, 2)
+                : Strings.textNoNameAccounts,
+          ),
         ),
         onLongPress: () {
           Clipboard.setData(
-            new ClipboardData(text: _account.password),
+            new ClipboardData(
+              text: _account.password,
+            ),
+          );
+          Scaffold.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                Strings.passwordCopied,
+                style: TextStyle(color: Colors.white),
+              ),
+              backgroundColor: Colors.grey.shade900,
+            ),
           );
         },
         onTap: () {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) {
-              return AccountForm(_account);
-            }),
+            MaterialPageRoute(
+              builder: (context) {
+                return AccountForm(_account);
+              },
+            ),
           );
         },
         trailing: new Column(
@@ -143,7 +154,7 @@ class AccountItem extends StatelessWidget {
               child: new IconButton(
                 icon: new Icon(Icons.menu),
                 onPressed: () {
-                  print('Icon button tapped');
+                  print('Icon button pressed.');
                 },
               ),
             )
@@ -151,33 +162,5 @@ class AccountItem extends StatelessWidget {
         ),
       ),
     );
-    // actions: <Widget>[
-    //     caption: 'Archive',
-    //     color: Colors.blue,
-    //     icon: Icons.archive,
-    //     //onTap: () => _showSnackBar('Archive'),
-    //   ),
-    // new IconSlideAction(
-    //   caption: 'Share',
-    //   color: Colors.indigo,
-    //   icon: Icons.share,
-    //   //onTap: () => _showSnackBar('Share'),
-    // ),
-    // ],
-    //secondaryActions: <Widget>[
-    //   new IconSlideAction(
-    //     caption: 'More',
-    //     color: Colors.black45,
-    //     icon: Icons.more_horiz,
-    //     //onTap: () => _showSnackBar('More'),
-    //   ),
-    //   new IconSlideAction(
-    //     caption: 'Delete',
-    //     color: Colors.red,
-    //     icon: Icons.delete,
-    //     onTap: () {},
-    //   ),
-    // ],
-    //);
   }
 }

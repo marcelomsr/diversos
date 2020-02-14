@@ -1,26 +1,8 @@
+import 'package:accountsvault/Strings.dart';
 import 'package:accountsvault/componentes/editor.dart';
 import 'package:accountsvault/database/dao/account.dart';
 import 'package:accountsvault/models/account.dart';
 import 'package:flutter/material.dart';
-
-const _titleAppBar = 'Create Account';
-
-const _labelFieldName = 'Name of account';
-const _tipFieldName = 'Google';
-
-const _labelFieldSite = 'Site';
-const _tipFieldSite = 'www.google.com';
-
-const _labelFieldUser = 'User';
-const _tipFieldUser = 'blabla@organization.com';
-
-const _labelFieldPassword = 'Password';
-const _tipFieldPassword = '******';
-
-const _labelFieldDescription = 'Description';
-const _tipFieldDescription = 'My account for google services.';
-
-const _textoBotaoConfirmar = 'Save';
 
 class AccountForm extends StatefulWidget {
   final Account account;
@@ -43,7 +25,7 @@ class AccountFormState extends State<AccountForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(_titleAppBar)),
+      appBar: AppBar(title: Text(Strings.titleAppBarCreateAccount)),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -51,41 +33,41 @@ class AccountFormState extends State<AccountForm> {
               controller: _controllerFieldName = TextEditingController(
                 text: widget.account != null ? widget.account.name : '',
               ),
-              label: _labelFieldName,
-              tip: _tipFieldName,
+              label: Strings.labelFieldNameCreateAccount,
+              tip: Strings.tipFieldNameCreateAccount,
             ),
             Editor(
               controller: _controllerFieldSite = TextEditingController(
                 text: widget.account != null ? widget.account.site : '',
               ),
-              label: _labelFieldSite,
-              tip: _tipFieldSite,
+              label: Strings.labelFieldSiteCreateAccount,
+              tip: Strings.tipFieldSiteCreateAccount,
             ),
             Editor(
               controller: _controllerFieldUser = TextEditingController(
                 text: widget.account != null ? widget.account.user : '',
               ),
-              label: _labelFieldUser,
-              tip: _tipFieldUser,
+              label: Strings.labelFieldUserCreateAccount,
+              tip: Strings.tipFieldUserCreateAccount,
             ),
             Editor(
               controller: _controllerFieldPassword = TextEditingController(
                 text: widget.account != null ? widget.account.password : '',
               ),
-              label: _labelFieldPassword,
-              tip: _tipFieldPassword,
+              label: Strings.labelFieldPasswordCreateAccount,
+              tip: Strings.tipFieldPasswordCreateAccount,
               //password: true,
             ),
             Editor(
               controller: _controllerFieldDescription = TextEditingController(
                 text: widget.account != null ? widget.account.description : '',
               ),
-              label: _labelFieldDescription,
-              tip: _tipFieldDescription,
+              label: Strings.labelFieldDescriptionCreateAccount,
+              tip: Strings.tipFieldDescriptionCreateAccount,
               maxLines: 5,
             ),
             RaisedButton(
-              child: Text(_textoBotaoConfirmar),
+              child: Text(Strings.textSaveButton),
               onPressed: () {
                 _saveAccount(context, widget.account);
               },
