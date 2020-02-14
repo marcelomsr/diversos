@@ -74,8 +74,6 @@ class ListAccountsState extends State<ListAccounts> {
   }
 }
 
-enum WhyFarther { harder, smarter, selfStarter, tradingCharter }
-
 class AccountItem extends StatelessWidget {
   final Account _account;
 
@@ -89,7 +87,6 @@ class AccountItem extends StatelessWidget {
       child: Container(
         //color: Colors.white,
         child: ListTile(
-          //leading: Icon(Icons.monetization_on),
           title: Text(_account.name.toString()),
           subtitle: Text(_account.user.toString()),
           leading: CircleAvatar(
@@ -114,7 +111,7 @@ class AccountItem extends StatelessWidget {
                 child: new IconButton(
                   icon: new Icon(Icons.menu),
                   onPressed: () {
-                    print('object');
+                    print('Icon button tapped');
                   },
                 ),
               )
@@ -122,32 +119,31 @@ class AccountItem extends StatelessWidget {
           ),
         ),
       ),
-      actions: <Widget>[
-        new IconSlideAction(
-          caption: 'Archive',
-          color: Colors.blue,
-          icon: Icons.archive,
-          //onTap: () => _showSnackBar('Archive'),
-        ),
-        new IconSlideAction(
-          caption: 'Share',
-          color: Colors.indigo,
-          icon: Icons.share,
-          //onTap: () => _showSnackBar('Share'),
-        ),
-      ],
+      // actions: <Widget>[
+      //     caption: 'Archive',
+      //     color: Colors.blue,
+      //     icon: Icons.archive,
+      //     //onTap: () => _showSnackBar('Archive'),
+      //   ),
+      // new IconSlideAction(
+      //   caption: 'Share',
+      //   color: Colors.indigo,
+      //   icon: Icons.share,
+      //   //onTap: () => _showSnackBar('Share'),
+      // ),
+      // ],
       secondaryActions: <Widget>[
-        new IconSlideAction(
-          caption: 'More',
-          color: Colors.black45,
-          icon: Icons.more_horiz,
-          //onTap: () => _showSnackBar('More'),
-        ),
+        //   new IconSlideAction(
+        //     caption: 'More',
+        //     color: Colors.black45,
+        //     icon: Icons.more_horiz,
+        //     //onTap: () => _showSnackBar('More'),
+        //   ),
         new IconSlideAction(
           caption: 'Delete',
           color: Colors.red,
           icon: Icons.delete,
-          //onTap: () => _showSnackBar('Delete'),
+          onTap: () {},
         ),
       ],
     );
