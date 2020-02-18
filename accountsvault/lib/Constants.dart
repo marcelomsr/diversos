@@ -21,5 +21,9 @@ class Constants {
       'My account for google services.';
   static const textSaveButton = 'Save';
 
+  static const titleAppBarSelic = 'Taxa Selic';
+  static const formatDate = 'dd/MM/yyyy';
+  static const percentage = '%';
+
   static Color colorApp = Colors.blue.shade500;
 }

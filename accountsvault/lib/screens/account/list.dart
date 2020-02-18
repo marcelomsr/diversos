@@ -1,5 +1,6 @@
 import 'package:accountsvault/database/dao/account.dart';
 import 'package:accountsvault/models/account.dart';
+import 'package:accountsvault/screens/Selic.dart';
 import 'package:accountsvault/screens/account/formulario.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,7 +31,7 @@ class ListAccountsState extends State<ListAccounts> {
               ),
             ),
             ListTile(
-              title: Text('Item 1'),
+              title: Text('Accounts'),
               onTap: () {
                 // Update the state of the app
                 // ...
@@ -39,12 +40,17 @@ class ListAccountsState extends State<ListAccounts> {
               },
             ),
             ListTile(
-              title: Text('Item 2'),
+              title: Text('Selic'),
               onTap: () {
                 // Update the state of the app
                 // ...
                 // Then close the drawer
-                Navigator.pop(context);
+                //Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) {
+                    return SelicView();
+                  }),
+                );
               },
             ),
           ],

@@ -27,6 +27,7 @@ class AccountDao {
 
   Map<String, dynamic> _toMap(Account account) {
     final Map<String, dynamic> accountMap = Map();
+    accountMap[_id] = account.id;
     accountMap[_name] = account.name;
     accountMap[_site] = account.site;
     accountMap[_user] = account.user;
