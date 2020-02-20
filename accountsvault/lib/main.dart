@@ -6,6 +6,7 @@ import 'package:accountsvault/models/Account.dart';
 import 'package:accountsvault/screens/account/List.dart';
 import 'package:flutter/material.dart';
 
+// implantar consulta das contas
 // passar o consumo da moto
 // passar os valores dos lucros dos meses pra cá
 // colocar para editar o valor da selic e deixar o atual padrão

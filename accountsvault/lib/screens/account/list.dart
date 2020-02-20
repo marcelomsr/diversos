@@ -20,55 +20,15 @@ class ListAccountsState extends State<ListAccounts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              child: Text('Drawer Header'),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-            ),
-            ListTile(
-              title: Text(Constants.titleAppBarAccounts),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text(Constants.titleAppBarSelic),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return SelicView();
-                    },
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              title: Text(Constants.about),
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return MessageDialog(
-                      title: Constants.about,
-                      content: Constants.version,
-                      textCloseButton: Constants.close,
-                    );
-                  },
-                );
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: _showMenu(),
       appBar: AppBar(
         title: Text(Constants.titleAppBarAccounts),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: null,
+          ),
+        ],
       ),
       body: FutureBuilder<List<Account>>(
         initialData: List(),
@@ -92,10 +52,14 @@ class ListAccountsState extends State<ListAccounts> {
             case ConnectionState.active:
               break;
             case ConnectionState.done:
-              final List<Account> accounts = snapshot.data;
-              accounts.sort((a, b) {
-                return a.name.toLowerCase().compareTo(b.name.toLowerCase());
-              });
+              final List<Account> accounts = snapshot.data
+                  .where((food) => food.name.toLowerCase().contains('br'))
+                  .toList();
+              accounts.sort(
+                (a, b) {
+                  return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+                },
+              );
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final Account account = accounts[index];
@@ -135,7 +99,6 @@ class ListAccountsState extends State<ListAccounts> {
               );
               break;
           }
-
           return Text(Constants.unknownError);
         },
       ),
@@ -148,6 +111,56 @@ class ListAccountsState extends State<ListAccounts> {
             }),
           );
         },
+      ),
+    );
+  }
+
+  Drawer _showMenu() {
+    return Drawer(
+      child: ListView(
+        // Important: Remove any padding from the ListView.
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(
+            child: Text('Drawer Header'),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+            ),
+          ),
+          ListTile(
+            title: Text(Constants.titleAppBarAccounts),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: Text(Constants.titleAppBarSelic),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return SelicView();
+                  },
+                ),
+              );
+            },
+          ),
+          ListTile(
+            title: Text(Constants.about),
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return MessageDialog(
+                    title: Constants.about,
+                    content: Constants.version,
+                    textCloseButton: Constants.close,
+                  );
+                },
+              );
+            },
+          ),
+        ],
       ),
     );
   }
