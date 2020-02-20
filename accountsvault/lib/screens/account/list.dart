@@ -31,26 +31,42 @@ class ListAccountsState extends State<ListAccounts> {
               ),
             ),
             ListTile(
-              title: Text('Accounts'),
+              title: Text(Constants.titleAppBarAccounts),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              title: Text('Selic'),
+              title: Text(Constants.titleAppBarSelic),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                //Navigator.pop(context);
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) {
-                    return SelicView();
-                  }),
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return SelicView();
+                    },
+                  ),
                 );
+              },
+            ),
+            ListTile(
+              title: Text(Constants.about),
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text(Constants.about),
+                        content: Text('Version: 1.0'),
+                        actions: <Widget>[
+                          FlatButton(
+                            child: Text(Constants.close),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          )
+                        ],
+                      );
+                    });
               },
             ),
           ],

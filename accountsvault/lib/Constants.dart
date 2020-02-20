@@ -20,10 +20,11 @@ class Constants {
   static const tipFieldDescriptionCreateAccount =
       'My account for google services.';
   static const textSaveButton = 'Save';
-
   static const titleAppBarSelic = 'Taxa Selic';
   static const formatDate = 'dd/MM/yyyy';
   static const percentage = '%';
+  static const about = 'About';
+  static const close = 'Close';
 
   static Color colorApp = Colors.blue.shade500;
 }
