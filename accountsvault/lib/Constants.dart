@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Constants {
+  static const version = 'Version 1.0.0';
+
   static const titleAppBarAccounts = 'Accounts';
   static const textNoNameAccounts = 'Ah';
   static const passwordCopied = 'Password copied.';

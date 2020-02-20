@@ -1,3 +1,4 @@
+import 'package:accountsvault/componentes/MessageDialog.dart';
 import 'package:accountsvault/database/dao/Account.dart';
 import 'package:accountsvault/models/Account.dart';
 import 'package:accountsvault/screens/Selic.dart';
@@ -52,24 +53,15 @@ class ListAccountsState extends State<ListAccounts> {
               title: Text(Constants.about),
               onTap: () {
                 showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        title: Text(Constants.about),
-                        content: Text('Version: 1.0'),
-                        actions: <Widget>[
-                          FlatButton(
-                            child: Text(Constants.close),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          )
-                        ],
-                      );
-                    });
+                  context: context,
+                  builder: (BuildContext context) {
+                    return MessageDialog(
+                      title: Constants.about,
+                      content: Constants.version,
+                      textCloseButton: Constants.close,
+                    );
+                  },
+                );
               },
             ),
           ],
