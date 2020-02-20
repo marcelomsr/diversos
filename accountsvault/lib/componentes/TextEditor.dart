@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Editor extends StatelessWidget {
+class TextEditor extends StatelessWidget {
   final TextEditingController controller;
   final String label;
   final String tip;
@@ -8,7 +8,7 @@ class Editor extends StatelessWidget {
   final bool password;
   final int maxLines;
 
-  Editor({
+  TextEditor({
     this.controller,
     this.label,
     this.tip,

@@ -1,4 +1,4 @@
-import 'package:accountsvault/models/account.dart';
+import 'package:accountsvault/models/Account.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:accountsvault/database/app_database.dart';
 

@@ -1,10 +1,14 @@
 import 'dart:ui';
 
 import 'package:accountsvault/Constants.dart';
-import 'package:accountsvault/database/dao/account.dart';
-import 'package:accountsvault/models/account.dart';
-import 'package:accountsvault/screens/account/list.dart';
+import 'package:accountsvault/database/dao/Account.dart';
+import 'package:accountsvault/models/Account.dart';
+import 'package:accountsvault/screens/account/List.dart';
 import 'package:flutter/material.dart';
+
+// passar o consumo da moto
+// passar os valores dos lucros dos meses pra cá
+// colocar para editar o valor da selic e deixar o atual padrão
 
 void main() {
   runApp(AccountsVaultApp());

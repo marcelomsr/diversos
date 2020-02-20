@@ -1,7 +1,7 @@
 import 'package:accountsvault/Constants.dart';
-import 'package:accountsvault/componentes/editor.dart';
-import 'package:accountsvault/database/dao/account.dart';
-import 'package:accountsvault/models/account.dart';
+import 'package:accountsvault/componentes/TextEditor.dart';
+import 'package:accountsvault/database/dao/Account.dart';
+import 'package:accountsvault/models/Account.dart';
 import 'package:flutter/material.dart';
 
 class AccountForm extends StatefulWidget {
@@ -29,28 +29,28 @@ class AccountFormState extends State<AccountForm> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Editor(
+            TextEditor(
               controller: _controllerFieldName = TextEditingController(
                 text: widget.account != null ? widget.account.name : '',
               ),
               label: Constants.labelFieldNameCreateAccount,
               tip: Constants.tipFieldNameCreateAccount,
             ),
-            Editor(
+            TextEditor(
               controller: _controllerFieldSite = TextEditingController(
                 text: widget.account != null ? widget.account.site : '',
               ),
               label: Constants.labelFieldSiteCreateAccount,
               tip: Constants.tipFieldSiteCreateAccount,
             ),
-            Editor(
+            TextEditor(
               controller: _controllerFieldUser = TextEditingController(
                 text: widget.account != null ? widget.account.user : '',
               ),
               label: Constants.labelFieldUserCreateAccount,
               tip: Constants.tipFieldUserCreateAccount,
             ),
-            Editor(
+            TextEditor(
               controller: _controllerFieldPassword = TextEditingController(
                 text: widget.account != null ? widget.account.password : '',
               ),
@@ -58,7 +58,7 @@ class AccountFormState extends State<AccountForm> {
               tip: Constants.tipFieldPasswordCreateAccount,
               //password: true,
             ),
-            Editor(
+            TextEditor(
               controller: _controllerFieldDescription = TextEditingController(
                 text: widget.account != null ? widget.account.description : '',
               ),

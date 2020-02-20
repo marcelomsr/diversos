@@ -1,10 +1,10 @@
-import 'package:accountsvault/database/dao/account.dart';
-import 'package:accountsvault/models/account.dart';
+import 'package:accountsvault/database/dao/Account.dart';
+import 'package:accountsvault/models/Account.dart';
 import 'package:accountsvault/screens/Selic.dart';
-import 'package:accountsvault/screens/account/formulario.dart';
+import 'package:accountsvault/screens/account/Form.dart';
+import 'package:accountsvault/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:accountsvault/Constants.dart';
 
 class ListAccounts extends StatefulWidget {
   @override
@@ -55,6 +55,9 @@ class ListAccountsState extends State<ListAccounts> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
                         title: Text(Constants.about),
                         content: Text('Version: 1.0'),
                         actions: <Widget>[
