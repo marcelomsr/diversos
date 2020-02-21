@@ -1,8 +1,17 @@
 import 'package:accountsvault/Constants.dart';
+import 'package:accountsvault/componentes/TextEditor.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
-class SelicView extends StatelessWidget {
+class SelicView extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return SelicViewState();
+  }
+}
+
+class SelicViewState extends State<SelicView> {
+  TextEditingController _controllerSelecValue;
   final CalculaJurosSelic _selic = CalculaJurosSelic(4.25);
 
   @override
@@ -11,9 +20,14 @@ class SelicView extends StatelessWidget {
       appBar: AppBar(
         title: Text(Constants.titleAppBarSelic),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(32.0),
-        child: _createTable(),
+      body: Column(
+        children: <Widget>[
+          TextEditor(),
+          Padding(
+            padding: EdgeInsets.all(32.0),
+            child: _createTable(),
+          ),
+        ],
       ),
     );
   }
@@ -26,7 +40,9 @@ class SelicView extends StatelessWidget {
         width: 0.5,
       ),
       children: [
-        _createRowHeader(Constants.titleAppBarSelic),
+        _createRowHeader(
+          Constants.titleAppBarSelic,
+        ),
         _createRowTable(
           _selic._taxaSelic.toString() + Constants.percentage,
           _selic._jurosBruto.toStringAsPrecision(4) + Constants.percentage,
@@ -83,6 +99,7 @@ class SelicView extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
+              //TextEditor(),
               Text(percentage),
               Text(date),
             ],
