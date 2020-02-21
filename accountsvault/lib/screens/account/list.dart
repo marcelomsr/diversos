@@ -1,7 +1,164 @@
+/*
+import 'package:flutter/material.dart';
+
+class SearchList extends StatefulWidget {
+  SearchList({Key key}) : super(key: key);
+  @override
+  _SearchListState createState() => new _SearchListState();
+}
+
+class _SearchListState extends State<SearchList> {
+  Widget appBarTitle = new Text(
+    "Search Sample",
+    style: new TextStyle(color: Colors.white),
+  );
+  Icon actionIcon = new Icon(
+    Icons.search,
+    color: Colors.white,
+  );
+  final key = new GlobalKey<ScaffoldState>();
+  final TextEditingController _searchQuery = new TextEditingController();
+  List<String> _list;
+  bool _IsSearching;
+  String _searchText = "";
+
+  _SearchListState() {
+    _searchQuery.addListener(() {
+      if (_searchQuery.text.isEmpty) {
+        setState(() {
+          _IsSearching = false;
+          _searchText = "";
+        });
+      } else {
+        setState(() {
+          _IsSearching = true;
+          _searchText = _searchQuery.text;
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _IsSearching = false;
+    init();
+  }
+
+  void init() {
+    _list = List();
+    _list.add("Google");
+    _list.add("IOS");
+    _list.add("Andorid");
+    _list.add("Dart");
+    _list.add("Flutter");
+    _list.add("Python");
+    _list.add("React");
+    _list.add("Xamarin");
+    _list.add("Kotlin");
+    _list.add("Java");
+    _list.add("RxAndroid");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      key: key,
+      appBar: buildBar(context),
+      body: new ListView(
+        padding: new EdgeInsets.symmetric(vertical: 8.0),
+        children: _IsSearching ? _buildSearchList() : _buildList(),
+      ),
+    );
+  }
+
+  List<ChildItem> _buildList() {
+    return _list.map((contact) => new ChildItem(contact)).toList();
+  }
+
+  List<ChildItem> _buildSearchList() {
+    if (_searchText.isEmpty) {
+      return _list.map((contact) => new ChildItem(contact)).toList();
+    } else {
+      List<String> _searchList = List();
+      for (int i = 0; i < _list.length; i++) {
+        String name = _list.elementAt(i);
+        if (name.toLowerCase().contains(_searchText.toLowerCase())) {
+          _searchList.add(name);
+        }
+      }
+      return _searchList.map((contact) => new ChildItem(contact)).toList();
+    }
+  }
+
+  Widget buildBar(BuildContext context) {
+    return new AppBar(centerTitle: true, title: appBarTitle, actions: <Widget>[
+      new IconButton(
+        icon: actionIcon,
+        onPressed: () {
+          setState(() {
+            if (this.actionIcon.icon == Icons.search) {
+              this.actionIcon = new Icon(
+                Icons.close,
+                color: Colors.white,
+              );
+              this.appBarTitle = new TextField(
+                controller: _searchQuery,
+                style: new TextStyle(
+                  color: Colors.white,
+                ),
+                decoration: new InputDecoration(
+                    prefixIcon: new Icon(Icons.search, color: Colors.white),
+                    hintText: "Search...",
+                    hintStyle: new TextStyle(color: Colors.white)),
+              );
+              _handleSearchStart();
+            } else {
+              _handleSearchEnd();
+            }
+          });
+        },
+      ),
+    ]);
+  }
+
+  void _handleSearchStart() {
+    setState(() {
+      _IsSearching = true;
+    });
+  }
+
+  void _handleSearchEnd() {
+    setState(() {
+      this.actionIcon = new Icon(
+        Icons.search,
+        color: Colors.white,
+      );
+      this.appBarTitle = new Text(
+        "Search Sample",
+        style: new TextStyle(color: Colors.white),
+      );
+      _IsSearching = false;
+      _searchQuery.clear();
+    });
+  }
+}
+
+class ChildItem extends StatelessWidget {
+  final String name;
+  ChildItem(this.name);
+  @override
+  Widget build(BuildContext context) {
+    return new ListTile(title: new Text(this.name));
+  }
+}
+*/
+
 import 'package:accountsvault/componentes/MessageDialog.dart';
 import 'package:accountsvault/database/dao/Account.dart';
 import 'package:accountsvault/models/Account.dart';
 import 'package:accountsvault/screens/Selic.dart';
+import 'package:accountsvault/screens/account/AccountItem.dart';
 import 'package:accountsvault/screens/account/Form.dart';
 import 'package:accountsvault/Constants.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +183,11 @@ class ListAccountsState extends State<ListAccounts> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.search),
-            onPressed: null,
+            onPressed: () {
+              setState(
+                () {},
+              );
+            },
           ),
         ],
       ),
@@ -161,68 +322,6 @@ class ListAccountsState extends State<ListAccounts> {
             },
           ),
         ],
-      ),
-    );
-  }
-}
-
-class AccountItem extends StatelessWidget {
-  final Account _account;
-
-  AccountItem(this._account);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: ListTile(
-        title: Text(_account.name.toString()),
-        subtitle: Text(_account.user.toString()),
-        leading: CircleAvatar(
-          backgroundColor: Colors.blue.shade500,
-          child: Text(
-            _account.name.length >= 2
-                ? _account.name.toString().substring(0, 2)
-                : Constants.textNoNameAccounts,
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-        onLongPress: () {
-          Clipboard.setData(
-            new ClipboardData(
-              text: _account.password,
-            ),
-          );
-          Scaffold.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                Constants.passwordCopied,
-                style: TextStyle(color: Colors.white),
-              ),
-              backgroundColor: Colors.grey.shade900,
-            ),
-          );
-        },
-        onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) {
-                return AccountForm(_account);
-              },
-            ),
-          );
-        },
-        trailing: new Column(
-          children: <Widget>[
-            new Container(
-              child: new IconButton(
-                icon: new Icon(Icons.menu),
-                onPressed: () {
-                  print('Icon button pressed.');
-                },
-              ),
-            )
-          ],
-        ),
       ),
     );
   }
