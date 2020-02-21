@@ -25,7 +25,11 @@ class AccountFormState extends State<AccountForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(Constants.titleAppBarCreateAccount)),
+      appBar: AppBar(
+        title: widget.account != null
+            ? Text(Constants.titleAppBarEditAccount)
+            : Text(Constants.titleAppBarCreateAccount),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -33,38 +37,38 @@ class AccountFormState extends State<AccountForm> {
               controller: _controllerFieldName = TextEditingController(
                 text: widget.account != null ? widget.account.name : '',
               ),
-              label: Constants.labelFieldNameCreateAccount,
               tip: Constants.tipFieldNameCreateAccount,
+              icon: Icons.description,
             ),
             TextEditor(
               controller: _controllerFieldSite = TextEditingController(
                 text: widget.account != null ? widget.account.site : '',
               ),
-              label: Constants.labelFieldSiteCreateAccount,
               tip: Constants.tipFieldSiteCreateAccount,
+              icon: Icons.cloud_done,
             ),
             TextEditor(
               controller: _controllerFieldUser = TextEditingController(
                 text: widget.account != null ? widget.account.user : '',
               ),
-              label: Constants.labelFieldUserCreateAccount,
               tip: Constants.tipFieldUserCreateAccount,
+              icon: Icons.person,
             ),
             TextEditor(
               controller: _controllerFieldPassword = TextEditingController(
                 text: widget.account != null ? widget.account.password : '',
               ),
-              label: Constants.labelFieldPasswordCreateAccount,
               tip: Constants.tipFieldPasswordCreateAccount,
-              //password: true,
+              password: true,
+              icon: Icons.lock,
             ),
             TextEditor(
               controller: _controllerFieldDescription = TextEditingController(
                 text: widget.account != null ? widget.account.description : '',
               ),
-              label: Constants.labelFieldDescriptionCreateAccount,
               tip: Constants.tipFieldDescriptionCreateAccount,
               maxLines: 5,
+              icon: Icons.chat,
             ),
             RaisedButton(
               child: Text(Constants.textSaveButton),
