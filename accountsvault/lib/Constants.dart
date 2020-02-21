@@ -27,6 +27,8 @@ class Constants {
   static const percentage = '%';
   static const about = 'About';
   static const close = 'Close';
+  static const search = 'Search..';
+  static const drawerHeader = 'Drawer Header';
 
   static Color colorApp = Colors.blue.shade500;
 }

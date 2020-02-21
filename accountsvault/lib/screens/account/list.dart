@@ -1,159 +1,3 @@
-/*
-import 'package:flutter/material.dart';
-
-class SearchList extends StatefulWidget {
-  SearchList({Key key}) : super(key: key);
-  @override
-  _SearchListState createState() => new _SearchListState();
-}
-
-class _SearchListState extends State<SearchList> {
-  Widget appBarTitle = new Text(
-    "Search Sample",
-    style: new TextStyle(color: Colors.white),
-  );
-  Icon actionIcon = new Icon(
-    Icons.search,
-    color: Colors.white,
-  );
-  final key = new GlobalKey<ScaffoldState>();
-  final TextEditingController _searchQuery = new TextEditingController();
-  List<String> _list;
-  bool _IsSearching;
-  String _searchText = "";
-
-  _SearchListState() {
-    _searchQuery.addListener(() {
-      if (_searchQuery.text.isEmpty) {
-        setState(() {
-          _IsSearching = false;
-          _searchText = "";
-        });
-      } else {
-        setState(() {
-          _IsSearching = true;
-          _searchText = _searchQuery.text;
-        });
-      }
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _IsSearching = false;
-    init();
-  }
-
-  void init() {
-    _list = List();
-    _list.add("Google");
-    _list.add("IOS");
-    _list.add("Andorid");
-    _list.add("Dart");
-    _list.add("Flutter");
-    _list.add("Python");
-    _list.add("React");
-    _list.add("Xamarin");
-    _list.add("Kotlin");
-    _list.add("Java");
-    _list.add("RxAndroid");
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      key: key,
-      appBar: buildBar(context),
-      body: new ListView(
-        padding: new EdgeInsets.symmetric(vertical: 8.0),
-        children: _IsSearching ? _buildSearchList() : _buildList(),
-      ),
-    );
-  }
-
-  List<ChildItem> _buildList() {
-    return _list.map((contact) => new ChildItem(contact)).toList();
-  }
-
-  List<ChildItem> _buildSearchList() {
-    if (_searchText.isEmpty) {
-      return _list.map((contact) => new ChildItem(contact)).toList();
-    } else {
-      List<String> _searchList = List();
-      for (int i = 0; i < _list.length; i++) {
-        String name = _list.elementAt(i);
-        if (name.toLowerCase().contains(_searchText.toLowerCase())) {
-          _searchList.add(name);
-        }
-      }
-      return _searchList.map((contact) => new ChildItem(contact)).toList();
-    }
-  }
-
-  Widget buildBar(BuildContext context) {
-    return new AppBar(centerTitle: true, title: appBarTitle, actions: <Widget>[
-      new IconButton(
-        icon: actionIcon,
-        onPressed: () {
-          setState(() {
-            if (this.actionIcon.icon == Icons.search) {
-              this.actionIcon = new Icon(
-                Icons.close,
-                color: Colors.white,
-              );
-              this.appBarTitle = new TextField(
-                controller: _searchQuery,
-                style: new TextStyle(
-                  color: Colors.white,
-                ),
-                decoration: new InputDecoration(
-                    prefixIcon: new Icon(Icons.search, color: Colors.white),
-                    hintText: "Search...",
-                    hintStyle: new TextStyle(color: Colors.white)),
-              );
-              _handleSearchStart();
-            } else {
-              _handleSearchEnd();
-            }
-          });
-        },
-      ),
-    ]);
-  }
-
-  void _handleSearchStart() {
-    setState(() {
-      _IsSearching = true;
-    });
-  }
-
-  void _handleSearchEnd() {
-    setState(() {
-      this.actionIcon = new Icon(
-        Icons.search,
-        color: Colors.white,
-      );
-      this.appBarTitle = new Text(
-        "Search Sample",
-        style: new TextStyle(color: Colors.white),
-      );
-      _IsSearching = false;
-      _searchQuery.clear();
-    });
-  }
-}
-
-class ChildItem extends StatelessWidget {
-  final String name;
-  ChildItem(this.name);
-  @override
-  Widget build(BuildContext context) {
-    return new ListTile(title: new Text(this.name));
-  }
-}
-*/
-
 import 'package:accountsvault/componentes/MessageDialog.dart';
 import 'package:accountsvault/database/dao/Account.dart';
 import 'package:accountsvault/models/Account.dart';
@@ -162,7 +6,6 @@ import 'package:accountsvault/screens/account/AccountItem.dart';
 import 'package:accountsvault/screens/account/Form.dart';
 import 'package:accountsvault/Constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class ListAccounts extends StatefulWidget {
   @override
@@ -174,23 +17,27 @@ class ListAccounts extends StatefulWidget {
 class ListAccountsState extends State<ListAccounts> {
   final AccountDao _dao = AccountDao();
 
+  final TextEditingController _filter = new TextEditingController();
+  String _searchText;
+
+  Widget appBarTitle = new Text(
+    Constants.titleAppBarAccounts,
+  );
+
+  Icon _actionIcon = new Icon(
+    Icons.search,
+  );
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: _showMenu(),
-      appBar: AppBar(
-        title: Text(Constants.titleAppBarAccounts),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              setState(
-                () {},
-              );
-            },
-          ),
-        ],
-      ),
+    return new Scaffold(
+      drawer: _showDrawer(),
+      appBar: _buildAppBar(context),
       body: FutureBuilder<List<Account>>(
         initialData: List(),
         future: _dao.findAll(),
@@ -199,22 +46,14 @@ class ListAccountsState extends State<ListAccounts> {
             case ConnectionState.none:
               break;
             case ConnectionState.waiting:
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    CircularProgressIndicator(),
-                    Text(Constants.loading),
-                  ],
-                ),
-              );
+              return _buildLoading();
               break;
             case ConnectionState.active:
               break;
             case ConnectionState.done:
               final List<Account> accounts = snapshot.data
-                  .where((food) => food.name.toLowerCase().contains('br'))
+                  .where(
+                      (food) => food.name.toLowerCase().contains(_searchText))
                   .toList();
               accounts.sort(
                 (a, b) {
@@ -263,27 +102,57 @@ class ListAccountsState extends State<ListAccounts> {
           return Text(Constants.unknownError);
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) {
-              return AccountForm(null);
-            }),
-          );
-        },
-      ),
+      floatingActionButton: _buildFloatingActionButton(context),
     );
   }
 
-  Drawer _showMenu() {
+  Widget _buildAppBar(BuildContext context) {
+    return AppBar(
+      title: appBarTitle,
+      actions: <Widget>[
+        new IconButton(
+          icon: _actionIcon,
+          onPressed: () {
+            _pressedSearchIcon();
+          },
+        ),
+      ],
+    );
+  }
+
+  void _pressedSearchIcon() {
+    setState(() {
+      if (this._actionIcon.icon == Icons.search) {
+        this._actionIcon = new Icon(
+          Icons.close,
+          color: Colors.white,
+        );
+        this.appBarTitle = new TextField(
+          controller: _filter,
+          autofocus: true,
+          decoration: new InputDecoration(
+            prefixIcon: new Icon(Icons.search, color: Colors.white),
+            hintText: Constants.search,
+            //hintStyle: new TextStyle(color: Colors.white),
+          ),
+          onChanged: (String text) {
+            _handleSearchStart();
+          },
+        );
+      } else {
+        _handleSearchEnd();
+      }
+    });
+  }
+
+  Widget _showDrawer() {
     return Drawer(
       child: ListView(
         // Important: Remove any padding from the ListView.
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
-            child: Text('Drawer Header'),
+            child: Text(Constants.drawerHeader),
             decoration: BoxDecoration(
               color: Colors.blue,
             ),
@@ -324,5 +193,54 @@ class ListAccountsState extends State<ListAccounts> {
         ],
       ),
     );
+  }
+
+  Widget _buildFloatingActionButton(BuildContext context) {
+    return FloatingActionButton(
+      child: Icon(Icons.add),
+      onPressed: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) {
+            return AccountForm(null);
+          }),
+        );
+      },
+    );
+  }
+
+  Widget _buildLoading() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          CircularProgressIndicator(),
+          Text(Constants.loading),
+        ],
+      ),
+    );
+  }
+
+  void _handleSearchStart() {
+    setState(() {
+      _searchText = _filter.text.toLowerCase();
+    });
+  }
+
+  void _handleSearchEnd() {
+    setState(() {
+      this._actionIcon = new Icon(
+        Icons.search,
+        color: Colors.white,
+      );
+
+      this.appBarTitle = new Text(
+        Constants.titleAppBarAccounts,
+        style: new TextStyle(color: Colors.white),
+      );
+
+      _filter.clear();
+      _searchText = '';
+    });
   }
 }
