@@ -26,4 +26,5 @@ class Constants {
   static const drawerHeader = 'Drawer Header';
 
   static Color colorApp = Colors.blue.shade500;
+  static BorderRadius borderRadius = BorderRadius.circular(20.0);
 }

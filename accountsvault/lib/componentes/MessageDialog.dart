@@ -16,7 +16,7 @@ class MessageDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: Constants.borderRadius,
       ),
       title: Text(title),
       content: Text(content),

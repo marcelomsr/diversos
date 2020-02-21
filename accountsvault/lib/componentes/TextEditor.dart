@@ -1,3 +1,4 @@
+import 'package:accountsvault/Constants.dart';
 import 'package:flutter/material.dart';
 
 class TextEditor extends StatefulWidget {
@@ -42,7 +43,7 @@ class TextEditorState extends State<TextEditor> {
         ),
         decoration: InputDecoration(
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20.0),
+            borderRadius: Constants.borderRadius,
           ),
           icon: widget.icon != null ? Icon(widget.icon) : null,
           //labelText: widget.label,
