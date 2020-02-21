@@ -18,7 +18,7 @@ class ListAccountsState extends State<ListAccounts> {
   final AccountDao _dao = AccountDao();
 
   final TextEditingController _filter = new TextEditingController();
-  String _searchText;
+  String _searchText = '';
 
   Widget appBarTitle = new Text(
     Constants.titleAppBarAccounts,
