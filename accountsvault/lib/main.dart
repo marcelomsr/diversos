@@ -12,22 +12,25 @@ void main() {
 
   AccountDao().findAll().then((accounts) {
     String employee = 'klbn11';
-    //String employee = 'vvar3';
 
-    String url = 'https://app.tororadar.com.br/acoes/$employee/';
+    String url1 = 'https://app.tororadar.com.br/acoes/$employee/';
+    String url2 = 'https://app.tororadar.com.br/empresa/$employee/';
     String value = '';
-    String percent = '';
 
-    read(url).then((contents) {
+    read(url1).then((contents) {
       int startIndexValue = contents.indexOf('R\$') + 10;
-      int stopIndexValue = startIndexValue + 10;
-      value = contents.substring(startIndexValue, stopIndexValue).trim();
-      print(value);
+      value = contents.substring(startIndexValue, startIndexValue + 20).trim();
+      print('url1: R\$ ' + value);
+    });
 
-      int startIndexPercent = contents.indexOf('<i class="icon-var-') + 33;
-      int stopIndexPercent = startIndexPercent + 10;
-      percent = contents.substring(startIndexPercent, stopIndexPercent).trim();
-      print(percent);
+    read(url2).then((contents) {
+      int startIndexValue = contents.indexOf('R\$ ');
+      value = contents.substring(startIndexValue, startIndexValue + 20).trim();
+
+      // Considera do início até o começo da tag
+      value = value.substring(0, value.indexOf('<'));
+
+      print('url2: ' + value);
     });
 
     //print(accounts.length);
