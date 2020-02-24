@@ -1,3 +1,4 @@
+import 'package:http/http.dart';
 import 'dart:ui';
 
 import 'package:accountsvault/Constants.dart';
@@ -9,6 +10,34 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(AccountsVaultApp());
 
+  AccountDao().findAll().then((accounts) {
+    String employee = 'klbn11';
+    //String employee = 'vvar3';
+
+    String url = 'https://app.tororadar.com.br/acoes/$employee/';
+    String value = '';
+    String percent = '';
+
+    read(url).then((contents) {
+      int startIndexValue = contents.indexOf('R\$') + 10;
+      int stopIndexValue = startIndexValue + 10;
+      value = contents.substring(startIndexValue, stopIndexValue).trim();
+      print(value);
+
+      int startIndexPercent = contents.indexOf('<i class="icon-var-') + 33;
+      int stopIndexPercent = startIndexPercent + 10;
+      percent = contents.substring(startIndexPercent, stopIndexPercent).trim();
+      print(percent);
+    });
+
+    //print(accounts.length);
+    if (accounts.length <= 0) {
+      _insertDefaultContent();
+    }
+  });
+}
+
+void _insertDefaultContent() {
   AccountDao()
       .save(Account(8, 'AES Eletropaulo', '', '34124292600', '112739881', ''));
   AccountDao().save(Account(9, 'Ali Express', '', 'marcelomsr@hotmail.com',
