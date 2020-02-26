@@ -100,6 +100,8 @@ void _insertDefaultContent() {
   AccountDao().save(Account(36, 'Deezer', '', 'marcelomsr@hotmail.com',
       '10155996Deezer', 'Conexão principal é com o Facebook'));
   AccountDao().save(Account(
+      7, 'Deezer Aleatório', '', 'marcelosr6@gmail.com', 'dEEzer10155', ''));
+  AccountDao().save(Account(
       37, 'Deezer Family', '', 'marcelosr6@gmail.com', 'dEEzer10155', ''));
   AccountDao().save(Account(38, 'Dermo Manipulações',
       'www.dermomanipulacoes.com.br/', 'marcelomsr@hotmail.com', 'rezx85', ''));
