@@ -51,7 +51,8 @@ class TextEditorState extends State<TextEditor> {
           suffixIcon: _buildSuffixIcon(),
         ),
         obscureText: widget.password ? _isHidden : false,
-        keyboardType: TextInputType.text,
+        keyboardType:
+            widget.maxLines <= 1 ? TextInputType.text : TextInputType.multiline,
       ),
     );
   }
