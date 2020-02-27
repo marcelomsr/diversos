@@ -32,6 +32,7 @@ class ListPricesState extends State<ListPrices> {
         title: Text(Constants.titleAppBarPrice),
         actions: <Widget>[],
       ),
+      //floatingActionButton: atualizar_lista,
       body: Center(
         child: Container(
           child: SingleChildScrollView(
@@ -141,6 +142,8 @@ class ListPricesState extends State<ListPrices> {
       ),
     );
   }
+}
+
 /*
     String url1 = 'https://app.tororadar.com.br/acoes/$employee/';
     String url2 = 'https://app.tororadar.com.br/empresa/$employee/';
@@ -160,5 +163,5 @@ class ListPricesState extends State<ListPrices> {
       value = value.substring(0, value.indexOf('<'));
 
       print('url2: ' + value);
-    });*/
-}
+    });
+*/
