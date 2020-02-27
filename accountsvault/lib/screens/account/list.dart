@@ -1,7 +1,5 @@
-import 'package:accountsvault/componentes/MessageDialog.dart';
 import 'package:accountsvault/database/dao/Account.dart';
 import 'package:accountsvault/models/Account.dart';
-import 'package:accountsvault/screens/Selic.dart';
 import 'package:accountsvault/screens/account/AccountItem.dart';
 import 'package:accountsvault/screens/account/Form.dart';
 import 'package:accountsvault/Constants.dart';
@@ -36,7 +34,7 @@ class ListAccountsState extends State<ListAccounts> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      drawer: _showDrawer(),
+      drawer: Constants.showDrawer(context),
       appBar: _buildAppBar(context),
       body: FutureBuilder<List<Account>>(
         initialData: List(),
@@ -143,56 +141,6 @@ class ListAccountsState extends State<ListAccounts> {
         _handleSearchEnd();
       }
     });
-  }
-
-  Widget _showDrawer() {
-    return Drawer(
-      child: ListView(
-        // Important: Remove any padding from the ListView.
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          DrawerHeader(
-            child: Text(Constants.drawerHeader),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
-          ),
-          ListTile(
-            title: Text(Constants.titleAppBarAccounts),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: Text(Constants.titleAppBarSelic),
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) {
-                    return SelicView();
-                  },
-                ),
-              );
-            },
-          ),
-          ListTile(
-            title: Text(Constants.about),
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return MessageDialog(
-                    title: Constants.about,
-                    content: Constants.version,
-                    textCloseButton: Constants.close,
-                  );
-                },
-              );
-            },
-          ),
-        ],
-      ),
-    );
   }
 
   Widget _buildFloatingActionButton(BuildContext context) {

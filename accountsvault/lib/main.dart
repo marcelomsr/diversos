@@ -1,6 +1,4 @@
-import 'package:http/http.dart';
 import 'dart:ui';
-
 import 'package:accountsvault/Constants.dart';
 import 'package:accountsvault/database/dao/Account.dart';
 import 'package:accountsvault/models/Account.dart';
@@ -15,28 +13,6 @@ void main() {
   runApp(AccountsVaultApp());
 
   AccountDao().findAll().then((accounts) {
-    String employee = 'klbn11';
-
-    String url1 = 'https://app.tororadar.com.br/acoes/$employee/';
-    String url2 = 'https://app.tororadar.com.br/empresa/$employee/';
-    String value = '';
-
-    read(url1).then((contents) {
-      int startIndexValue = contents.indexOf('R\$') + 10;
-      value = contents.substring(startIndexValue, startIndexValue + 20).trim();
-      print('url1: R\$ ' + value);
-    });
-
-    read(url2).then((contents) {
-      int startIndexValue = contents.indexOf('R\$ ');
-      value = contents.substring(startIndexValue, startIndexValue + 20).trim();
-
-      // Considera do início até o começo da tag
-      value = value.substring(0, value.indexOf('<'));
-
-      print('url2: ' + value);
-    });
-
     //print(accounts.length);
     if (accounts.length <= 0) {
       _insertDefaultContent();

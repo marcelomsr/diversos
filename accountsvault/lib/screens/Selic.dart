@@ -17,6 +17,7 @@ class SelicViewState extends State<SelicView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Constants.showDrawer(context),
       appBar: AppBar(
         title: Text(Constants.titleAppBarSelic),
       ),
