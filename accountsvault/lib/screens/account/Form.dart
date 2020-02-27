@@ -90,12 +90,12 @@ class AccountFormState extends State<AccountForm> {
     final String description = _controllerFieldDescription.text;
 
     if (name != null && user != null && password != null) {
-      final int id = (account != null ? account.id : 0);
+      final int id = (account != null ? account.id : null);
       final accountSaved = Account(id, name, site, user, password, description);
 
       Future<int> future;
 
-      if (accountSaved.id != 0)
+      if (accountSaved.id != null)
         future = _dao.update(accountSaved);
       else
         future = _dao.save(accountSaved);
