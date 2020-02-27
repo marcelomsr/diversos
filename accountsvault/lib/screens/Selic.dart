@@ -21,102 +21,161 @@ class SelicViewState extends State<SelicView> {
       appBar: AppBar(
         title: Text(Constants.titleAppBarSelic),
       ),
-      body: Column(
-        children: <Widget>[
-          TextEditor(
-            controller: _controllerSelecValue = TextEditingController(
-              text: _selic._taxaSelic.toString(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: Constants.borderRadius,
+              color: Color(0xff5a348b),
+              gradient: LinearGradient(
+                colors: [Color(0xff8d70fe), Color(0xff2da9ef)],
+                begin: Alignment.centerRight,
+                end: Alignment(-1.0, -1.0),
+              ), //Gradient
             ),
-            inputType: TextInputType.number,
-            textAlign: TextAlign.center,
-            functionCompleteEditing: () {
-              _selic = CalculaJurosSelic(
-                  double.tryParse(_controllerSelecValue.text));
-              setState(() {});
-            },
+            child: Column(
+              children: <Widget>[
+                TextEditor(
+                  controller: _controllerSelecValue = TextEditingController(
+                    text: _selic._taxaSelic.toString(),
+                  ),
+                  inputType: TextInputType.number,
+                  textAlign: TextAlign.center,
+                  functionCompleteEditing: () {
+                    _selic = CalculaJurosSelic(
+                        double.tryParse(_controllerSelecValue.text));
+                    setState(() {});
+                  },
+                ),
+                _createDataTable(),
+              ],
+            ),
           ),
-          Padding(
-            padding: EdgeInsets.all(32.0),
-            child: _createTable(),
-          ),
-        ],
+        ),
       ),
     );
   }
 
-  _createTable() {
-    return Table(
-      border: TableBorder.all(
-        color: Colors.white70,
-        style: BorderStyle.solid,
-        width: 0.5,
-      ),
-      children: [
-        _createRowHeader(
-          Constants.titleAppBarSelic,
+  Widget _createDataTable() {
+    return DataTable(
+      columns: <DataColumn>[
+        DataColumn(
+          label: Text(''),
         ),
-        _createRowTable(
-          _selic._taxaSelic.toString() + Constants.percentage,
-          _selic._jurosBruto.toStringAsPrecision(4) + Constants.percentage,
-        ),
-        _createRowTable(
-          _selic._jurosAte6Meses.toStringAsPrecision(4) + Constants.percentage,
-          DateFormat(Constants.formatDate).format(
-            DateTime.now(),
-          ),
-        ),
-        _createRowTable(
-          _selic._juros6Meses1Ano.toStringAsPrecision(4) + Constants.percentage,
-          DateFormat(Constants.formatDate).format(
-            DateTime.now().add(Duration(days: -181)),
-          ),
-        ),
-        _createRowTable(
-          _selic._juros1Ano1Ano6Meses.toStringAsPrecision(4) +
-              Constants.percentage,
-          DateFormat(Constants.formatDate).format(
-            DateTime.now().add(Duration(days: -361)),
-          ),
-        ),
-        _createRowTable(
-          _selic._juros1Ano6Meses2Anos.toStringAsPrecision(4) +
-              Constants.percentage,
-          DateFormat(Constants.formatDate).format(
-            DateTime.now().add(Duration(days: -721)),
-          ),
+        DataColumn(
+          label: Text(''),
         ),
       ],
-    );
-  }
-
-  _createRowHeader(String data) {
-    return TableRow(
-      children: [
-        TableCell(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Text(data),
-            ],
+      rows: <DataRow>[
+        DataRow(cells: <DataCell>[
+          DataCell(
+            myRowDataIcon(
+              Icons.arrow_forward,
+              _selic._taxaSelic.toString() + Constants.percentage,
+            ),
           ),
-        ),
-      ],
-    );
-  }
-
-  _createRowTable(String percentage, String date) {
-    return TableRow(
-      children: [
-        TableCell(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              //TextEditor(),
-              Text(percentage),
-              Text(date),
-            ],
+          DataCell(
+            Text(
+              _selic._jurosBruto.toStringAsPrecision(4) + Constants.percentage,
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
           ),
-        )
+        ]),
+        DataRow(cells: <DataCell>[
+          DataCell(
+            myRowDataIcon(
+              Icons.arrow_forward,
+              _selic._jurosAte6Meses.toStringAsPrecision(4) +
+                  Constants.percentage,
+            ),
+          ),
+          DataCell(
+            Text(
+              DateFormat(Constants.formatDate).format(
+                DateTime.now(),
+              ),
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ]),
+        DataRow(cells: <DataCell>[
+          DataCell(
+            myRowDataIcon(
+              Icons.arrow_forward,
+              _selic._juros6Meses1Ano.toStringAsPrecision(4) +
+                  Constants.percentage,
+            ),
+          ),
+          DataCell(
+            Text(
+              DateFormat(Constants.formatDate).format(
+                DateTime.now().add(Duration(days: -181)),
+              ),
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ]),
+        DataRow(cells: <DataCell>[
+          DataCell(
+            myRowDataIcon(
+              Icons.arrow_forward,
+              _selic._juros1Ano1Ano6Meses.toStringAsPrecision(4) +
+                  Constants.percentage,
+            ),
+          ),
+          DataCell(
+            Text(
+              DateFormat(Constants.formatDate).format(
+                DateTime.now().add(Duration(days: -361)),
+              ),
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ]),
+        DataRow(cells: <DataCell>[
+          DataCell(
+            myRowDataIcon(
+              Icons.arrow_forward,
+              _selic._juros1Ano6Meses2Anos.toStringAsPrecision(4) +
+                  Constants.percentage,
+            ),
+          ),
+          DataCell(
+            Text(
+              DateFormat(Constants.formatDate).format(
+                DateTime.now().add(Duration(days: -721)),
+              ),
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ]),
+        DataRow(cells: <DataCell>[
+          DataCell(
+            myRowDataIcon(
+              null,
+              '',
+            ),
+          ),
+          DataCell(
+            Text(
+              '',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ]),
       ],
     );
   }
@@ -142,4 +201,16 @@ class CalculaJurosSelic {
     _juros1Ano6Meses2Anos =
         ((_jurosBruto / 100) - (_jurosBruto / 100) * 15.0 / 100) * 100;
   }
+}
+
+ListTile myRowDataIcon(IconData iconVal, String rowVal) {
+  return ListTile(
+    leading: Icon(iconVal, color: new Color(0xffffffff)),
+    title: Text(
+      rowVal,
+      style: TextStyle(
+        color: Colors.white,
+      ),
+    ),
+  );
 }
