@@ -68,6 +68,7 @@ class AccountFormState extends State<AccountForm> {
               ),
               tip: Constants.tipFieldDescriptionCreateAccount,
               maxLines: 5,
+              inputType: TextInputType.multiline,
               icon: Icons.chat,
             ),
             RaisedButton(
