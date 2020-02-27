@@ -7,6 +7,10 @@ import 'package:accountsvault/models/Account.dart';
 import 'package:accountsvault/screens/account/List.dart';
 import 'package:flutter/material.dart';
 
+// passar o consumo da moto
+// passar os valores dos lucros dos meses pra cá
+// inserir as cotações das ações.
+
 void main() {
   runApp(AccountsVaultApp());
 
@@ -303,10 +307,6 @@ void _insertDefaultContent() {
   AccountDao().save(Account(
       null, 'WebMotors', '', 'marcelomsr@hotmail.com', '10155996WM', ''));
 }
-
-// passar o consumo da moto
-// passar os valores dos lucros dos meses pra cá
-// colocar para editar o valor da selic e deixar o atual padrão
 
 class AccountsVaultApp extends StatelessWidget {
   @override

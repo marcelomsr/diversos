@@ -12,7 +12,7 @@ class SelicView extends StatefulWidget {
 
 class SelicViewState extends State<SelicView> {
   TextEditingController _controllerSelecValue;
-  final CalculaJurosSelic _selic = CalculaJurosSelic(4.25);
+  CalculaJurosSelic _selic = CalculaJurosSelic(4.25);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,18 @@ class SelicViewState extends State<SelicView> {
       ),
       body: Column(
         children: <Widget>[
-          TextEditor(),
+          TextEditor(
+            controller: _controllerSelecValue = TextEditingController(
+              text: _selic._taxaSelic.toString(),
+            ),
+            inputType: TextInputType.number,
+            textAlign: TextAlign.center,
+            functionCompleteEditing: () {
+              _selic = CalculaJurosSelic(
+                  double.tryParse(_controllerSelecValue.text));
+              setState(() {});
+            },
+          ),
           Padding(
             padding: EdgeInsets.all(32.0),
             child: _createTable(),

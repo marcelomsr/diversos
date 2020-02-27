@@ -8,6 +8,9 @@ class TextEditor extends StatefulWidget {
   final IconData icon;
   final bool password;
   final int maxLines;
+  final TextInputType inputType;
+  final TextAlign textAlign;
+  final Function functionCompleteEditing;
 
   TextEditor({
     this.controller,
@@ -16,6 +19,9 @@ class TextEditor extends StatefulWidget {
     this.icon,
     this.password = false,
     this.maxLines = 1,
+    this.inputType = TextInputType.text,
+    this.textAlign = TextAlign.start,
+    this.functionCompleteEditing,
   });
 
   @override
@@ -36,6 +42,8 @@ class TextEditorState extends State<TextEditor> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
+        onEditingComplete: widget.functionCompleteEditing,
+        textAlign: widget.textAlign,
         maxLines: widget.maxLines,
         controller: widget.controller,
         style: TextStyle(
@@ -51,8 +59,7 @@ class TextEditorState extends State<TextEditor> {
           suffixIcon: _buildSuffixIcon(),
         ),
         obscureText: widget.password ? _isHidden : false,
-        keyboardType:
-            widget.maxLines <= 1 ? TextInputType.text : TextInputType.multiline,
+        keyboardType: widget.inputType,
       ),
     );
   }
