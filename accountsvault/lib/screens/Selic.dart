@@ -12,7 +12,7 @@ class SelicView extends StatefulWidget {
 
 class SelicViewState extends State<SelicView> {
   TextEditingController _controllerSelecValue;
-  CalculaJurosSelic _selic = CalculaJurosSelic(4.25);
+  CalculaJurosSelic _selic = CalculaJurosSelic(Constants.rateSelic);
 
   @override
   Widget build(BuildContext context) {

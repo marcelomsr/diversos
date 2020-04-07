@@ -10,7 +10,7 @@ Future<Database> getDatabase() async {
     onCreate: (db, version) {
       db.execute(AccountDao.tableSql);
     },
-    version: 1,
-    //onDowngrade: onDatabaseDowngradeDelete,
+    version: 2,
+    onDowngrade: onDatabaseDowngradeDelete,
   );
 }

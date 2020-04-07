@@ -5,7 +5,7 @@ import 'package:accountsvault/screens/investment/Price.dart';
 import 'package:flutter/material.dart';
 
 class Constants {
-  static const version = 'Version 1.0.0';
+  static const version = 'Version 1.0.1';
 
   static const titleAppBarAccounts = 'Accounts';
   static const textNoNameAccounts = 'Ah';
@@ -29,6 +29,7 @@ class Constants {
   static const search = 'Search..';
   static const drawerHeader = 'Drawer Header';
   static const titleAppBarPrice = 'Price';
+  static const rateSelic = 3.75;
 
   static Color colorApp = Colors.blue.shade500;
   static BorderRadius borderRadius = BorderRadius.circular(20.0);
