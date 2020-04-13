@@ -5,10 +5,10 @@ using SystemTrayApp.Properties;
 
 namespace SystemTrayApp
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	class ProcessIcon : IDisposable
+    /// <summary>
+    /// 
+    /// </summary>
+    class ProcessIcon : IDisposable
 	{
 		/// <summary>
 		/// The NotifyIcon object.

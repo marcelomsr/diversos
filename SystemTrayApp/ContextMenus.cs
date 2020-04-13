@@ -2,14 +2,13 @@
 using System.Diagnostics;
 using System.Windows.Forms;
 using SystemTrayApp.Properties;
-using System.Drawing;
 
 namespace SystemTrayApp
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	class ContextMenus
+    /// <summary>
+    /// 
+    /// </summary>
+    class ContextMenus
 	{
 		/// <summary>
 		/// Is the About box displayed?

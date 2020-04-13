@@ -1,6 +1,6 @@
-﻿using System;
+﻿using AdministratorCore.DataBaseHelper;
+using System;
 using System.Text.RegularExpressions;
-using AdministratorCore.DataBaseHelper;
 
 namespace AdministratorCore
 {

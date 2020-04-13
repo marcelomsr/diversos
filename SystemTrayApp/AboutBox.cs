@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace SystemTrayApp
 {
-	partial class AboutBox : Form
+    partial class AboutBox : Form
 	{
 		public AboutBox()
 		{

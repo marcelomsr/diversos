@@ -1,8 +1,7 @@
 ﻿using System;
+using System.Data;
 //using IBM.Data.DB2;
 using System.Data.Odbc;
-using System.Data;
-using System.Data.SqlClient;
 
 namespace DB2CoreOdbc
 {
