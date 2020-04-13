@@ -5,9 +5,12 @@ import 'package:accountsvault/models/Account.dart';
 import 'package:accountsvault/screens/account/List.dart';
 import 'package:flutter/material.dart';
 
-// passar o consumo da moto
-// passar os valores dos lucros dos meses pra cá
-// inserir as cotações das ações.
+// Criar o consumo da moto
+// Criar os valores dos rendimentos mensais
+// Criar cotaçáo das ações.
+// Criar notificações
+// Criar JI e exibir as notificações
+// Alterar o nome do aplicativo (OneForAll?)
 
 void main() {
   runApp(AccountsVaultApp());
