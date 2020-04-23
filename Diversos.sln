@@ -47,6 +47,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleRecorderTest", "Cons
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CountLines", "InboudConsole\CountLines.csproj", "{76992B00-5921-471E-9655-22C4789071B5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestesDiversos", "TestesDiversos\TestesDiversos.vcxproj", "{DACBC510-AF15-4460-B621-0325862AE572}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -423,6 +425,24 @@ Global
 		{76992B00-5921-471E-9655-22C4789071B5}.Release|x64.Build.0 = Release|Any CPU
 		{76992B00-5921-471E-9655-22C4789071B5}.Release|x86.ActiveCfg = Release|Any CPU
 		{76992B00-5921-471E-9655-22C4789071B5}.Release|x86.Build.0 = Release|Any CPU
+		{DACBC510-AF15-4460-B621-0325862AE572}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{DACBC510-AF15-4460-B621-0325862AE572}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{DACBC510-AF15-4460-B621-0325862AE572}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{DACBC510-AF15-4460-B621-0325862AE572}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DACBC510-AF15-4460-B621-0325862AE572}.Debug|Win32.Build.0 = Debug|Win32
+		{DACBC510-AF15-4460-B621-0325862AE572}.Debug|x64.ActiveCfg = Debug|x64
+		{DACBC510-AF15-4460-B621-0325862AE572}.Debug|x64.Build.0 = Debug|x64
+		{DACBC510-AF15-4460-B621-0325862AE572}.Debug|x86.ActiveCfg = Debug|Win32
+		{DACBC510-AF15-4460-B621-0325862AE572}.Debug|x86.Build.0 = Debug|Win32
+		{DACBC510-AF15-4460-B621-0325862AE572}.Release|Any CPU.ActiveCfg = Release|Win32
+		{DACBC510-AF15-4460-B621-0325862AE572}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{DACBC510-AF15-4460-B621-0325862AE572}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{DACBC510-AF15-4460-B621-0325862AE572}.Release|Win32.ActiveCfg = Release|Win32
+		{DACBC510-AF15-4460-B621-0325862AE572}.Release|Win32.Build.0 = Release|Win32
+		{DACBC510-AF15-4460-B621-0325862AE572}.Release|x64.ActiveCfg = Release|x64
+		{DACBC510-AF15-4460-B621-0325862AE572}.Release|x64.Build.0 = Release|x64
+		{DACBC510-AF15-4460-B621-0325862AE572}.Release|x86.ActiveCfg = Release|Win32
+		{DACBC510-AF15-4460-B621-0325862AE572}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
