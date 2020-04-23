@@ -29,6 +29,12 @@
     <Compile Update="Telas\UserControlGravar.Designer.cs">
       <DependentUpon>UserControlGravar.cs</DependentUpon>
     </Compile>
+    <Compile Update="Telas\UserControlEnviarMensagemEspecifica.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Telas\UserControlObterGravacao - Copy.Designer.cs">
+      <DependentUpon>UserControlObterGravacao.cs</DependentUpon>
+    </Compile>
     <Compile Update="Telas\UserControlObterGravacao.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -49,6 +55,9 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Telas\UserControlGravar.resx">
       <DependentUpon>UserControlGravar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Telas\UserControlObterGravacao - Copy.resx">
+      <DependentUpon>UserControlObterGravacao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="Telas\UserControlObterGravacao.resx">
       <DependentUpon>UserControlObterGravacao.cs</DependentUpon>

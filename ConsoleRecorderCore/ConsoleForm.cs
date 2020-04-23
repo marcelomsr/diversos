@@ -98,6 +98,13 @@ namespace ConsoleRecorderCore
                     }
                     break;
 
+                case RecorderInteraction.Command.ENVIAR_MENSAGEM_ESPECIFICA:
+                    {
+                        UserControlEnviarMensagemEspecifica user_control = new UserControlEnviarMensagemEspecifica();
+                        panel.Controls.Add(user_control);
+                    }
+                    break;
+
                 default:
                     break;
             }
@@ -149,7 +156,7 @@ namespace ConsoleRecorderCore
 
                 case RecorderInteraction.Command.OBTER_GRAVACAO:
                     {
-                        TextBox txt_sqc_gravacao = (TextBox)panel.Controls[0].Controls.Find("txt_sqc_gravacao", false)[0];
+                        TextBox txt_sqc_gravacao = (TextBox)panel.Controls[0].Controls.Find("txt_message", false)[0];
 
                         // FIXME
                         string gravacao = _recorderInteraction.GetRecording(Convert.ToInt32(txt_sqc_gravacao.Text));
@@ -161,8 +168,19 @@ namespace ConsoleRecorderCore
                     break;
 
                 case RecorderInteraction.Command.OBTER_VERSAO:
-                    AppendTextConsole(_recorderInteraction.GetVersion());
-                    AppendTextConsole(_recorderInteraction.GetResponse());
+                    {
+                        AppendTextConsole(_recorderInteraction.GetVersion());
+                        AppendTextConsole(_recorderInteraction.GetResponse());
+                    }
+                    break;
+
+                case RecorderInteraction.Command.ENVIAR_MENSAGEM_ESPECIFICA:
+                    {
+                        TextBox txt_message = (TextBox)panel.Controls[0].Controls.Find("txt_message", false)[0];
+
+                        AppendTextConsole(_recorderInteraction.SendEspecificMessage(txt_message.Text));
+                        AppendTextConsole(_recorderInteraction.GetResponse());
+                    }
                     break;
 
                 default:
