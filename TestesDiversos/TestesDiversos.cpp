@@ -17,7 +17,8 @@ int main()
     size_t found = numero_ramal.find('@');
 
     if (found != std::string::npos)
-        numero_ramal_tratado = boost::algorithm::ireplace_first_copy(numero_ramal, "@", "\\\\@");
+        //numero_ramal_tratado = boost::algorithm::ireplace_first_copy(numero_ramal, "@", "\\\\@");
+        boost::replace_all(numero_ramal_tratado, "@", "\\\\@");
 
     std::cout << numero_ramal_tratado.c_str();
 }
