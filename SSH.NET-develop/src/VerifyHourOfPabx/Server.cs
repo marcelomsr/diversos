@@ -30,6 +30,7 @@ namespace VerifyHourOfPabx
             servers.Add(new Server() { serverName = "Oita" });
             servers.Add(new Server() { serverName = "Praesto" });
             servers.Add(new Server() { serverName = "Rouen" });
+            servers.Add(new Server() { serverName = "Saga" });
             servers.Add(new Server() { serverName = "Soro" });
             servers.Add(new Server() { serverName = "Stoholm" });
             servers.Add(new Server() { serverName = "Vamdrup" });
