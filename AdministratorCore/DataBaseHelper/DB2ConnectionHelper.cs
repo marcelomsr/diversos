@@ -1,5 +1,5 @@
-﻿using System;
-using IBM.Data.DB2.Core;
+﻿using IBM.Data.DB2.Core;
+using System;
 
 namespace AdministratorCore.DataBaseHelper
 {

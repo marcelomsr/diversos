@@ -41,10 +41,10 @@
             this.lbl_sqc_gravacao.TabIndex = 14;
             this.lbl_sqc_gravacao.Text = "sqc_gravacao";
             // 
-            // txt_sqc_gravacao
+            // txt_message
             // 
             this.txt_sqc_gravacao.Location = new System.Drawing.Point(134, 3);
-            this.txt_sqc_gravacao.Name = "txt_sqc_gravacao";
+            this.txt_sqc_gravacao.Name = "txt_message";
             this.txt_sqc_gravacao.Size = new System.Drawing.Size(135, 20);
             this.txt_sqc_gravacao.TabIndex = 13;
             this.txt_sqc_gravacao.Text = "102894656";

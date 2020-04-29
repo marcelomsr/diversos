@@ -10,6 +10,7 @@ namespace ConsoleRecorderCore
     {
         public enum Command
         {
+            ENVIAR_MENSAGEM_ESPECIFICA = 0,
             INICIAR_GRAVACAO_CHAMADA = 1,
             PARAR_GRAVACAO_CHAMADA = 2,
             OBTER_CAMINHO_GRAVACAO_LIGACAO = 3,
@@ -357,6 +358,24 @@ namespace ConsoleRecorderCore
         public string GetVersion()
         {
             string[] parametros_retorno = SendCommand($"{(int)Command.OBTER_VERSAO}@$");
+
+            int retorno = Convert.ToInt32(parametros_retorno[parametros_retorno.Length - 1]);
+            
+            string retorno_servidor = "";
+
+            switch (retorno)
+            {
+                case 0:
+                    retorno_servidor = String.Format("{0}", parametros_retorno[0]);
+                    break;
+            }
+
+            return retorno_servidor;
+        }
+
+        public string SendEspecificMessage(String message)
+        {
+            string[] parametros_retorno = SendCommand($"{message}");
 
             int retorno = Convert.ToInt32(parametros_retorno[parametros_retorno.Length - 1]);
 
