@@ -1,0 +1,553 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0E416380-8BFB-4759-B651-8A5424417665}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SorteioTimesPokemon</RootNamespace>
+    <AssemblyName>SorteioTimesPokemon</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>PokeBall-icon-64x64.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ComponentFactory.Krypton.Toolkit, Version=4.4.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Principal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Principal.Designer.cs">
+      <DependentUpon>Principal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResultadoSorteio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResultadoSorteio.Designer.cs">
+      <DependentUpon>ResultadoSorteio.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Principal.resx">
+      <DependentUpon>Principal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="ResultadoSorteio.resx">
+      <DependentUpon>ResultadoSorteio.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Opening.mp3" />
+    <Content Include="PokeBall-icon-64x64.ico" />
+    <Content Include="Pokemons.txt" />
+    <None Include="Resources\About-icon-16x16.png" />
+    <None Include="Resources\386.gif" />
+    <None Include="Resources\385.gif" />
+    <None Include="Resources\384.gif" />
+    <None Include="Resources\383.gif" />
+    <None Include="Resources\382.gif" />
+    <None Include="Resources\381.gif" />
+    <None Include="Resources\380.gif" />
+    <None Include="Resources\379.gif" />
+    <None Include="Resources\378.gif" />
+    <None Include="Resources\377.gif" />
+    <None Include="Resources\376.gif" />
+    <None Include="Resources\375.gif" />
+    <None Include="Resources\374.gif" />
+    <None Include="Resources\373.gif" />
+    <None Include="Resources\372.gif" />
+    <None Include="Resources\371.gif" />
+    <None Include="Resources\370.gif" />
+    <None Include="Resources\369.gif" />
+    <None Include="Resources\368.gif" />
+    <None Include="Resources\367.gif" />
+    <None Include="Resources\366.gif" />
+    <None Include="Resources\365.gif" />
+    <None Include="Resources\364.gif" />
+    <None Include="Resources\363.gif" />
+    <None Include="Resources\362.gif" />
+    <None Include="Resources\361.gif" />
+    <None Include="Resources\360.gif" />
+    <None Include="Resources\359.gif" />
+    <None Include="Resources\358.gif" />
+    <None Include="Resources\357.gif" />
+    <None Include="Resources\356.gif" />
+    <None Include="Resources\355.gif" />
+    <None Include="Resources\354.gif" />
+    <None Include="Resources\353.gif" />
+    <None Include="Resources\352.gif" />
+    <None Include="Resources\351.gif" />
+    <None Include="Resources\350.gif" />
+    <None Include="Resources\349.gif" />
+    <None Include="Resources\348.gif" />
+    <None Include="Resources\347.gif" />
+    <None Include="Resources\346.gif" />
+    <None Include="Resources\345.gif" />
+    <None Include="Resources\344.gif" />
+    <None Include="Resources\343.gif" />
+    <None Include="Resources\342.gif" />
+    <None Include="Resources\341.gif" />
+    <None Include="Resources\340.gif" />
+    <None Include="Resources\339.gif" />
+    <None Include="Resources\338.gif" />
+    <None Include="Resources\337.gif" />
+    <None Include="Resources\336.gif" />
+    <None Include="Resources\335.gif" />
+    <None Include="Resources\334.gif" />
+    <None Include="Resources\333.gif" />
+    <None Include="Resources\332.gif" />
+    <None Include="Resources\331.gif" />
+    <None Include="Resources\330.gif" />
+    <None Include="Resources\329.gif" />
+    <None Include="Resources\328.gif" />
+    <None Include="Resources\327.gif" />
+    <None Include="Resources\326.gif" />
+    <None Include="Resources\325.gif" />
+    <None Include="Resources\324.gif" />
+    <None Include="Resources\323.gif" />
+    <None Include="Resources\322.gif" />
+    <None Include="Resources\321.gif" />
+    <None Include="Resources\320.gif" />
+    <None Include="Resources\319.gif" />
+    <None Include="Resources\318.gif" />
+    <None Include="Resources\317.gif" />
+    <None Include="Resources\316.gif" />
+    <None Include="Resources\315.gif" />
+    <None Include="Resources\314.gif" />
+    <None Include="Resources\313.gif" />
+    <None Include="Resources\312.gif" />
+    <None Include="Resources\311.gif" />
+    <None Include="Resources\310.gif" />
+    <None Include="Resources\309.gif" />
+    <None Include="Resources\308.gif" />
+    <None Include="Resources\307.gif" />
+    <None Include="Resources\306.gif" />
+    <None Include="Resources\305.gif" />
+    <None Include="Resources\304.gif" />
+    <None Include="Resources\303.gif" />
+    <None Include="Resources\302.gif" />
+    <None Include="Resources\301.gif" />
+    <None Include="Resources\300.gif" />
+    <None Include="Resources\299.gif" />
+    <None Include="Resources\298.gif" />
+    <None Include="Resources\297.gif" />
+    <None Include="Resources\296.gif" />
+    <None Include="Resources\295.gif" />
+    <None Include="Resources\294.gif" />
+    <None Include="Resources\293.gif" />
+    <None Include="Resources\292.gif" />
+    <None Include="Resources\291.gif" />
+    <None Include="Resources\290.gif" />
+    <None Include="Resources\289.gif" />
+    <None Include="Resources\288.gif" />
+    <None Include="Resources\287.gif" />
+    <None Include="Resources\286.gif" />
+    <None Include="Resources\285.gif" />
+    <None Include="Resources\284.gif" />
+    <None Include="Resources\283.gif" />
+    <None Include="Resources\282.gif" />
+    <None Include="Resources\281.gif" />
+    <None Include="Resources\280.gif" />
+    <None Include="Resources\279.gif" />
+    <None Include="Resources\278.gif" />
+    <None Include="Resources\277.gif" />
+    <None Include="Resources\276.gif" />
+    <None Include="Resources\275.gif" />
+    <None Include="Resources\274.gif" />
+    <None Include="Resources\273.gif" />
+    <None Include="Resources\272.gif" />
+    <None Include="Resources\271.gif" />
+    <None Include="Resources\270.gif" />
+    <None Include="Resources\269.gif" />
+    <None Include="Resources\268.gif" />
+    <None Include="Resources\267.gif" />
+    <None Include="Resources\266.gif" />
+    <None Include="Resources\265.gif" />
+    <None Include="Resources\264.gif" />
+    <None Include="Resources\263.gif" />
+    <None Include="Resources\262.gif" />
+    <None Include="Resources\261.gif" />
+    <None Include="Resources\260.gif" />
+    <None Include="Resources\259.gif" />
+    <None Include="Resources\258.gif" />
+    <None Include="Resources\257.gif" />
+    <None Include="Resources\256.gif" />
+    <None Include="Resources\255.gif" />
+    <None Include="Resources\254.gif" />
+    <None Include="Resources\253.gif" />
+    <None Include="Resources\252.gif" />
+    <None Include="Resources\251.gif" />
+    <None Include="Resources\250.gif" />
+    <None Include="Resources\249.gif" />
+    <None Include="Resources\248.gif" />
+    <None Include="Resources\247.gif" />
+    <None Include="Resources\246.gif" />
+    <None Include="Resources\245.gif" />
+    <None Include="Resources\244.gif" />
+    <None Include="Resources\243.gif" />
+    <None Include="Resources\242.gif" />
+    <None Include="Resources\241.gif" />
+    <None Include="Resources\240.gif" />
+    <None Include="Resources\239.gif" />
+    <None Include="Resources\238.gif" />
+    <None Include="Resources\237.gif" />
+    <None Include="Resources\236.gif" />
+    <None Include="Resources\235.gif" />
+    <None Include="Resources\234.gif" />
+    <None Include="Resources\233.gif" />
+    <None Include="Resources\232.gif" />
+    <None Include="Resources\231.gif" />
+    <None Include="Resources\230.gif" />
+    <None Include="Resources\229.gif" />
+    <None Include="Resources\228.gif" />
+    <None Include="Resources\227.gif" />
+    <None Include="Resources\226.gif" />
+    <None Include="Resources\225.gif" />
+    <None Include="Resources\224.gif" />
+    <None Include="Resources\223.gif" />
+    <None Include="Resources\222.gif" />
+    <None Include="Resources\221.gif" />
+    <None Include="Resources\220.gif" />
+    <None Include="Resources\219.gif" />
+    <None Include="Resources\218.gif" />
+    <None Include="Resources\217.gif" />
+    <None Include="Resources\216.gif" />
+    <None Include="Resources\215.gif" />
+    <None Include="Resources\214.gif" />
+    <None Include="Resources\213.gif" />
+    <None Include="Resources\212.gif" />
+    <None Include="Resources\211.gif" />
+    <None Include="Resources\210.gif" />
+    <None Include="Resources\209.gif" />
+    <None Include="Resources\208.gif" />
+    <None Include="Resources\207.gif" />
+    <None Include="Resources\206.gif" />
+    <None Include="Resources\205.gif" />
+    <None Include="Resources\204.gif" />
+    <None Include="Resources\203.gif" />
+    <None Include="Resources\202.gif" />
+    <None Include="Resources\201.gif" />
+    <None Include="Resources\200.gif" />
+    <None Include="Resources\199.gif" />
+    <None Include="Resources\198.gif" />
+    <None Include="Resources\197.gif" />
+    <None Include="Resources\196.gif" />
+    <None Include="Resources\195.gif" />
+    <None Include="Resources\194.gif" />
+    <None Include="Resources\193.gif" />
+    <None Include="Resources\192.gif" />
+    <None Include="Resources\191.gif" />
+    <None Include="Resources\190.gif" />
+    <None Include="Resources\189.gif" />
+    <None Include="Resources\188.gif" />
+    <None Include="Resources\187.gif" />
+    <None Include="Resources\186.gif" />
+    <None Include="Resources\185.gif" />
+    <None Include="Resources\184.gif" />
+    <None Include="Resources\183.gif" />
+    <None Include="Resources\182.gif" />
+    <None Include="Resources\181.gif" />
+    <None Include="Resources\180.gif" />
+    <None Include="Resources\179.gif" />
+    <None Include="Resources\178.gif" />
+    <None Include="Resources\177.gif" />
+    <None Include="Resources\176.gif" />
+    <None Include="Resources\175.gif" />
+    <None Include="Resources\174.gif" />
+    <None Include="Resources\173.gif" />
+    <None Include="Resources\172.gif" />
+    <None Include="Resources\171.gif" />
+    <None Include="Resources\170.gif" />
+    <None Include="Resources\169.gif" />
+    <None Include="Resources\168.gif" />
+    <None Include="Resources\167.gif" />
+    <None Include="Resources\166.gif" />
+    <None Include="Resources\165.gif" />
+    <None Include="Resources\164.gif" />
+    <None Include="Resources\163.gif" />
+    <None Include="Resources\162.gif" />
+    <None Include="Resources\161.gif" />
+    <None Include="Resources\160.gif" />
+    <None Include="Resources\159.gif" />
+    <None Include="Resources\158.gif" />
+    <None Include="Resources\157.gif" />
+    <None Include="Resources\156.gif" />
+    <None Include="Resources\155.gif" />
+    <None Include="Resources\154.gif" />
+    <None Include="Resources\153.gif" />
+    <None Include="Resources\152.gif" />
+    <None Include="Resources\151.gif" />
+    <None Include="Resources\150.gif" />
+    <None Include="Resources\149.gif" />
+    <None Include="Resources\148.gif" />
+    <None Include="Resources\147.gif" />
+    <None Include="Resources\146.gif" />
+    <None Include="Resources\145.gif" />
+    <None Include="Resources\144.gif" />
+    <None Include="Resources\143.gif" />
+    <None Include="Resources\142.gif" />
+    <None Include="Resources\141.gif" />
+    <None Include="Resources\140.gif" />
+    <None Include="Resources\139.gif" />
+    <None Include="Resources\138.gif" />
+    <None Include="Resources\137.gif" />
+    <None Include="Resources\136.gif" />
+    <None Include="Resources\135.gif" />
+    <None Include="Resources\134.gif" />
+    <None Include="Resources\133.gif" />
+    <None Include="Resources\132.gif" />
+    <None Include="Resources\131.gif" />
+    <None Include="Resources\130.gif" />
+    <None Include="Resources\129.gif" />
+    <None Include="Resources\128.gif" />
+    <None Include="Resources\127.gif" />
+    <None Include="Resources\126.gif" />
+    <None Include="Resources\125.gif" />
+    <None Include="Resources\124.gif" />
+    <None Include="Resources\123.gif" />
+    <None Include="Resources\122.gif" />
+    <None Include="Resources\121.gif" />
+    <None Include="Resources\120.gif" />
+    <None Include="Resources\119.gif" />
+    <None Include="Resources\118.gif" />
+    <None Include="Resources\117.gif" />
+    <None Include="Resources\116.gif" />
+    <None Include="Resources\115.gif" />
+    <None Include="Resources\114.gif" />
+    <None Include="Resources\113.gif" />
+    <None Include="Resources\112.gif" />
+    <None Include="Resources\111.gif" />
+    <None Include="Resources\110.gif" />
+    <None Include="Resources\109.gif" />
+    <None Include="Resources\108.gif" />
+    <None Include="Resources\107.gif" />
+    <None Include="Resources\106.gif" />
+    <None Include="Resources\105.gif" />
+    <None Include="Resources\104.gif" />
+    <None Include="Resources\103.gif" />
+    <None Include="Resources\102.gif" />
+    <None Include="Resources\101.gif" />
+    <None Include="Resources\100.gif" />
+    <None Include="Resources\99.gif" />
+    <None Include="Resources\98.gif" />
+    <None Include="Resources\97.gif" />
+    <None Include="Resources\96.gif" />
+    <None Include="Resources\95.gif" />
+    <None Include="Resources\94.gif" />
+    <None Include="Resources\93.gif" />
+    <None Include="Resources\92.gif" />
+    <None Include="Resources\91.gif" />
+    <None Include="Resources\90.gif" />
+    <None Include="Resources\89.gif" />
+    <None Include="Resources\88.gif" />
+    <None Include="Resources\87.gif" />
+    <None Include="Resources\86.gif" />
+    <None Include="Resources\85.gif" />
+    <None Include="Resources\84.gif" />
+    <None Include="Resources\83.gif" />
+    <None Include="Resources\82.gif" />
+    <None Include="Resources\81.gif" />
+    <None Include="Resources\80.gif" />
+    <None Include="Resources\79.gif" />
+    <None Include="Resources\78.gif" />
+    <None Include="Resources\77.gif" />
+    <None Include="Resources\76.gif" />
+    <None Include="Resources\75.gif" />
+    <None Include="Resources\74.gif" />
+    <None Include="Resources\73.gif" />
+    <None Include="Resources\72.gif" />
+    <None Include="Resources\71.gif" />
+    <None Include="Resources\70.gif" />
+    <None Include="Resources\69.gif" />
+    <None Include="Resources\68.gif" />
+    <None Include="Resources\67.gif" />
+    <None Include="Resources\66.gif" />
+    <None Include="Resources\65.gif" />
+    <None Include="Resources\64.gif" />
+    <None Include="Resources\63.gif" />
+    <None Include="Resources\62.gif" />
+    <None Include="Resources\61.gif" />
+    <None Include="Resources\60.gif" />
+    <None Include="Resources\59.gif" />
+    <None Include="Resources\58.gif" />
+    <None Include="Resources\57.gif" />
+    <None Include="Resources\56.gif" />
+    <None Include="Resources\55.gif" />
+    <None Include="Resources\54.gif" />
+    <None Include="Resources\53.gif" />
+    <None Include="Resources\52.gif" />
+    <None Include="Resources\51.gif" />
+    <None Include="Resources\50.gif" />
+    <None Include="Resources\49.gif" />
+    <None Include="Resources\48.gif" />
+    <None Include="Resources\47.gif" />
+    <None Include="Resources\46.gif" />
+    <None Include="Resources\45.gif" />
+    <None Include="Resources\44.gif" />
+    <None Include="Resources\43.gif" />
+    <None Include="Resources\42.gif" />
+    <None Include="Resources\41.gif" />
+    <None Include="Resources\40.gif" />
+    <None Include="Resources\39.gif" />
+    <None Include="Resources\38.gif" />
+    <None Include="Resources\37.gif" />
+    <None Include="Resources\36.gif" />
+    <None Include="Resources\35.gif" />
+    <None Include="Resources\34.gif" />
+    <None Include="Resources\33.gif" />
+    <None Include="Resources\32.gif" />
+    <None Include="Resources\31.gif" />
+    <None Include="Resources\30.gif" />
+    <None Include="Resources\29.gif" />
+    <None Include="Resources\28.gif" />
+    <None Include="Resources\27.gif" />
+    <None Include="Resources\26.gif" />
+    <None Include="Resources\25.gif" />
+    <None Include="Resources\24.gif" />
+    <None Include="Resources\23.gif" />
+    <None Include="Resources\22.gif" />
+    <None Include="Resources\21.gif" />
+    <None Include="Resources\20.gif" />
+    <None Include="Resources\19.gif" />
+    <None Include="Resources\18.gif" />
+    <None Include="Resources\17.gif" />
+    <None Include="Resources\16.gif" />
+    <None Include="Resources\15.gif" />
+    <None Include="Resources\14.gif" />
+    <None Include="Resources\13.gif" />
+    <None Include="Resources\12.gif" />
+    <None Include="Resources\11.gif" />
+    <None Include="Resources\10.gif" />
+    <None Include="Resources\9.gif" />
+    <None Include="Resources\8.gif" />
+    <None Include="Resources\7.gif" />
+    <None Include="Resources\6.gif" />
+    <None Include="Resources\5.gif" />
+    <None Include="Resources\4.gif" />
+    <None Include="Resources\3.gif" />
+    <None Include="Resources\2.gif" />
+    <None Include="Resources\1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\System.Pokemon\System.Pokemon.csproj">
+      <Project>{412DE99E-04C7-41C5-A1DA-9DB7087E7140}</Project>
+      <Name>System.Pokemon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if exist "$(TargetDir)Pokemons.txt" del "$(TargetDir)Pokemons.txt"
+if not exist "$(TargetDir)Pokemons.txt" copy "$(ProjectDir)Pokemons.txt" "$(TargetDir)"
+if exist "$(TargetDir)Opening.mp3" del "$(TargetDir)Opening.mp3"
+if not exist "$(TargetDir)Opening.mp3" copy "$(ProjectDir)Opening.mp3" "$(TargetDir)"
+</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
