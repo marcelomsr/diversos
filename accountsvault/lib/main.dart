@@ -5,12 +5,12 @@ import 'package:accountsvault/models/Account.dart';
 import 'package:accountsvault/screens/account/List.dart';
 import 'package:flutter/material.dart';
 
-// Criar o consumo da moto
-// Criar os valores dos rendimentos mensais
+// Criar o consumo da moto.
+// Criar os valores dos rendimentos mensais com gráficos.
 // Criar cotaçáo das ações.
-// Criar notificações
-// Criar JI e exibir as notificações
-// Alterar o nome do aplicativo (OneForAll?)
+// Criar notificações.
+// Criar JI e exibir as notificações.
+// Alterar o nome do aplicativo. (OneForAll?)
 
 void main() {
   runApp(AccountsVaultApp());
@@ -25,9 +25,12 @@ void main() {
 
 void _insertDefaultContent() {
   AccountDao().save(Account(
-      null, 'Deezer Aleatório', '', 'marcelosr6@gmail.com', 'dEEzer10155', ''));
-  AccountDao().save(
-      Account(null, 'AES Eletropaulo', '', '34124292600', '112739881', ''));
+      null,
+      'Enel',
+      '',
+      'marcelosr6@gmail.com',
+      'Google Login',
+      'Telefone: (11) 5511-5823\nE-mail: roneie@msn.com\nCPF: 34124292600\nInstalação: 0112739881'));
   AccountDao().save(Account(null, 'Ali Express', '', 'marcelomsr@hotmail.com',
       'Ali10155996Express', ''));
   AccountDao().save(Account(
@@ -46,7 +49,7 @@ void _insertDefaultContent() {
   AccountDao()
       .save(Account(null, 'B3', '', '35656558878', '101CeI55996\$', ''));
   AccountDao().save(Account(null, 'Banco Inter', '', '0001/4245137-0',
-      '101265iNter', 'Assinatura 15426587'));
+      '101265iN', 'Assinatura 15426587'));
   AccountDao().save(Account(null, 'Bra', '', '', '', 'Débito: 101559'));
   AccountDao().save(Account(null, 'Banggood', '', 'marcelomsr@hotmail.com',
       'Facebook', 'Senha: faa9e934'));
@@ -57,8 +60,9 @@ void _insertDefaultContent() {
   AccountDao().save(Account(
       null, 'Cabify', '', 'marcelomsr@hotmail.com', '10155996Cabi', ''));
   AccountDao().save(Account(null, 'Caixa', '', 'marcelomsr27', 'Cx53yK',
-      'AssinaturaEletrônica: 271718 \nDébito: 2651 \nSílabas: Hu De Vi \nSenha RTSP 10155RTsp'));
-  AccountDao().save(Account(null, 'Câmera wi-fi', '', '', '', ''));
+      'AssinaturaEletrônica: 271718 \nDébito: 2651 \nSílabas: Hu De Vi \nInternacional: 7536'));
+  AccountDao()
+      .save(Account(null, 'Câmera wi-fi', '', '', '', 'Senha RTSP 10155RTsp'));
   AccountDao().save(Account(null, 'Carteira de trabalho digital', '',
       '35656558878', '10155996cTpS', ''));
   AccountDao().save(Account(null, 'Casa das torneiras', '',
@@ -66,8 +70,6 @@ void _insertDefaultContent() {
   AccountDao().save(Account(null, 'CEI', '', '', 'IlneaR160*', ''));
   AccountDao().save(
       Account(null, 'Centauro', '', 'marcelomsr@hotmail.com', '10155996', ''));
-  AccountDao().save(Account(null, 'Central Uninove', 'www3.uninove.br/se/aluno',
-      'User 1716200954', '144054', ''));
   AccountDao().save(
       Account(null, 'Cinemark', 'App', 'marcelomsr@hotmail.com', '0k5tj6', ''));
   AccountDao().save(Account(null, 'CNH Digital', '', 'marcelomsr@hotmail.com',
@@ -119,7 +121,6 @@ void _insertDefaultContent() {
       'Agência 0001 CC 143644-3 Banco 278 - Genial Investimentos'));
   AccountDao()
       .save(Account(null, 'GitHub', '', 'marcelomsr', '10155996Git', ''));
-  AccountDao().save(Account(null, 'GK', '', 'marcelo.msr', '10155996Gk', ''));
   AccountDao()
       .save(Account(null, 'Gol', '', 'marcelomsr@hotmail.com', '10155996', ''));
   AccountDao().save(Account(
@@ -167,8 +168,8 @@ void _insertDefaultContent() {
       'marcelomsr@hotmail.com', '10155996Surpreenda', ''));
   AccountDao().save(Account(null, 'Masterpass', '', 'marcelomsr@hotmail.com',
       '10155996MasterPass', ''));
-  AccountDao().save(
-      Account(null, 'Meliuz', '', 'marcelosr6@gmail.com', '10155Meluiz', ''));
+  AccountDao().save(Account(null, 'Meliuz', '', 'marcelosr6@gmail.com',
+      '10155Meluiz', 'Aplicativo 265732 cartão 3457'));
   AccountDao().save(Account(null, 'Mercado Bitcoin', '', '35656558878',
       '101mErcadoBitCoin', 'PIN 7319'));
   AccountDao().save(Account(
@@ -194,6 +195,7 @@ void _insertDefaultContent() {
       Account(null, 'Nota Fiscal Paulista', '', '35656558878', '10155996', ''));
   AccountDao().save(Account(null, 'Nubank', 'www.nubank.com.br', '35656558878',
       'Cruzeiroquerido10155996kxy', ''));
+  AccountDao().save(Account(null, 'Nuuvem', '', 'Login do google', '', ''));
   AccountDao().save(
       Account(null, 'OLX', '', 'marcelomsr@hotmail.com', '10155996Olx', ''));
   AccountDao().save(Account(null, 'Órama', '', 'marcelomsr@hotmail.com',
@@ -265,8 +267,6 @@ void _insertDefaultContent() {
   AccountDao().save(Account(null, 'Steam', '', 'marcelomsr', '10155996', ''));
   AccountDao().save(Account(
       null, 'Submarino', '', 'marcelomsr@hotmail.com', '10155996Subway', ''));
-  AccountDao().save(Account(
-      null, 'Swarm', '', 'marcelomsr@hotmail.com', 'Swarm10155996', ''));
   AccountDao().save(Account(null, 'Terra Investimentos', '', '35656558878',
       '101tERraInV55\$', 'assinatura eletrônica: tE26\$54@'));
   AccountDao()
@@ -280,11 +280,23 @@ void _insertDefaultContent() {
       Account(null, 'Uber', '', 'marcelomsr@hotmail.com', '10155996Uber', ''));
   AccountDao().save(Account(null, 'Uber Motorista', '',
       'marcelomsr@hotmail.com', '10155996Uber', ''));
-  AccountDao().save(Account(null, 'Vivo Ease', '', '', '101xyz', ''));
+  AccountDao().save(Account(null, 'Vivo Easy', '', '', '101xyz', ''));
   AccountDao().save(Account(null, 'Xiaomi Account', '', 'marcelosr6@gmail.com',
       '10155996iMi', 'ID: 1853325070'));
   AccountDao().save(Account(
       null, 'WebMotors', '', 'marcelomsr@hotmail.com', '10155996WM', ''));
+  AccountDao()
+      .save(Account(null, 'c-sharcorner', '', 'login facebook', '', ''));
+  AccountDao().save(Account(null, 'tremdepassageiros.vale.com', '',
+      'marcelomsr@hotmail.com', '10133Vale', ''));
+  AccountDao().save(
+      Account(null, 'Apple', '', 'marcelosr6@gmail.com', '10155996Apple', ''));
+  AccountDao().save(Account(null, 'www.amazon.com.br', '',
+      'marcelomsr@hotmail.com', '9sgamazon.comopl851rtv', ''));
+  AccountDao()
+      .save(Account(null, 'Mercado Pago Meu', '', 'Login Google', '', ''));
+  AccountDao().save(Account(null, 'Mercado Pago Juliana', '',
+      'juuhdealmeida@gmail.com', 'juuh10155996', ''));
 }
 
 class AccountsVaultApp extends StatelessWidget {
