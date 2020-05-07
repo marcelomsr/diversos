@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 // Criar notificações.
 // Criar JI e exibir as notificações.
 // Alterar o nome do aplicativo. (OneForAll?)
+// Simulador e registrador de empréstimos.
 
 void main() {
   runApp(AccountsVaultApp());
