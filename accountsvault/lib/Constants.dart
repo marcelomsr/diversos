@@ -29,7 +29,7 @@ class Constants {
   static const search = 'Search..';
   static const drawerHeader = 'Drawer Header';
   static const titleAppBarPrice = 'Price';
-  static const rateSelic = 3;
+  static const rateSelic = 3.0;
 
   static Color colorApp = Colors.blue.shade500;
   static BorderRadius borderRadius = BorderRadius.circular(20.0);
