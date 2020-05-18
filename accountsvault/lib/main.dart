@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 // Criar JI e exibir as notificações.
 // Alterar o nome do aplicativo. (OneForAll?)
 // Simulador e registrador de empréstimos.
+// Simulador na taxa selic para simulação de investimentos em renda fixa
 
 void main() {
   runApp(AccountsVaultApp());
