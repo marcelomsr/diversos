@@ -21,7 +21,7 @@ class Constants {
   static const tipFieldPasswordCreateAccount = 'Password';
   static const tipFieldDescriptionCreateAccount = 'Description';
   static const textSaveButton = 'Save';
-  static const titleAppBarSelic = 'Rate Selic';
+  static const titleAppBarSelic = 'Rate Selic/CDI';
   static const formatDate = 'dd/MM/yyyy';
   static const percentage = '%';
   static const about = 'About';
