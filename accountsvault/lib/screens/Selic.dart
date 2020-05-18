@@ -95,14 +95,16 @@ class SelicViewState extends State<SelicView> {
           DataCell(
             myRowDataIcon(
               Icons.arrow_forward,
-              _interest._rateSelic.toString() + Constants.percentage + " a.a.",
+              _interest._rateSelic.toString() +
+                  Constants.percentage +
+                  Constants.textPerYear,
             ),
           ),
           DataCell(
             Text(
               _interest._jurosBruto.toStringAsPrecision(4) +
                   Constants.percentage +
-                  " a.m.",
+                  Constants.textPerMonth,
               style: TextStyle(
                 color: Colors.white,
               ),
@@ -114,7 +116,8 @@ class SelicViewState extends State<SelicView> {
             myRowDataIcon(
               Icons.arrow_forward,
               _interest._jurosAte6Meses.toStringAsPrecision(4) +
-                  Constants.percentage,
+                  Constants.percentage +
+                  Constants.textPerMonth,
             ),
           ),
           DataCell(
@@ -133,7 +136,8 @@ class SelicViewState extends State<SelicView> {
             myRowDataIcon(
               Icons.arrow_forward,
               _interest._juros6Meses1Ano.toStringAsPrecision(4) +
-                  Constants.percentage,
+                  Constants.percentage +
+                  Constants.textPerMonth,
             ),
           ),
           DataCell(
@@ -152,7 +156,8 @@ class SelicViewState extends State<SelicView> {
             myRowDataIcon(
               Icons.arrow_forward,
               _interest._juros1Ano1Ano6Meses.toStringAsPrecision(4) +
-                  Constants.percentage,
+                  Constants.percentage +
+                  Constants.textPerMonth,
             ),
           ),
           DataCell(
@@ -171,7 +176,8 @@ class SelicViewState extends State<SelicView> {
             myRowDataIcon(
               Icons.arrow_forward,
               _interest._juros1Ano6Meses2Anos.toStringAsPrecision(4) +
-                  Constants.percentage,
+                  Constants.percentage +
+                  Constants.textPerMonth,
             ),
           ),
           DataCell(

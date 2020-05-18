@@ -33,6 +33,8 @@ class Constants {
   static const rateCDI = 100.0;
   static const labelSelic = "SELIC %";
   static const labelCDI = "CDI %";
+  static const textPerYear = " a.a.";
+  static const textPerMonth = " a.m.";
 
   static Color colorApp = Colors.blue.shade500;
   static BorderRadius borderRadius = BorderRadius.circular(20.0);
