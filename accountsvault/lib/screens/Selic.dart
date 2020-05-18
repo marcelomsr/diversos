@@ -11,8 +11,13 @@ class SelicView extends StatefulWidget {
 }
 
 class SelicViewState extends State<SelicView> {
-  TextEditingController _controllerSelecValue;
-  CalculaJurosSelic _selic = CalculaJurosSelic(Constants.rateSelic);
+  TextEditingController _controllerSelicValue;
+  TextEditingController _controllerCDIValue;
+
+  CalculaJuros _interest = CalculaJuros(
+    Constants.rateSelic,
+    Constants.rateCDI,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -37,14 +42,32 @@ class SelicViewState extends State<SelicView> {
             child: Column(
               children: <Widget>[
                 TextEditor(
-                  controller: _controllerSelecValue = TextEditingController(
-                    text: _selic._taxaSelic.toString(),
+                  label: Constants.labelSelic,
+                  controller: _controllerSelicValue = TextEditingController(
+                    text: _interest._rateSelic.toString(),
                   ),
                   inputType: TextInputType.number,
                   textAlign: TextAlign.center,
                   functionCompleteEditing: () {
-                    _selic = CalculaJurosSelic(
-                        double.tryParse(_controllerSelecValue.text));
+                    _interest = CalculaJuros(
+                      double.tryParse(_controllerSelicValue.text),
+                      double.tryParse(_controllerCDIValue.text),
+                    );
+                    setState(() {});
+                  },
+                ),
+                TextEditor(
+                  label: Constants.labelCDI,
+                  controller: _controllerCDIValue = TextEditingController(
+                    text: _interest._rateCDI.toString(),
+                  ),
+                  inputType: TextInputType.number,
+                  textAlign: TextAlign.center,
+                  functionCompleteEditing: () {
+                    _interest = CalculaJuros(
+                      double.tryParse(_controllerSelicValue.text),
+                      double.tryParse(_controllerCDIValue.text),
+                    );
                     setState(() {});
                   },
                 ),
@@ -72,12 +95,14 @@ class SelicViewState extends State<SelicView> {
           DataCell(
             myRowDataIcon(
               Icons.arrow_forward,
-              _selic._taxaSelic.toString() + Constants.percentage,
+              _interest._rateSelic.toString() + Constants.percentage + " a.a.",
             ),
           ),
           DataCell(
             Text(
-              _selic._jurosBruto.toStringAsPrecision(4) + Constants.percentage,
+              _interest._jurosBruto.toStringAsPrecision(4) +
+                  Constants.percentage +
+                  " a.m.",
               style: TextStyle(
                 color: Colors.white,
               ),
@@ -88,7 +113,7 @@ class SelicViewState extends State<SelicView> {
           DataCell(
             myRowDataIcon(
               Icons.arrow_forward,
-              _selic._jurosAte6Meses.toStringAsPrecision(4) +
+              _interest._jurosAte6Meses.toStringAsPrecision(4) +
                   Constants.percentage,
             ),
           ),
@@ -107,7 +132,7 @@ class SelicViewState extends State<SelicView> {
           DataCell(
             myRowDataIcon(
               Icons.arrow_forward,
-              _selic._juros6Meses1Ano.toStringAsPrecision(4) +
+              _interest._juros6Meses1Ano.toStringAsPrecision(4) +
                   Constants.percentage,
             ),
           ),
@@ -126,7 +151,7 @@ class SelicViewState extends State<SelicView> {
           DataCell(
             myRowDataIcon(
               Icons.arrow_forward,
-              _selic._juros1Ano1Ano6Meses.toStringAsPrecision(4) +
+              _interest._juros1Ano1Ano6Meses.toStringAsPrecision(4) +
                   Constants.percentage,
             ),
           ),
@@ -145,7 +170,7 @@ class SelicViewState extends State<SelicView> {
           DataCell(
             myRowDataIcon(
               Icons.arrow_forward,
-              _selic._juros1Ano6Meses2Anos.toStringAsPrecision(4) +
+              _interest._juros1Ano6Meses2Anos.toStringAsPrecision(4) +
                   Constants.percentage,
             ),
           ),
@@ -181,17 +206,20 @@ class SelicViewState extends State<SelicView> {
   }
 }
 
-class CalculaJurosSelic {
-  double _taxaSelic;
+class CalculaJuros {
+  double _rateSelic;
+  double _rateCDI;
   double _jurosBruto;
   double _jurosAte6Meses;
   double _juros6Meses1Ano;
   double _juros1Ano1Ano6Meses;
   double _juros1Ano6Meses2Anos;
 
-  CalculaJurosSelic(double taxaSelic) {
-    _taxaSelic = taxaSelic;
-    _jurosBruto = taxaSelic / 12;
+  CalculaJuros(double rateSelic, double rateCDI) {
+    _rateSelic = rateSelic;
+    _rateCDI = rateCDI;
+    double rate = _rateSelic * _rateCDI / 100;
+    _jurosBruto = rate / 12;
     _jurosAte6Meses =
         ((_jurosBruto / 100) - (_jurosBruto / 100) * 22.5 / 100) * 100;
     _juros6Meses1Ano =

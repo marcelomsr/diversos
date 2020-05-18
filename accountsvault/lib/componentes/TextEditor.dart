@@ -54,7 +54,7 @@ class TextEditorState extends State<TextEditor> {
             borderRadius: Constants.borderRadius,
           ),
           icon: widget.icon != null ? Icon(widget.icon) : null,
-          //labelText: widget.label,
+          labelText: widget.label,
           hintText: widget.tip,
           suffixIcon: _buildSuffixIcon(),
         ),
