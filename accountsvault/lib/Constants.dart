@@ -1,5 +1,5 @@
 import 'package:accountsvault/componentes/MessageDialog.dart';
-import 'package:accountsvault/screens/Selic.dart';
+import 'package:accountsvault/screens/selic-CDI/Selic.dart';
 import 'package:accountsvault/screens/account/List.dart';
 import 'package:accountsvault/screens/investment/Price.dart';
 import 'package:flutter/material.dart';
