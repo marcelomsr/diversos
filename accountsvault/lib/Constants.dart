@@ -35,6 +35,10 @@ class Constants {
   static const labelCDI = "CDI %";
   static const textPerYear = " a.a.";
   static const textPerMonth = " a.m.";
+  static const textSimulateWithTheseParameters =
+      "Simulate with these paramenters";
+  static const titleAppBarSelicCDISimulate = "Simulate Selic/CDI";
+  static const textSimulate = "Simulate";
 
   static Color colorApp = Colors.blue.shade500;
   static BorderRadius borderRadius = BorderRadius.circular(20.0);

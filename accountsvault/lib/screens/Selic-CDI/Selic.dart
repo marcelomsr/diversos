@@ -1,5 +1,6 @@
 import 'package:accountsvault/Constants.dart';
 import 'package:accountsvault/componentes/TextEditor.dart';
+import 'package:accountsvault/screens/Selic-CDI/SelicCDISimulate.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
@@ -72,6 +73,27 @@ class SelicViewState extends State<SelicView> {
                   },
                 ),
                 _createDataTable(),
+                RaisedButton(
+                  child: Text(Constants.textSimulateWithTheseParameters),
+                  onPressed: () {
+                    _interest = CalculaJuros(
+                      double.tryParse(_controllerSelicValue.text),
+                      double.tryParse(_controllerCDIValue.text),
+                    );
+
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) {
+                        return SelicCDISimulate(
+                          _interest._jurosBruto,
+                          _interest._jurosAte6Meses,
+                          _interest._juros6Meses1Ano,
+                          _interest._juros1Ano1Ano6Meses,
+                          _interest._juros1Ano6Meses2Anos,
+                        );
+                      }),
+                    );
+                  },
+                ),
               ],
             ),
           ),
@@ -185,22 +207,6 @@ class SelicViewState extends State<SelicView> {
               DateFormat(Constants.formatDate).format(
                 DateTime.now().add(Duration(days: -721)),
               ),
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ]),
-        DataRow(cells: <DataCell>[
-          DataCell(
-            myRowDataIcon(
-              null,
-              '',
-            ),
-          ),
-          DataCell(
-            Text(
-              '',
               style: TextStyle(
                 color: Colors.white,
               ),
