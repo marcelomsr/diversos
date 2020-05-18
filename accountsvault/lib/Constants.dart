@@ -30,6 +30,7 @@ class Constants {
   static const drawerHeader = 'Drawer Header';
   static const titleAppBarPrice = 'Price';
   static const rateSelic = 3.0;
+  static const rateCDI = 100.0;
   static const labelSelic = "SELIC %";
   static const labelCDI = "CDI %";
 
