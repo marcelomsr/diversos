@@ -5,14 +5,14 @@ import 'package:accountsvault/screens/account/Form.dart';
 import 'package:accountsvault/Constants.dart';
 import 'package:flutter/material.dart';
 
-class ListAccounts extends StatefulWidget {
+class AccountList extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return ListAccountsState();
+    return AccountListState();
   }
 }
 
-class ListAccountsState extends State<ListAccounts> {
+class AccountListState extends State<AccountList> {
   final AccountDao _dao = AccountDao();
 
   final TextEditingController _filter = new TextEditingController();
