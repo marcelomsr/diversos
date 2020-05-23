@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 // Registro de peso
 
 void main() {
-  runApp(AccountsVaultApp());
+  runApp(One4AllApp());
 
   AccountDao().findAll().then((accounts) {
     //print(accounts.length);
@@ -302,7 +302,7 @@ void _insertDefaultContent() {
       'juuhdealmeida@gmail.com', 'juuh10155996', ''));
 }
 
-class AccountsVaultApp extends StatelessWidget {
+class One4AllApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
