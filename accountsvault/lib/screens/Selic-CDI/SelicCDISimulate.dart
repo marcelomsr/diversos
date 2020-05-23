@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:accountsvault/componentes/MessageDialog.dart';
-import 'package:accountsvault/Constants.dart';
-import 'package:accountsvault/componentes/TextEditor.dart';
+import 'package:One4All/componentes/MessageDialog.dart';
+import 'package:One4All/Constants.dart';
+import 'package:One4All/componentes/TextEditor.dart';
 import 'package:flutter/material.dart';
 
 class SelicCDISimulate extends StatefulWidget {

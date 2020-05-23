@@ -1,4 +1,4 @@
-import 'package:accountsvault/database/dao/Account.dart';
+import 'package:One4All/database/dao/Account.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 

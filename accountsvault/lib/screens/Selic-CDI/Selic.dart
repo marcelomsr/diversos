@@ -1,6 +1,6 @@
-import 'package:accountsvault/Constants.dart';
-import 'package:accountsvault/componentes/TextEditor.dart';
-import 'package:accountsvault/screens/Selic-CDI/SelicCDISimulate.dart';
+import 'package:One4All/Constants.dart';
+import 'package:One4All/componentes/TextEditor.dart';
+import 'package:One4All/screens/Selic-CDI/SelicCDISimulate.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 

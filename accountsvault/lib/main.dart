@@ -1,8 +1,8 @@
 import 'dart:ui';
-import 'package:accountsvault/Constants.dart';
-import 'package:accountsvault/database/dao/Account.dart';
-import 'package:accountsvault/models/Account.dart';
-import 'package:accountsvault/screens/account/AccountList.dart';
+import 'package:One4All/Constants.dart';
+import 'package:One4All/database/dao/Account.dart';
+import 'package:One4All/models/Account.dart';
+import 'package:One4All/screens/account/AccountList.dart';
 import 'package:flutter/material.dart';
 
 // Criar o consumo da moto.
@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 // Criar cotaçáo das ações.
 // Criar notificações.
 // Criar JI e exibir as notificações.
-// Alterar o nome do aplicativo. (OneForAll?)
+// Alterar o nome do aplicativo. One4All
 // Simulador e registrador de empréstimos.
 // Seleção de idiomas
 // Registro de peso

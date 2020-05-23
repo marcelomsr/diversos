@@ -1,6 +1,6 @@
-import 'package:accountsvault/Constants.dart';
-import 'package:accountsvault/models/Account.dart';
-import 'package:accountsvault/screens/account/Form.dart';
+import 'package:One4All/Constants.dart';
+import 'package:One4All/models/Account.dart';
+import 'package:One4All/screens/account/Form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

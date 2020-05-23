@@ -1,4 +1,4 @@
-import 'package:accountsvault/Constants.dart';
+import 'package:One4All/Constants.dart';
 import 'package:flutter/material.dart';
 
 class ListPrices extends StatefulWidget {

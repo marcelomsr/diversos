@@ -1,8 +1,8 @@
-import 'package:accountsvault/database/dao/Account.dart';
-import 'package:accountsvault/models/Account.dart';
-import 'package:accountsvault/screens/account/AccountItem.dart';
-import 'package:accountsvault/screens/account/Form.dart';
-import 'package:accountsvault/Constants.dart';
+import 'package:One4All/database/dao/Account.dart';
+import 'package:One4All/models/Account.dart';
+import 'package:One4All/screens/account/AccountItem.dart';
+import 'package:One4All/screens/account/Form.dart';
+import 'package:One4All/Constants.dart';
 import 'package:flutter/material.dart';
 
 class AccountList extends StatefulWidget {
