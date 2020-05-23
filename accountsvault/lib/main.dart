@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:accountsvault/Constants.dart';
 import 'package:accountsvault/database/dao/Account.dart';
 import 'package:accountsvault/models/Account.dart';
-import 'package:accountsvault/screens/account/List.dart';
+import 'package:accountsvault/screens/account/AccountList.dart';
 import 'package:flutter/material.dart';
 
 // Criar o consumo da moto.
@@ -12,7 +12,8 @@ import 'package:flutter/material.dart';
 // Criar JI e exibir as notificações.
 // Alterar o nome do aplicativo. (OneForAll?)
 // Simulador e registrador de empréstimos.
-// Simulador na taxa selic para simulação de investimentos em renda fixa
+// Seleção de idiomas
+// Registro de peso
 
 void main() {
   runApp(AccountsVaultApp());
@@ -314,7 +315,7 @@ class AccountsVaultApp extends StatelessWidget {
           textTheme: ButtonTextTheme.primary,
         ),
       ),
-      home: ListAccounts(),
+      home: AccountList(),
     );
   }
 }

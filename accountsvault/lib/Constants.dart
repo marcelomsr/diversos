@@ -1,11 +1,11 @@
 import 'package:accountsvault/componentes/MessageDialog.dart';
 import 'package:accountsvault/screens/selic-CDI/Selic.dart';
-import 'package:accountsvault/screens/account/List.dart';
+import 'package:accountsvault/screens/account/AccountList.dart';
 import 'package:accountsvault/screens/investment/Price.dart';
 import 'package:flutter/material.dart';
 
 class Constants {
-  static const version = 'Version 1.0.1';
+  static const version = 'Version 1.1.0';
 
   static const titleAppBarAccounts = 'Accounts';
   static const textNoNameAccounts = 'Ah';
@@ -58,7 +58,7 @@ class Constants {
           ListTile(
             title: Text(Constants.titleAppBarAccounts),
             onTap: () {
-              _goTo(context, ListAccounts());
+              _goTo(context, AccountList());
             },
           ),
           ListTile(
