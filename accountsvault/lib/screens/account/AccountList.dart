@@ -62,6 +62,7 @@ class AccountListState extends State<AccountList> {
                 itemBuilder: (context, index) {
                   final Account account = accounts[index];
                   return Dismissible(
+                    direction: DismissDirection.endToStart,
                     key: Key(account.id.toString()),
                     onDismissed: (direction) {
                       setState(() {
@@ -89,7 +90,17 @@ class AccountListState extends State<AccountList> {
                         ),
                       );
                     },
-                    background: Container(color: Colors.grey.shade800),
+                    background: Container(
+                      alignment: AlignmentDirectional.centerEnd,
+                      color: Colors.red.shade400,
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                     child: AccountItem(account),
                   );
                 },
