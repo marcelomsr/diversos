@@ -1,4 +1,4 @@
-import 'package:One4All/componentes/MessageDialog.dart';
+import 'package:One4All/components/MessageDialog.dart';
 import 'package:One4All/screens/selic-CDI/Selic.dart';
 import 'package:One4All/screens/account/AccountList.dart';
 import 'package:One4All/screens/investment/Price.dart';

@@ -1,5 +1,5 @@
 import 'package:One4All/Constants.dart';
-import 'package:One4All/componentes/TextEditor.dart';
+import 'package:One4All/components/TextEditor.dart';
 import 'package:One4All/screens/Selic-CDI/SelicCDISimulate.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';

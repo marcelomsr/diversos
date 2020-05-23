@@ -1,5 +1,5 @@
 import 'package:One4All/Constants.dart';
-import 'package:One4All/componentes/TextEditor.dart';
+import 'package:One4All/components/TextEditor.dart';
 import 'package:One4All/database/dao/Account.dart';
 import 'package:One4All/models/Account.dart';
 import 'package:flutter/material.dart';
