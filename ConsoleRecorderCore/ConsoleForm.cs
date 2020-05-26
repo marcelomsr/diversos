@@ -112,6 +112,9 @@ namespace ConsoleRecorderCore
 
         private void lst_gravadores_SelectedValueChanged(object sender, EventArgs e)
         {
+            if (lst_gravadores.SelectedItem == null)
+                return;
+
             var recorder = (Recorder)lst_gravadores.SelectedItem;
 
             _recorderInteraction = new RecorderInteraction(recorder);
