@@ -111,9 +111,10 @@
             this.lst_gravadores.Location = new System.Drawing.Point(14, 14);
             this.lst_gravadores.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.lst_gravadores.Name = "lst_gravadores";
-            this.lst_gravadores.Size = new System.Drawing.Size(275, 499);
+            this.lst_gravadores.Size = new System.Drawing.Size(160, 499);
             this.lst_gravadores.TabIndex = 13;
             this.lst_gravadores.SelectedValueChanged += new System.EventHandler(this.lst_gravadores_SelectedValueChanged);
+            this.lst_gravadores.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             // 
             // btn_stress
             // 
@@ -129,6 +130,7 @@
             // 
             // btn_analisar_gravacoes
             // 
+            this.btn_analisar_gravacoes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_analisar_gravacoes.Location = new System.Drawing.Point(427, 491);
             this.btn_analisar_gravacoes.Name = "btn_analisar_gravacoes";
             this.btn_analisar_gravacoes.Size = new System.Drawing.Size(75, 23);
@@ -142,6 +144,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1116, 527);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Controls.Add(this.btn_analisar_gravacoes);
             this.Controls.Add(this.btn_stress);
             this.Controls.Add(this.lst_gravadores);
