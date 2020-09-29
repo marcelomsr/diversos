@@ -1,70 +1,89 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UseWindowsForms>true</UseWindowsForms>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<UseWindowsForms>true</UseWindowsForms>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Moq" Version="4.12.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Moq" Version="4.12.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="NAudio">
-      <HintPath>..\Lib\NAudio.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+	<ItemGroup>
+		<Reference Include="NAudio">
+			<HintPath>..\Lib\NAudio.dll</HintPath>
+		</Reference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="ConsoleForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="ConsoleForm.Designer.cs">
-      <DependentUpon>ConsoleForm.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Telas\UserControlGravar.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Telas\UserControlGravar.Designer.cs">
-      <DependentUpon>UserControlGravar.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Telas\UserControlEnviarMensagemEspecifica.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Telas\UserControlObterGravacao - Copy.Designer.cs">
-      <DependentUpon>UserControlObterGravacao.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Telas\UserControlObterGravacao.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Telas\UserControlObterGravacao.Designer.cs">
-      <DependentUpon>UserControlObterGravacao.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Telas\UserControlPararGravar.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Telas\UserControlPararGravar.Designer.cs">
-      <DependentUpon>UserControlPararGravar.cs</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Update="ConsoleForm.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="ConsoleForm.Designer.cs">
+			<DependentUpon>ConsoleForm.cs</DependentUpon>
+		</Compile>
 
-  <ItemGroup>
-    <EmbeddedResource Update="ConsoleForm.resx">
-      <DependentUpon>ConsoleForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Telas\UserControlGravar.resx">
-      <DependentUpon>UserControlGravar.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Telas\UserControlObterGravacao - Copy.resx">
-      <DependentUpon>UserControlObterGravacao.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Telas\UserControlObterGravacao.resx">
-      <DependentUpon>UserControlObterGravacao.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Telas\UserControlPararGravar.resx">
-      <DependentUpon>UserControlPararGravar.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
+		<Compile Update="Telas\UserControlEnviarMensagemEspecifica.cs">
+			<SubType>UserControl</SubType>
+		</Compile>
+		<Compile Update="Telas\UserControlEnviarMensagemEspecifica.Designer.cs">
+			<DependentUpon>UserControlEnviarMensagemEspecifica.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Telas\UserControlGravar.cs">
+			<SubType>UserControl</SubType>
+		</Compile>
+		<Compile Update="Telas\UserControlGravar.Designer.cs">
+			<DependentUpon>UserControlGravar.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Telas\UserControlObterCaminhoGravacao.cs">
+			<SubType>UserControl</SubType>
+		</Compile>
+		<Compile Update="Telas\UserControlObterCaminhoGravacao.Designer.cs">
+			<DependentUpon>UserControlObterCaminhoGravacao.cs</DependentUpon>
+		</Compile>		
+		<Compile Update="Telas\UserControlObterCaminhoGravacaoLigacao.cs">
+			<SubType>UserControl</SubType>
+		</Compile>
+		<Compile Update="Telas\UserControlObterCaminhoGravacaoLigacao.Designer.cs">
+			<DependentUpon>UserControlObterCaminhoGravacaoLigacao.cs</DependentUpon>
+		</Compile>		
+		<Compile Update="Telas\UserControlObterGravacao.Designer.cs">
+			<DependentUpon>UserControlObterGravacao.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Telas\UserControlObterGravacao.cs">
+			<SubType>UserControl</SubType>
+		</Compile>
+		<Compile Update="Telas\UserControlPararGravar.cs">
+			<SubType>UserControl</SubType>
+		</Compile>
+		<Compile Update="Telas\UserControlPararGravar.Designer.cs">
+			<DependentUpon>UserControlPararGravar.cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="ConsoleForm.resx">
+			<DependentUpon>ConsoleForm.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Telas\UserControlEnviarMensagemEspecifica.resx">
+			<DependentUpon>UserControlEnviarMensagemEspecifica.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Telas\UserControlGravar.resx">
+			<DependentUpon>UserControlGravar.cs</DependentUpon>
+		</EmbeddedResource>		
+		<EmbeddedResource Update="Telas\UserControlObterCaminhoGravacao.resx">
+			<DependentUpon>UserControlObterCaminhoGravacao.cs</DependentUpon>
+		</EmbeddedResource>		
+		<EmbeddedResource Update="Telas\UserControlObterCaminhoGravacaoLigacao.resx">
+			<DependentUpon>UserControlObterCaminhoGravacaoLigacao.cs</DependentUpon>
+		</EmbeddedResource>		
+		<EmbeddedResource Update="Telas\UserControlObterGravacao.resx">
+			<DependentUpon>UserControlObterGravacao.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Telas\UserControlPararGravar.resx">
+			<DependentUpon>UserControlPararGravar.cs</DependentUpon>
+		</EmbeddedResource>
+	</ItemGroup>
 
 </Project>

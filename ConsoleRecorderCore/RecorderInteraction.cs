@@ -196,6 +196,28 @@ namespace ConsoleRecorderCore
 			return gravacao;
 		}
 
+		public string GetPathRecordingByClient(int sqc_gravacao, string tpo_origem)
+		{
+			string[] parametros_retorno = SendCommand($"{(int)Command.OBTER_CAMINHO_GRAVACAO_LIGACAO}@{sqc_gravacao}&{tpo_origem}$");
+
+			int retorno = Convert.ToInt32(parametros_retorno[parametros_retorno.Length - 1]);
+
+			string gravacao = "";
+
+			switch (retorno)
+			{
+				case 0:
+					gravacao = parametros_retorno[0];
+					break;
+
+				case 1:
+					gravacao = "Não foi possível obter a gravação.";
+					break;
+			}
+
+			return gravacao;
+		}
+
 		public string GetRecording(int sqc_gravacao)
 		{
 			string[] parametros_retorno = SendCommand($"{(int)Command.OBTER_GRAVACAO}@{sqc_gravacao}$");

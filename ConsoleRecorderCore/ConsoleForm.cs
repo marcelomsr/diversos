@@ -28,6 +28,8 @@ namespace ConsoleRecorderCore
 		private void LoadListRecorders()
 		{
 			lst_gravadores.Items.Add(new Recorder("localhost:8889", "localhost", 8889));
+			lst_gravadores.Items.Add(new Recorder("Kobe1", "10.0.72.194", 8894));
+			lst_gravadores.Items.Add(new Recorder("Kobe2", "10.0.72.194", 8897));
 			//lst_gravadores.Items.Add(new Recorder("Campinas", "10.0.72.194", 8884));
 			//lst_gravadores.Items.Add(new Recorder("HA", "10.0.72.194", 8882));
 			//lst_gravadores.Items.Add(new Recorder("Agente Virtual (ANTIBES)", "10.0.72.194", 8883));
@@ -90,6 +92,20 @@ namespace ConsoleRecorderCore
 				//        panel.Controls.Add(user_control);
 				//    }
 				//    break;
+
+				case RecorderInteraction.Command.OBTER_CAMINHO_GRAVACAO:
+					{
+						UserControlObterCaminhoGravacao user_control = new UserControlObterCaminhoGravacao();
+						panel.Controls.Add(user_control);
+					}
+					break;
+
+				case RecorderInteraction.Command.OBTER_CAMINHO_GRAVACAO_LIGACAO:
+					{
+						UserControlObterCaminhoGravacaoLigacao user_control = new UserControlObterCaminhoGravacaoLigacao();
+						panel.Controls.Add(user_control);
+					}
+					break;
 
 				case RecorderInteraction.Command.OBTER_GRAVACAO:
 					{
@@ -161,6 +177,33 @@ namespace ConsoleRecorderCore
 
 					//    break;
 
+					case RecorderInteraction.Command.OBTER_CAMINHO_GRAVACAO:
+						{
+							TextBox txt_sqc_gravacao = (TextBox)panel.Controls[0].Controls.Find("txt_sqc_gravacao", false)[0];
+							int sqc_gravacao = Convert.ToInt32(txt_sqc_gravacao.Text);
+
+							string path = _recorderInteraction.GetPathRecording(sqc_gravacao);
+
+							AppendTextConsole(_recorderInteraction.GetResponse());
+							AppendTextConsole(path, true);
+						}
+						break;
+
+					case RecorderInteraction.Command.OBTER_CAMINHO_GRAVACAO_LIGACAO:
+						{
+							TextBox txt_cdg_cliente = (TextBox)panel.Controls[0].Controls.Find("txt_cdg_cliente", false)[0];
+							int cdg_cliente = Convert.ToInt32(txt_cdg_cliente.Text);
+
+							TextBox txt_tpo_origem = (TextBox)panel.Controls[0].Controls.Find("txt_tpo_origem", false)[0];
+							string tpo_origem = txt_tpo_origem.Text;
+
+							string path = _recorderInteraction.GetPathRecordingByClient(cdg_cliente, tpo_origem);
+
+							AppendTextConsole(_recorderInteraction.GetResponse());
+							AppendTextConsole(path, true);
+						}
+						break;
+
 					case RecorderInteraction.Command.OBTER_GRAVACAO:
 						{
 							TextBox txt_sqc_gravacao = (TextBox)panel.Controls[0].Controls.Find("txt_message", false)[0];
@@ -171,7 +214,6 @@ namespace ConsoleRecorderCore
 							AppendTextConsole(_recorderInteraction.GetResponse());
 							AppendTextConsole(gravacao, true);
 						}
-
 						break;
 
 					case RecorderInteraction.Command.OBTER_VERSAO:
