@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using NLog;
+using System;
 using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
-using NLog;
 
 namespace WindowsService
 {
@@ -25,7 +21,7 @@ namespace WindowsService
 			var logfile = new NLog.Targets.FileTarget("logfile") { FileName = filename + ".txt" };
 			var logconsole = new NLog.Targets.ConsoleTarget("logconsole");
 
-			// Rules for mapping loggers to targets            
+			// Rules for mapping loggers to targets
 			config.AddRule(LogLevel.Info, LogLevel.Fatal, logconsole);
 			config.AddRule(LogLevel.Debug, LogLevel.Fatal, logfile);
 

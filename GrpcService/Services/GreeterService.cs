@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace GrpcService
 {
@@ -20,6 +17,14 @@ namespace GrpcService
 			return Task.FromResult(new HelloReply
 			{
 				Message = "Hello " + request.Name
+			});
+		}
+
+		public override Task<HelloReply> ObterProfissional(HelloRequest request, ServerCallContext context)
+		{
+			return Task.FromResult(new HelloReply
+			{
+				Message = "Hello " + request + " vc é Marcelo!"
 			});
 		}
 	}

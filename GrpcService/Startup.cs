@@ -28,7 +28,21 @@ namespace GrpcService
 		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddGrpc();
+			//services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme)
+			//.AddCertificate(options =>
+			//{
+			//	if (_isDevelopment)
+			//	{
+			//		// DO NOT DO THIS IN PRODUCTION!
+			//		options.RevocationMode = X509RevocationMode.NoCheck;
+			//	}
+			//});
+			//services.AddAuthorization();
+
+			services.AddGrpc(options=>
+			{
+				options.EnableDetailedErrors = true;				
+			});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +54,9 @@ namespace GrpcService
 			}
 
 			app.UseRouting();
+
+			//app.UseAuthentication();
+			//app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>
 			{

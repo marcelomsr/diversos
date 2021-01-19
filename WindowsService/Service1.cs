@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WindowsService
 {
@@ -21,7 +14,13 @@ namespace WindowsService
 
 		protected override void OnStart(string[] args)
 		{
-			_process = Process.Start(@"C:\Users\marcelosr\Desktop\Repo\Diversos\GrpcService\bin\Debug\netcoreapp3.1\GrpcService.exe");
+			//sc create AltriumService binPath=C:\Users\marcelosr\Desktop\Repo\Diversos\GrpcService\bin\Debug\net5.0\GrpcService.exe
+
+			_process.StartInfo = new ProcessStartInfo(
+				@"C:\Users\marcelosr\Desktop\Repo\Diversos\GrpcService\bin\Debug\netcoreapp3.1\GrpcService.exe",
+				"--console");
+
+			_process = Process.Start(_process.StartInfo);
 		}
 
 		protected override void OnStop()

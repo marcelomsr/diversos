@@ -1,16 +1,17 @@
-using System;
-
-using NLog;
-using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Hosting;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
+using NLog;
+using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace GrpcService
 {
 	public class Program
 	{
+		private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
 		private static async Task Main(string[] args)
 		{
 			ConfigLog();
@@ -21,10 +22,12 @@ namespace GrpcService
 
 			if (isService)
 			{
+				Logger.Info("Serviço");
 				await builder.RunAsServiceAsync();
 			}
 			else
 			{
+				Logger.Info("Console");
 				await builder.RunConsoleAsync();
 			}
 		}
