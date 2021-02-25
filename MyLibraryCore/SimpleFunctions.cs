@@ -233,5 +233,27 @@ namespace MyLibraryCore
 
 			return fibonacci.ToArray();
 		}
+
+		public static List<int> Lotofacil(int qtdNumbers = 15)
+		{
+			if (qtdNumbers < 15 || qtdNumbers > 18)
+				throw new ArgumentOutOfRangeException("qtdNumbers", "Valor fora do range permitido. 15-18");
+
+			List<int> numeros_sorteados = new List<int>();
+
+			Random random = new Random();
+
+			while (numeros_sorteados.Count < qtdNumbers)
+			{
+				int numero_sorteado = random.Next(1, 25);
+
+				if (!numeros_sorteados.Contains(numero_sorteado))
+					numeros_sorteados.Add(numero_sorteado);
+			}
+
+			numeros_sorteados.Sort();
+
+			return numeros_sorteados;
+		}
 	}
 }

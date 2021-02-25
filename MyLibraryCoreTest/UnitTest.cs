@@ -1,5 +1,7 @@
 using MyLibraryCore;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace MyLibraryCoreTest
 {
@@ -35,6 +37,26 @@ namespace MyLibraryCoreTest
 			Assert.AreEqual(new long[] { 0, 1, 1 }, SimpleFunctions.Fibonacci(3));
 			Assert.AreEqual(new long[] { 0, 1, 1, 2, 3 }, SimpleFunctions.Fibonacci(5));
 			Assert.AreEqual(new long[] { 0, 1, 1, 2, 3, 5, 8 }, SimpleFunctions.Fibonacci(7));
+		}
+
+		[Test]
+		public void LotofacilIsCorrect()
+		{
+			Assert.AreEqual(15, SimpleFunctions.Lotofacil().Count);
+			Assert.AreEqual(16, SimpleFunctions.Lotofacil(16).Count);
+
+			// Using an anonymous delegate
+			Assert.Throws<ArgumentOutOfRangeException>(
+			delegate { SimpleFunctions.Lotofacil(19); });
+
+			// Using a Lambda expression
+			Assert.Throws<ArgumentOutOfRangeException>(
+			  () => { SimpleFunctions.Lotofacil(14); });
+
+			var sortedNumbers = SimpleFunctions.Lotofacil();
+			var hashSet = new HashSet<int>(sortedNumbers);
+			Assert.AreEqual(sortedNumbers.Count, hashSet.Count);
+
 		}
 	}
 }
