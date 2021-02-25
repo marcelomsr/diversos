@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandIpDevice", "CommandI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemTrayApp", "SystemTrayApp\SystemTrayApp.csproj", "{F317AF2E-9704-4A2A-BDAE-B4662ED9483B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unlock", "WindowsFormsExample\Unlock.csproj", "{5BA49CDA-E7B5-4F2B-9A17-A13CF03B8A02}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unlock", "Unlock\Unlock.csproj", "{5BA49CDA-E7B5-4F2B-9A17-A13CF03B8A02}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdministratorCore", "AdministratorCore\AdministratorCore.csproj", "{EEB0567C-D867-4D98-BCD5-FD2224E533D9}"
 EndProject
