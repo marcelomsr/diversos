@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -255,6 +256,18 @@ namespace MyLibraryCore
 			numeros_sorteados.Sort();
 
 			return numeros_sorteados;
+		}
+
+		public static void MeasurePerformance(Action action, ref long elapsedMilliseconds, ref long elapsedTicks)
+        {
+			Stopwatch stopwatch = new Stopwatch();			
+			stopwatch.Start();
+
+			action();
+			stopwatch.Stop();
+
+			elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
+			elapsedTicks = stopwatch.ElapsedTicks;
 		}
 
 		#endregion

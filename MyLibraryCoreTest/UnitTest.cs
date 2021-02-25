@@ -85,5 +85,21 @@ namespace MyLibraryCoreTest
 					Thread.Sleep(450);
 				}, 500));
 		}
+
+		[Test]
+		public void MeasurePerformance_IsCorrect()
+		{
+			long elapsedMilliseconds = 0;
+			long elapsedTicks = 0;
+
+			SimpleFunctions.MeasurePerformance(
+				delegate ()
+				{
+					Thread.Sleep(1);
+				}, ref elapsedMilliseconds, ref elapsedTicks);
+
+			Assert.Positive(elapsedMilliseconds);
+			Assert.Positive(elapsedTicks);
+		}
 	}
 }
