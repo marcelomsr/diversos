@@ -15,8 +15,7 @@ namespace MyLibraryCoreTest
 		[Test]
 		public void FibonnaciIsEmpty()
 		{
-			Assert.IsEmpty(SimpleFunctions.Fibonacci(0));			
-
+			Assert.IsEmpty(SimpleFunctions.Fibonacci(0));
 		}
 
 		[Test]
@@ -28,9 +27,6 @@ namespace MyLibraryCoreTest
 		[Test]
 		public void FibonacciIsCorrect()
 		{
-			Assert.AreEqual(1, SimpleFunctions.Fibonacci(1).Length);
-			Assert.AreEqual(5, SimpleFunctions.Fibonacci(5).Length);
-
 			Assert.AreEqual(new long[] { }, SimpleFunctions.Fibonacci(0));
 			Assert.AreEqual(new long[] { 0 }, SimpleFunctions.Fibonacci(1));
 			Assert.AreEqual(new long[] { 0, 1 }, SimpleFunctions.Fibonacci(2));
