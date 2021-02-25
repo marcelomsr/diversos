@@ -74,37 +74,31 @@ namespace SorteioTabelaCampeonato
 
         private static void gravar_sorteio_arquivo(List<string> partidas_torneio)
         {
-            StreamWriter wr = new StreamWriter(@"C:\torneio.txt");
+            string pathFile = @"C:\torneio.txt";
+
+            SimpleFunctions.FileWriter(pathFile, false, null);
 
             foreach (string partida in partidas_torneio)
             {
-                wr.WriteLine(partida);
+                SimpleFunctions.FileWriter(pathFile, true, partida);
                 Console.WriteLine(partida);
             }
-
-            wr.Close();
         }
 
         private static void definir_lista_competidores(ref List<string> competidores, ref List<string> comp_1, ref List<string> comp_2)
         {
             // Se a quantidade de competidores for ímpar, insere a folga para fazer a rodada completa.
             if (competidores.Count % 2 == 1)
-            {
                 competidores.Add("Folga");
-            }
 
             int metade = competidores.Count / 2;
 
             for (int i = 0; i < competidores.Count; i++)
             {
                 if (i + 1 <= metade)
-                {
                     comp_1.Add(competidores[i]);
-                }
                 else
-                {
                     comp_2.Add(competidores[i]);
-                }
             }
         }
     }
