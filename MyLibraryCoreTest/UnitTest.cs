@@ -2,6 +2,7 @@ using MyLibraryCore;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace MyLibraryCoreTest
 {
@@ -63,6 +64,26 @@ namespace MyLibraryCoreTest
 			var hashSet = new HashSet<int>(sortedNumbers);
 			Assert.AreEqual(sortedNumbers.Count, hashSet.Count);
 
+		}
+
+		[Test]
+		public void TimeOut_Expired()
+		{
+			Assert.IsTrue(SimpleFunctions.TimeOut(
+				delegate ()
+				{
+					Thread.Sleep(500);
+				}, 500));
+		}
+
+		[Test]
+		public void TimeOut_NotExpired()
+		{
+			Assert.IsFalse(SimpleFunctions.TimeOut(
+				delegate ()
+				{
+					Thread.Sleep(450);
+				}, 500));
 		}
 	}
 }

@@ -191,6 +191,8 @@ namespace MyLibraryCore
 			return customAttribute.Length > 0 ? ((DescriptionAttribute)customAttribute[0]).Description : name;
 		}
 
+		#region Tested
+
 		public static bool TimeOut(Action action, int millisecondsTimeOut)
 		{
 			var tokenSource = new CancellationTokenSource();
@@ -204,7 +206,6 @@ namespace MyLibraryCore
 
 			return false;
 		}
-
 		public static long[] Fibonacci(int n)
 		{
 			if (n <= 0)
@@ -255,5 +256,7 @@ namespace MyLibraryCore
 
 			return numeros_sorteados;
 		}
+
+		#endregion
 	}
 }
