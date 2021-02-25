@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lotofacil", "Lotofacil\Lotofacil.csproj", "{44DA1249-E024-4DE6-B43A-079906BD8D27}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SorteioTabelaCampeonato", "SorteioTabelaCampeonato\SorteioTabelaCampeonato.csproj", "{D17A2107-2AB8-4300-9CD6-7E9C4094C243}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContandoTempoExecucao", "ContandoTempoExecucao\ContandoTempoExecucao.csproj", "{2D63DC9D-38C1-46A5-948A-27B415406B0B}"
@@ -61,9 +59,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcClient", "GrpcClient\Gr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsService", "WindowsService\WindowsService.csproj", "{B9237B91-6724-4CAC-87C3-FB5F7838876F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibraryCore", "MyLibraryCore\MyLibraryCore.csproj", "{BC2E2F35-7BC6-4E14-A0D5-1A0D0E5584FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyLibraryCore", "MyLibraryCore\MyLibraryCore.csproj", "{BC2E2F35-7BC6-4E14-A0D5-1A0D0E5584FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibraryCore.Test", "MyLibraryCoreTest\MyLibraryCore.Test.csproj", "{7F6E723F-EF65-457E-8C6B-552AA706187C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyLibraryCore.Test", "MyLibraryCoreTest\MyLibraryCore.Test.csproj", "{7F6E723F-EF65-457E-8C6B-552AA706187C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,23 +77,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{44DA1249-E024-4DE6-B43A-079906BD8D27}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{44DA1249-E024-4DE6-B43A-079906BD8D27}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{44DA1249-E024-4DE6-B43A-079906BD8D27}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{44DA1249-E024-4DE6-B43A-079906BD8D27}.Debug|Win32.ActiveCfg = Debug|x86
-		{44DA1249-E024-4DE6-B43A-079906BD8D27}.Debug|Win32.Build.0 = Debug|x86
-		{44DA1249-E024-4DE6-B43A-079906BD8D27}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{44DA1249-E024-4DE6-B43A-079906BD8D27}.Debug|x64.Build.0 = Debug|Any CPU
-		{44DA1249-E024-4DE6-B43A-079906BD8D27}.Debug|x86.ActiveCfg = Debug|x86
-		{44DA1249-E024-4DE6-B43A-079906BD8D27}.Debug|x86.Build.0 = Debug|x86
-		{44DA1249-E024-4DE6-B43A-079906BD8D27}.Release|Any CPU.ActiveCfg = Release|x86
-		{44DA1249-E024-4DE6-B43A-079906BD8D27}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{44DA1249-E024-4DE6-B43A-079906BD8D27}.Release|Mixed Platforms.Build.0 = Release|x86
-		{44DA1249-E024-4DE6-B43A-079906BD8D27}.Release|Win32.ActiveCfg = Release|x86
-		{44DA1249-E024-4DE6-B43A-079906BD8D27}.Release|Win32.Build.0 = Release|x86
-		{44DA1249-E024-4DE6-B43A-079906BD8D27}.Release|x64.ActiveCfg = Release|x64
-		{44DA1249-E024-4DE6-B43A-079906BD8D27}.Release|x86.ActiveCfg = Release|x86
-		{44DA1249-E024-4DE6-B43A-079906BD8D27}.Release|x86.Build.0 = Release|x86
 		{D17A2107-2AB8-4300-9CD6-7E9C4094C243}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{D17A2107-2AB8-4300-9CD6-7E9C4094C243}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{D17A2107-2AB8-4300-9CD6-7E9C4094C243}.Debug|Mixed Platforms.Build.0 = Debug|x86
