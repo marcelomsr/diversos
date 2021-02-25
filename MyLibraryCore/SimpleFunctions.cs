@@ -210,6 +210,9 @@ namespace MyLibraryCore
 			if (n <= 0)
 				return Array.Empty<long>();
 
+			if (n == 1)
+				return new long[] { 0 };
+
 			long a = 0;
 			long b = 1;
 			long temp;
