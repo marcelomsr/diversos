@@ -200,7 +200,7 @@ namespace MyLibraryCore
 
 			var task = Task.Factory.StartNew(action, token);
 
-			// Estourou o tempo
+			// If time expired, returns true
 			if (!task.Wait(millisecondsTimeOut, token))
 				return true;
 
