@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleRecorderCore", "Cons
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleRecorderTest", "ConsoleRecorderTest\ConsoleRecorderTest.csproj", "{607C5DD8-03AC-4265-9F89-B5A8F9CB4EBB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CountLines", "InboudConsole\CountLines.csproj", "{76992B00-5921-471E-9655-22C4789071B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CountLines", "CountLines\CountLines.csproj", "{76992B00-5921-471E-9655-22C4789071B5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestesDiversos", "TestesDiversos\TestesDiversos.vcxproj", "{DACBC510-AF15-4460-B621-0325862AE572}"
 EndProject
