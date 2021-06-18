@@ -45,20 +45,13 @@ namespace DadosAcoes
             var acao = new Acao();
             acao.ticker = ticker;
 
-            int nmrNo = 1;
-            foreach (HtmlNode node in doc.DocumentNode.SelectNodes("//strong[@class='" + "value" + "']"))
-            {
-                if (nmrNo == 1)
-                    acao.valorAtual = Convert.ToDouble(node.InnerText);
+            HtmlNode node;
 
-                if (nmrNo == 4 && node.InnerText != "-")
-                    acao.dividendYield = Convert.ToDouble(node.InnerText);
+            node= doc.DocumentNode.SelectNodes("//div[@title='" + "Valor atual do ativo" + "']")[0];
+            acao.valorAtual = Convert.ToDouble(node.FirstChild.NextSibling.NextSibling.NextSibling.NextSibling.NextSibling.InnerText);
 
-                nmrNo++;
-
-                if (nmrNo == 5)
-                    break;
-            }
+            node = doc.DocumentNode.SelectNodes("//div[@title='" + "Dividend Yield com base nos últimos 12 meses" + "']")[0];
+            acao.dividendYield = Convert.ToDouble(node.FirstChild.NextSibling.NextSibling.NextSibling.InnerText);
 
             // Até melhorar o que tenho hoje
             //Console.WriteLine($"{acao.ticker.PadRight(6)} {acao.valorAtual.ToString().PadLeft(8)} {acao.dividendYield.ToString().PadLeft(8)}%");
