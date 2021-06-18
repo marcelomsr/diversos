@@ -1,7 +1,6 @@
-﻿using MyLibraryCore;
+﻿using HtmlAgilityPack;
+using MyLibraryCore;
 using System;
-using HtmlAgilityPack;
-using System.Linq;
 using System.Collections.Generic;
 
 namespace DadosAcoes
@@ -67,12 +66,5 @@ namespace DadosAcoes
 
             acoes.Add(acao);
         }
-    }
-
-    public class Acao
-    {
-        public string ticker;
-        public double valorAtual;
-        public double dividendYield;
-    }
+    }    
 }
