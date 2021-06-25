@@ -14,13 +14,17 @@ namespace DadosAcoes
 
         static void Main(string[] args)
         {
-            foreach(var ticker in args)
+
+#if(DEBUG)
+            args = new string[] { "BTOW3" };
+#endif
+            foreach (var ticker in args)
             {
                 string html = ObterMainHTML(ticker);
                 ObterDadosAcao(html, ticker);
             }
 
-            Console.WriteLine("Hello World!");
+            Console.Read();
         }
 
         private static string ObterMainHTML(string ticker)
@@ -47,11 +51,15 @@ namespace DadosAcoes
 
             HtmlNode node;
 
-            node= doc.DocumentNode.SelectNodes("//div[@title='" + "Valor atual do ativo" + "']")[0];
-            acao.valorAtual = Convert.ToDouble(node.FirstChild.NextSibling.NextSibling.NextSibling.NextSibling.NextSibling.InnerText);
+            node = doc.DocumentNode.SelectNodes("//div[@title='" + "Valor atual do ativo" + "']")[0];
+            double outValorAtual;
+            if (double.TryParse(node.FirstChild.NextSibling.NextSibling.NextSibling.NextSibling.NextSibling.InnerText, out outValorAtual))
+                acao.valorAtual = outValorAtual;
 
             node = doc.DocumentNode.SelectNodes("//div[@title='" + "Dividend Yield com base nos últimos 12 meses" + "']")[0];
-            acao.dividendYield = Convert.ToDouble(node.FirstChild.NextSibling.NextSibling.NextSibling.InnerText);
+            double outDividendYield;
+            if (double.TryParse(node.FirstChild.NextSibling.NextSibling.NextSibling.InnerText, out outDividendYield))
+                acao.dividendYield = outDividendYield;
 
             // Até melhorar o que tenho hoje
             //Console.WriteLine($"{acao.ticker.PadRight(6)} {acao.valorAtual.ToString().PadLeft(8)} {acao.dividendYield.ToString().PadLeft(8)}%");
@@ -59,5 +67,5 @@ namespace DadosAcoes
 
             acoes.Add(acao);
         }
-    }    
+    }
 }
