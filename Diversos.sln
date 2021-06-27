@@ -43,7 +43,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyLibraryCore.Test", "MyLib
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContandoTempoExecucaoCore", "ContandoTempoExecucaoCore\ContandoTempoExecucaoCore.csproj", "{27E43FF2-3FC5-48A1-9A00-6229953F25AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DadosAcoes", "DadosAcoes\DadosAcoes.csproj", "{34B1EBC6-8FFE-42FE-AD90-DC68039B0784}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DadosB3", "DadosAcoes\DadosB3.csproj", "{34B1EBC6-8FFE-42FE-AD90-DC68039B0784}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

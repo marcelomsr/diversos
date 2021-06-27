@@ -1,15 +1,18 @@
-﻿using System;
+﻿using MyLibraryCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DadosAcoes
+namespace DadosB3
 {
-    public class Acao
+    public class Acao : Ativo
     {
-        public string ticker { get; set; }
-        public double valorAtual { get; set; }
-        public double dividendYield { get; set; }
+        private static Uri fonteURI = new Uri("https://statusinvest.com.br/acoes/");
+
+        public Acao(string ticker) : base(ticker, fonteURI)
+        {
+        }
     }
 }
