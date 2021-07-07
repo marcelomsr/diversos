@@ -21,29 +21,99 @@ namespace DadosB3
             //args = new string[] { "CPLE6" };
 #endif
 
-            foreach (var ticker in args)
+            ObterDadosAtivos(args);
+            ExibirInformacoesAtivos();   
+        }
+
+        private static void ObterDadosAtivos(string[] tickers)
+        {
+            foreach (var ticker in tickers)
             {
                 if (ticker == "ACAO" || ticker == "FII")
-                    continue;
-
-                Ativo ativo;
-
-                if (args[0] == "ACAO")
                 {
-                    ativo = new Acao(ticker);
-                    Console.WriteLine($"{ativo.dividendYield}%");
+                    continue;
+                }
+
+                Console.WriteLine($"Obtendo informações do ativo '{ticker}'");
+
+                if (tickers[0] == "ACAO")
+                {
+                    ativos.Add(new Acao(ticker));
                 }
                 else
                 {
-                    ativo = new Fii(ticker);
-                    Console.WriteLine($"{((Fii)ativo).valorPatrimonial}");
+                    ativos.Add(new Fii(ticker));
                 }
+            }
+        }
+
+        private static void ExibirInformacoesAtivos()
+        {
+            try
+            {
+                do
+                {
+                    var opcaoEscolhida = ObterOpcaoEscolhida();
+
+                    switch (int.Parse(opcaoEscolhida))
+                    {
+                        case 1:
+                            foreach (var ativo in ativos)
+                                Console.WriteLine($"{ativo.dividendYield}%");
+                            break;
+
+                        case 2:
+                            foreach (var ativo in ativos)
+                                Console.WriteLine($"{((Fii)ativo).valorPatrimonial}");
+                            break;
+
+                        case 3:
+                            foreach (var ativo in ativos)
+                                Console.WriteLine($"{((Fii)ativo).proventos[0].valorPago}");
+                            break;
+
+                        case 4:
+                            foreach (var ativo in ativos)
+                                Console.WriteLine($"{((Fii)ativo).proventos[0].dataPagamento.ToString("MMMM")}");
+                            break;
+
+                        case 5:
+                            return;
+
+                        default:
+                            Console.WriteLine("Opção inválida!");
+                            break;
+                    }
+                } while (true);
 
                 // Até melhorar o que tenho hoje
-                //Console.WriteLine($"{acao.ticker.PadRight(6)} {acao.valorAtual.ToString().PadLeft(8)} {acao.dividendYield.ToString().PadLeft(8)}%");                
+                //Console.WriteLine($"{acao.ticker.PadRight(6)} {acao.valorAtual.ToString().PadLeft(8)} {acao.dividendYield.ToString().PadLeft(8)}%");    
             }
+            catch (FormatException)
+            {
+                Console.WriteLine("Opção inválida!");
+                ExibirInformacoesAtivos();
+            }            
+        }
 
-            Console.Read();
+        private static string ObterOpcaoEscolhida()
+        {
+            Console.WriteLine("");
+            Console.WriteLine("Escolha uma opção para exibir:");
+            Console.WriteLine("1 - Dividend Yield");
+            Console.WriteLine("2 - Valor Patrimonial");
+            Console.WriteLine("3 - Último Valor Pago");
+            Console.WriteLine("4 - Último Mês Pago");
+            Console.WriteLine("5 - Sair");
+            Console.WriteLine("");
+
+            Console.Write("Digite a opção desejada: ");
+
+            string opcaoEscolhida = Console.ReadLine();
+            Console.Clear();
+
+            return opcaoEscolhida;
+
         }
     }
 }
