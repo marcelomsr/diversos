@@ -2,11 +2,11 @@
   "profiles": {
     "DadosAcoes": {
       "commandName": "Project",
-      "commandLineArgs": "ACAO AESB3"
+      "commandLineArgs": "ACAO AESB3 B3SA3"
     },
     "DadosFiis": {
       "commandName": "Project",
-      "commandLineArgs": "FII ARRI11"
+      "commandLineArgs": "FII ARRI11 MXRF11"
     }
   }
 }

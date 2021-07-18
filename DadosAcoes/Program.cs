@@ -2,8 +2,9 @@
 using MyLibraryCore;
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DadosB3
 {
@@ -22,29 +23,34 @@ namespace DadosB3
 #endif
 
             ObterDadosAtivos(args);
-            ExibirInformacoesAtivos();   
+            ExibirInformacoesAtivos();
         }
 
         private static void ObterDadosAtivos(string[] tickers)
         {
-            foreach (var ticker in tickers)
+            Parallel.ForEach(tickers, (ticker) =>
             {
-                if (ticker == "ACAO" || ticker == "FII")
+                if (ticker != "ACAO" && ticker != "FII")
                 {
-                    continue;
-                }
+                    Console.WriteLine($"Obtendo informações do ativo '{ticker}'");
 
-                Console.WriteLine($"Obtendo informações do ativo '{ticker}'");
+                    if (tickers[0] == "ACAO")
+                    {
+                        ativos.Add(new Acao(ticker));
+                    }
+                    else
+                    {
+                        ativos.Add(new Fii(ticker));
+                    }
+                }
+            });
 
-                if (tickers[0] == "ACAO")
-                {
-                    ativos.Add(new Acao(ticker));
-                }
-                else
-                {
-                    ativos.Add(new Fii(ticker));
-                }
-            }
+            //ativos = ativos.OrderBy(ativo => ativo.ticker).ToList();
+
+            ativos.Sort(delegate (Ativo x, Ativo y)
+            {
+                return string.Compare(x.ticker, y.ticker, StringComparison.Ordinal);
+            });
         }
 
         private static void ExibirInformacoesAtivos()
@@ -93,6 +99,7 @@ namespace DadosB3
                             return;
 
                         case 9:
+                            Environment.Exit(0);
                             return;
 
                         default:
@@ -106,9 +113,9 @@ namespace DadosB3
             }
             catch (FormatException)
             {
-                Console.WriteLine("Opção inválida!");                
+                Console.WriteLine("Opção inválida!");
             }
-            catch(Exception)
+            catch (Exception)
             {
                 Console.WriteLine("Opção inválida para Ações!");
             }
