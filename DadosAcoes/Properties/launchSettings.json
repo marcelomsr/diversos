@@ -2,7 +2,7 @@
   "profiles": {
     "DadosAcoes": {
       "commandName": "Project",
-      "commandLineArgs": "ACAO AESB3 B3SA3"
+      "commandLineArgs": "ACAO AESB3 B3SA3 AMER3"
     },
     "DadosFiis": {
       "commandName": "Project",

@@ -27,13 +27,25 @@ namespace DadosB3
 
         private void definirValorPatrimonial()
         {
-            HtmlNode node = _htmlDocument.DocumentNode.SelectNodes("//*[text()[contains(., '" + "Val. patrimonial p/cota" + "')]]")[0];
+            HtmlNode node = obterNodeCollectionPrincipal("//*[text()[contains(., '" + "Val. patrimonial p/cota" + "')]]");
+
+            if (node == null)
+            {
+                return;
+            }
+
             this.valorPatrimonial = Convert.ToDouble(node.NextSibling.NextSibling.NextSibling.NextSibling.InnerText);
         }
 
         private void definirPVP()
         {
-            HtmlNode node = _htmlDocument.DocumentNode.SelectNodes("//*[text()[contains(., '" + "P/VP" + "')]]")[0];
+            HtmlNode node = obterNodeCollectionPrincipal("//*[text()[contains(., '" + "P/VP" + "')]]");
+
+            if (node == null)
+            {
+                return;
+            }
+
             this.pvp = Convert.ToDouble(node.NextSibling.NextSibling.InnerText);
         }
     }

@@ -48,7 +48,13 @@ namespace DadosB3
 
         private void definirValorAtual()
         {
-            HtmlNode node = _htmlDocument.DocumentNode.SelectNodes("//div[@title='" + "Valor atual do ativo" + "']")[0];
+            HtmlNode node = obterNodeCollectionPrincipal("//div[@title='" + "Valor atual do ativo" + "']");
+
+            if (node == null)
+            {
+                return;
+            }
+
             double outValorAtual;
             if (double.TryParse(node.FirstChild.NextSibling.NextSibling.NextSibling.NextSibling.NextSibling.InnerText, out outValorAtual))
                 this.valorAtual = outValorAtual;
@@ -56,7 +62,13 @@ namespace DadosB3
 
         private void definirDividendYield()
         {
-            HtmlNode node = _htmlDocument.DocumentNode.SelectNodes("//div[@title='" + "Dividend Yield com base nos últimos 12 meses" + "']")[0];
+            HtmlNode node = obterNodeCollectionPrincipal("//div[@title='" + "Dividend Yield com base nos últimos 12 meses" + "']");
+
+            if (node == null)
+            {
+                return;
+            }
+
             double outDividendYield;
             if (double.TryParse(node.FirstChild.NextSibling.NextSibling.NextSibling.InnerText, out outDividendYield))
                 this.dividendYield = outDividendYield;
@@ -65,7 +77,13 @@ namespace DadosB3
         private void definirProventos()
         {
             // Obtêm os dados dos proventos
-            HtmlNode table = _htmlDocument.DocumentNode.SelectNodes("//*[@title='" + "Tipo do provento" + "']")[0];
+            HtmlNode table = obterNodeCollectionPrincipal("//*[@title='" + "Tipo do provento" + "']");
+
+            if (table == null)
+            {
+                return;
+            }
+
             HtmlNodeCollection tbodyCollection = table.ParentNode.ParentNode.ParentNode.SelectNodes("//tbody/tr/td[@class='" + "uppercase" + "']");
 
             if (tbodyCollection == null)
@@ -81,6 +99,18 @@ namespace DadosB3
 
                 proventos.Add(provento);
             }
+        }
+
+        protected HtmlNode obterNodeCollectionPrincipal(string xpath)
+        {
+            HtmlNodeCollection nodeCollection = _htmlDocument.DocumentNode.SelectNodes(xpath);
+
+            if(nodeCollection == null)
+            {
+                return null;
+            }
+
+            return nodeCollection[0];
         }
     }
 }
