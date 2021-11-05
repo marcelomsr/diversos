@@ -61,41 +61,43 @@ namespace DadosB3
                 {
                     var opcaoEscolhida = ObterOpcaoEscolhida();
 
+                    StringBuilder saidaConsole = new StringBuilder();
+
                     switch (int.Parse(opcaoEscolhida))
                     {
                         case 1:
                             foreach (var ativo in ativos)
-                                Console.WriteLine($"{ativo.dividendYield}%");
+                                saidaConsole.AppendLine($"{ativo.dividendYield}%");
                             break;
 
                         case 2:
                             foreach (var ativo in ativos)
-                                Console.WriteLine($"{((Fii)ativo).valorPatrimonial}");
+                                saidaConsole.AppendLine($"{((Fii)ativo).valorPatrimonial}");
                             break;
 
                         case 3:
                             foreach (var ativo in ativos)
-                                Console.WriteLine($"{ativo.proventos[0].valorPago}");
+                                saidaConsole.AppendLine($"{ativo.proventos[0].valorPago}");
                             break;
 
                         case 4:
                             foreach (var ativo in ativos)
-                                Console.WriteLine($"{ativo.proventos[0].dataCom.ToString("MMMM")}");
+                                saidaConsole.AppendLine($"{ativo.proventos[0].dataCom.ToString("MMMM")}");
                             break;
 
                         case 5:
                             foreach (var ativo in ativos)
-                                Console.WriteLine($"{ativo.proventos[0].dataPagamento.ToString("MMMM")}");
+                                saidaConsole.AppendLine($"{ativo.proventos[0].dataPagamento.ToString("MMMM")}");
                             break;
 
                         case 6:
                             foreach (var ativo in ativos)
-                                Console.WriteLine($"{ativo.proventos[0].dataCom.ToString("dd/MM/yyyy")}");
+                                saidaConsole.AppendLine($"{ativo.proventos[0].dataCom.ToString("dd/MM/yyyy")}");
                             return;
 
                         case 7:
                             foreach (var ativo in ativos)
-                                Console.WriteLine($"{ativo.proventos[0].dataPagamento.ToString("dd/MM/yyyy")}");
+                                saidaConsole.AppendLine($"{ativo.proventos[0].dataPagamento.ToString("dd/MM/yyyy")}");
                             return;
 
                         case 9:
@@ -103,9 +105,12 @@ namespace DadosB3
                             return;
 
                         default:
-                            Console.WriteLine("Opção inválida!");
+                            saidaConsole.AppendLine("Opção inválida!");
                             break;
                     }
+
+                    Console.Write(saidaConsole);
+                    SimpleFunctions.SetToClipboard(saidaConsole.ToString());
                 } while (true);
 
                 // Até melhorar o que tenho hoje

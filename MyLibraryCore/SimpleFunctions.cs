@@ -11,7 +11,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+//using System.Windows.Forms;
 
 namespace MyLibraryCore
 {
@@ -31,31 +31,31 @@ namespace MyLibraryCore
 			}
 		}
 
-		public static void PrintScreen(Screen[] screens, string fileNameOutput, ImageFormat imageFormat)
-		{
-			int screenLeft = 0, screenWidth = 0, screenTop = 0, screenHeight = 0;
+		//public static void PrintScreen(Screen[] screens, string fileNameOutput, ImageFormat imageFormat)
+		//{
+		//	int screenLeft = 0, screenWidth = 0, screenTop = 0, screenHeight = 0;
 
-			foreach (Screen screen in screens)
-			{
-				screenWidth += screen.Bounds.Width;
+		//	foreach (Screen screen in screens)
+		//	{
+		//		screenWidth += screen.Bounds.Width;
 
-				if (screen.Bounds.Left < screenLeft)
-					screenLeft = screen.Bounds.Left;
+		//		if (screen.Bounds.Left < screenLeft)
+		//			screenLeft = screen.Bounds.Left;
 
-				if (screen.Bounds.Top < screenTop)
-					screenTop = screen.Bounds.Top;
+		//		if (screen.Bounds.Top < screenTop)
+		//			screenTop = screen.Bounds.Top;
 
-				if (screen.Bounds.Height > screenHeight)
-					screenHeight = screen.Bounds.Height;
-			}
+		//		if (screen.Bounds.Height > screenHeight)
+		//			screenHeight = screen.Bounds.Height;
+		//	}
 
-			using (Bitmap bpm = new Bitmap(screenWidth, screenHeight))
-			{
-				Graphics graphics = Graphics.FromImage(bpm as Image);
-				graphics.CopyFromScreen(screenLeft, screenTop, 0, 0, bpm.Size);
-				bpm.Save(@fileNameOutput, imageFormat);
-			}
-		}
+		//	using (Bitmap bpm = new Bitmap(screenWidth, screenHeight))
+		//	{
+		//		Graphics graphics = Graphics.FromImage(bpm as Image);
+		//		graphics.CopyFromScreen(screenLeft, screenTop, 0, 0, bpm.Size);
+		//		bpm.Save(@fileNameOutput, imageFormat);
+		//	}
+		//}
 
 		public static void GetHtml(Uri site, ref string html)
 		{
@@ -344,6 +344,11 @@ namespace MyLibraryCore
 				else
 					comp_2.Add(competidores[i]);
 			}
+		}
+
+		public static void SetToClipboard(string text)
+        {
+			TextCopy.ClipboardService.SetText(text);
 		}
 
 		#endregion
