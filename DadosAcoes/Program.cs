@@ -93,12 +93,12 @@ namespace DadosB3
                         case 6:
                             foreach (var ativo in ativos)
                                 saidaConsole.AppendLine($"{ativo.proventos[0].dataCom.ToString("dd/MM/yyyy")}");
-                            return;
+                            break;
 
                         case 7:
                             foreach (var ativo in ativos)
                                 saidaConsole.AppendLine($"{ativo.proventos[0].dataPagamento.ToString("dd/MM/yyyy")}");
-                            return;
+                            break;
 
                         case 9:
                             Environment.Exit(0);
