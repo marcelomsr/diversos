@@ -63,44 +63,44 @@ namespace DadosB3
 
                     StringBuilder saidaConsole = new StringBuilder();
 
-                    switch (int.Parse(opcaoEscolhida))
+                    switch (opcaoEscolhida)
                     {
-                        case 1:
+                        case '1':
                             foreach (var ativo in ativos)
                                 saidaConsole.AppendLine($"{ativo.dividendYield}%");
                             break;
 
-                        case 2:
+                        case '2':
                             foreach (var ativo in ativos)
                                 saidaConsole.AppendLine($"{((Fii)ativo).valorPatrimonial}");
                             break;
 
-                        case 3:
+                        case '3':
                             foreach (var ativo in ativos)
                                 saidaConsole.AppendLine($"{ativo.proventos[0].valorPago}");
                             break;
 
-                        case 4:
+                        case '4':
                             foreach (var ativo in ativos)
                                 saidaConsole.AppendLine($"{ativo.proventos[0].dataCom.ToString("MMMM")}");
                             break;
 
-                        case 5:
+                        case '5':
                             foreach (var ativo in ativos)
                                 saidaConsole.AppendLine($"{ativo.proventos[0].dataPagamento.ToString("MMMM")}");
                             break;
 
-                        case 6:
+                        case '6':
                             foreach (var ativo in ativos)
                                 saidaConsole.AppendLine($"{ativo.proventos[0].dataCom.ToString("dd/MM/yyyy")}");
                             break;
 
-                        case 7:
+                        case '7':
                             foreach (var ativo in ativos)
                                 saidaConsole.AppendLine($"{ativo.proventos[0].dataPagamento.ToString("dd/MM/yyyy")}");
                             break;
 
-                        case 9:
+                        case '9':
                             Environment.Exit(0);
                             return;
 
@@ -130,7 +130,7 @@ namespace DadosB3
             }
         }
 
-        private static string ObterOpcaoEscolhida()
+        private static char ObterOpcaoEscolhida()
         {
             Console.WriteLine("");
             Console.WriteLine("Escolha uma opção para exibir:");
@@ -146,7 +146,7 @@ namespace DadosB3
 
             Console.Write("Digite a opção desejada: ");
 
-            string opcaoEscolhida = Console.ReadLine();
+            var opcaoEscolhida = Console.ReadKey().KeyChar;
             Console.Clear();
 
             return opcaoEscolhida;
