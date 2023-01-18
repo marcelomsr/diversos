@@ -247,7 +247,7 @@ namespace MyLibraryCore
 
 			while (numeros_sorteados.Count < qtdNumbers)
 			{
-				int numero_sorteado = random.Next(1, 25);
+				int numero_sorteado = random.Next(1, 26);
 
 				if (!numeros_sorteados.Contains(numero_sorteado))
 					numeros_sorteados.Add(numero_sorteado);
