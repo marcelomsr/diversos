@@ -61,6 +61,7 @@ namespace MyLibraryCore
 		{
 			WebClient wc = new WebClient();
 			wc.Encoding = Encoding.UTF8;
+			wc.Headers.Add("User-Agent: Other");
 			html = wc.DownloadString(site);
 		}
 

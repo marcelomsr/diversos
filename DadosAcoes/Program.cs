@@ -18,7 +18,7 @@ namespace DadosB3
         {
 
 #if(DEBUG)
-            //args = new string[] { "MXRF11" };
+            args = new string[] { "MXRF11" };
             //args = new string[] { "CPLE6" };
 #endif
 
