@@ -31,7 +31,10 @@ namespace DadosB3
             this.proventos = new List<Provento>();
 
             string htmlTexto = "";
-            SimpleFunctions.GetHtml(pathGetHtml.AbsoluteUri + ticker, ref htmlTexto);
+            if (ticker != "VGIA11")
+                SimpleFunctions.GetHtml(pathGetHtml.AbsoluteUri + ticker, ref htmlTexto);
+            else
+                SimpleFunctions.GetHtml("https://statusinvest.com.br/fiagros/" + ticker, ref htmlTexto);
 
             _htmlDocument = new HtmlDocument();
             _htmlDocument.LoadHtml(htmlTexto);
@@ -105,7 +108,7 @@ namespace DadosB3
         {
             HtmlNodeCollection nodeCollection = _htmlDocument.DocumentNode.SelectNodes(xpath);
 
-            if(nodeCollection == null)
+            if (nodeCollection == null)
             {
                 return null;
             }
